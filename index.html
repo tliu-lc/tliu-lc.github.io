@@ -9,9 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#1A1812;--navy-2:#252218;
-  --yellow:#F0B429;--yellow-l:#F7CC5A;--yellow-d:#C8911A;
-  --white:#fff;--off:#f7f6f2;--off-2:#eceae4;
+  --navy:#00296B;--navy-2:#003F88;--blue:#00509D;
+  --yellow:#FFD500;--yellow-l:#FFE54D;--yellow-d:#FDC500;
+  --white:#fff;--off:#f5f7fb;--off-2:#e8ecf4;
   --ink:#0f1923;--ink-2:#334155;--muted:#64748b;--light:#94a3b8;
   --border:#e2e8f0;--bord-2:#cbd5e1;
   --r:14px;--r-sm:8px;
@@ -49,10 +49,10 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 /* AURORA */
 .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
 .aur{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
-.aur-1{width:65%;height:80%;top:-25%;left:-15%;background:radial-gradient(ellipse,rgba(240,180,41,.5) 0%,transparent 65%);animation:aur1 14s ease-in-out infinite alternate;}
-.aur-2{width:55%;height:65%;top:5%;right:-20%;background:radial-gradient(ellipse,rgba(247,204,90,.35) 0%,transparent 65%);animation:aur2 10s ease-in-out infinite alternate;}
-.aur-3{width:50%;height:70%;bottom:-30%;left:15%;background:radial-gradient(ellipse,rgba(200,145,26,.4) 0%,transparent 65%);animation:aur3 17s ease-in-out infinite alternate;}
-.aur-4{width:35%;height:45%;top:35%;left:30%;background:radial-gradient(ellipse,rgba(255,225,80,.22) 0%,transparent 65%);animation:aur4 9s ease-in-out infinite alternate;}
+.aur-1{width:65%;height:80%;top:-25%;left:-15%;background:radial-gradient(ellipse,rgba(255,213,0,.45) 0%,transparent 65%);animation:aur1 14s ease-in-out infinite alternate;}
+.aur-2{width:55%;height:65%;top:5%;right:-20%;background:radial-gradient(ellipse,rgba(253,197,0,.3) 0%,transparent 65%);animation:aur2 10s ease-in-out infinite alternate;}
+.aur-3{width:50%;height:70%;bottom:-30%;left:15%;background:radial-gradient(ellipse,rgba(255,230,60,.35) 0%,transparent 65%);animation:aur3 17s ease-in-out infinite alternate;}
+.aur-4{width:35%;height:45%;top:35%;left:30%;background:radial-gradient(ellipse,rgba(255,213,0,.18) 0%,transparent 65%);animation:aur4 9s ease-in-out infinite alternate;}
 @keyframes aur1{to{transform:translate(22%,18%) scale(1.15)}}
 @keyframes aur2{to{transform:translate(-18%,22%) scale(0.88)}}
 @keyframes aur3{to{transform:translate(14%,-22%) scale(1.12)}}
@@ -75,23 +75,24 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 .hp-strip{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
 .hp{padding:28px 32px;border-right:1px solid var(--border);background:var(--off);}
 .hp:last-child{border-right:none;}
-.hp-l{font-size:.64rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--yellow-d);margin-bottom:8px;}
+.hp-l{font-size:.64rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
 .hp p{font-size:.82rem;color:var(--muted);line-height:1.65;}
 
 /* CLIENT LOGOS */
 #clients{background:#fff;padding:44px 0;border-bottom:1px solid var(--border);}
 .cl-label{font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--light);text-align:center;margin-bottom:32px;}
-.cl-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
-.cl-logo{padding:12px 36px;display:flex;align-items:center;justify-content:center;transition:opacity .25s;}
-.cl-logo img,.cl-logo svg{height:44px;width:auto;object-fit:contain;display:block;}
+.cl-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;}
+.cl-logo{width:180px;height:72px;display:flex;align-items:center;justify-content:center;padding:10px 20px;flex-shrink:0;}
+.cl-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;}
+.cl-logo svg{max-width:100%;max-height:100%;}
 
 /* RÉALISATIONS */
 #results{background:var(--off);padding:88px 0;}
 .rg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
 .rc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:34px 28px;display:flex;flex-direction:column;gap:14px;transition:box-shadow .25s,border-color .25s;}
 .rc:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:var(--bord-2);}
-.rc-kpi{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;color:var(--yellow-d);line-height:1;}
-.rc-ico{font-size:1.7rem;line-height:1;}
+.rc-kpi{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;color:var(--navy);line-height:1;}
+.rc-bar{width:28px;height:3px;background:var(--yellow);border-radius:2px;margin-bottom:4px;}
 .rc h3{font-size:.9rem;color:var(--navy);font-weight:600;line-height:1.45;}
 .rc p{font-size:.82rem;color:var(--muted);line-height:1.75;flex:1;}
 
@@ -100,7 +101,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 .cg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px;}
 .card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:box-shadow .25s,border-color .25s;}
 .card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:var(--bord-2);}
-.card-tag{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow-d);}
+.card-tag{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);}
 .card h3{font-size:1rem;line-height:1.45;}
 .card p{font-size:.875rem;color:var(--muted);line-height:1.8;flex:1;}
 .card-lnk{font-size:.8rem;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:6px;transition:gap .2s;width:fit-content;margin-top:8px;}
@@ -167,7 +168,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 .octa.outline:hover{background:var(--navy);color:#fff;}
 .osol{margin-top:20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:40px;transition:box-shadow .25s;}
 .osol:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);}
-.osol-badge{display:inline-flex;align-items:center;gap:7px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow-d);margin-bottom:12px;}
+.osol-badge{display:inline-flex;align-items:center;gap:7px;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
 .osol-badge::before{content:'';width:6px;height:6px;background:var(--yellow);border-radius:50%;flex-shrink:0;}
 .osol h3{font-size:1.05rem;margin-bottom:8px;}
 .osol p{font-size:.875rem;max-width:500px;}
@@ -178,7 +179,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 .ab-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;border-radius:var(--r);}
 .ab-cap{padding:12px 0 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;}
 .ab-name{font-family:'DM Serif Display',serif;font-size:.95rem;font-weight:400;color:var(--ink);}
-.ab-role{font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow-d);}
+.ab-role{font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);}
 .abt h2{margin-bottom:24px;}
 .abt p{margin-bottom:16px;font-size:.925rem;}
 .abt p:last-of-type{margin-bottom:0;}
@@ -286,24 +287,24 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
         <line x1="384" y1="0" x2="384" y2="380" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
         <defs>
           <linearGradient id="gA" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F0B429"/>
-            <stop offset="100%" stop-color="#F0B429" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#FFD500"/>
+            <stop offset="100%" stop-color="#FFD500" stop-opacity="0"/>
           </linearGradient>
         </defs>
         <polygon points="20,310 80,270 140,250 200,210 260,195 320,165 370,138 420,108 460,82 460,380 20,380" fill="url(#gA)" opacity=".18"/>
-        <polyline points="20,310 80,270 140,250 200,210 260,195 320,165 370,138 420,108 460,82" stroke="rgba(240,180,41,.85)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="20,310 80,270 140,250 200,210 260,195 320,165 370,138 420,108 460,82" stroke="rgba(255,213,0,.85)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         <polyline points="20,355 80,340 140,328 200,305 260,290 320,270 370,255 420,240 460,230" stroke="rgba(255,255,255,.12)" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/>
-        <rect x="310" y="320" width="16" height="40" rx="3" fill="rgba(240,180,41,.28)"/>
-        <rect x="334" y="298" width="16" height="62" rx="3" fill="rgba(240,180,41,.4)"/>
-        <rect x="358" y="276" width="16" height="84" rx="3" fill="rgba(240,180,41,.52)"/>
-        <rect x="382" y="258" width="16" height="102" rx="3" fill="rgba(240,180,41,.64)"/>
-        <rect x="406" y="240" width="16" height="120" rx="3" fill="rgba(240,180,41,.74)"/>
-        <rect x="430" y="222" width="16" height="138" rx="3" fill="rgba(240,180,41,.84)"/>
-        <circle cx="200" cy="210" r="5" fill="rgba(240,180,41,.95)" stroke="#0b1728" stroke-width="2.5"/>
-        <circle cx="320" cy="165" r="5" fill="rgba(240,180,41,.95)" stroke="#0b1728" stroke-width="2.5"/>
-        <circle cx="460" cy="82" r="6" fill="#F0B429" stroke="#0b1728" stroke-width="2.5"/>
-        <rect x="396" y="52" width="70" height="26" rx="6" fill="rgba(240,180,41,.14)" stroke="rgba(240,180,41,.45)" stroke-width="1"/>
-        <text x="431" y="70" font-size="11" fill="#F0B429" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="600">+114%</text>
+        <rect x="310" y="320" width="16" height="40" rx="3" fill="rgba(255,213,0,.28)"/>
+        <rect x="334" y="298" width="16" height="62" rx="3" fill="rgba(255,213,0,.4)"/>
+        <rect x="358" y="276" width="16" height="84" rx="3" fill="rgba(255,213,0,.52)"/>
+        <rect x="382" y="258" width="16" height="102" rx="3" fill="rgba(255,213,0,.64)"/>
+        <rect x="406" y="240" width="16" height="120" rx="3" fill="rgba(255,213,0,.74)"/>
+        <rect x="430" y="222" width="16" height="138" rx="3" fill="rgba(255,213,0,.84)"/>
+        <circle cx="200" cy="210" r="5" fill="rgba(255,213,0,.95)" stroke="#00296B" stroke-width="2.5"/>
+        <circle cx="320" cy="165" r="5" fill="rgba(255,213,0,.95)" stroke="#00296B" stroke-width="2.5"/>
+        <circle cx="460" cy="82" r="6" fill="#FFD500" stroke="#00296B" stroke-width="2.5"/>
+        <rect x="396" y="52" width="70" height="26" rx="6" fill="rgba(255,213,0,.14)" stroke="rgba(255,213,0,.45)" stroke-width="1"/>
+        <text x="431" y="70" font-size="11" fill="#FFD500" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="600">+114%</text>
         <rect x="20" y="100" width="108" height="56" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
         <text x="34" y="122" font-size="8.5" fill="rgba(255,255,255,.33)" font-family="DM Sans,sans-serif" letter-spacing="1.2">CA 12 MOIS</text>
         <text x="34" y="144" font-size="16" fill="rgba(255,255,255,.88)" font-family="DM Sans,sans-serif" font-weight="600">284 K€</text>
@@ -346,17 +347,17 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
         <p>Optimisation de pipelines d'appels API à fort volume — moins d'attente, plus de données traitées dans les délais opérationnels.</p>
       </div>
       <div class="rc rv d2">
-        <div class="rc-ico">🔁</div>
+        <div class="rc-bar"></div>
         <h3>Workflows Airflow refondu</h3>
         <p>Élimination des goulots d'étranglement et des échecs silencieux. Orchestration fiable, observable, résistante aux pannes.</p>
       </div>
       <div class="rc rv d3">
-        <div class="rc-ico">📦</div>
+        <div class="rc-bar"></div>
         <h3>Pipelines GCP bout-en-bout</h3>
         <p>Infrastructure complète : ingestion, transformation dbt, BigQuery, déploiement Terraform + CI/CD automatisé. Maintenable par les équipes.</p>
       </div>
       <div class="rc rv d4">
-        <div class="rc-ico">🛍️</div>
+        <div class="rc-bar"></div>
         <h3>Plateforme retail clé en main</h3>
         <p>Monitoring des ventes, relance client automatisée, prospection et dashboarding. Un seul interlocuteur, de A à Z.</p>
       </div>
@@ -370,7 +371,6 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
     <div class="rv"><div class="sl">Périmètre d'intervention</div><h2>Ce que nous construisons pour vous</h2></div>
     <div class="cg rv">
       <div class="card feat">
-        <div class="feat-icon">☁️</div>
         <div class="card-tag">Data Engineering · Cloud GCP</div>
         <h3>De la donnée brute au tableau de bord — sans complexité inutile</h3>
         <p>Nous prenons en charge l'ensemble de la chaîne data : connexion aux sources, transformation, stockage, visualisation. Chaque composant est documenté et maintenable par vos équipes à l'issue du projet.</p>
@@ -419,14 +419,14 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
       <p>Sélection de technologies cloud-native et open-source, choisies pour leur fiabilité en production et la valeur qu'elles apportent à chaque projet.</p>
     </div>
     <div class="sg rv">
-      <div class="si"><div class="si-ico">☁️</div><div class="si-name">Google Cloud Platform</div><div class="si-desc">Cloud Run, Pub/Sub, Dataflow, Cloud Scheduler, Artifact Registry, Secret Manager, IAM</div><div class="si-tier">Infrastructure</div></div>
-      <div class="si"><div class="si-ico">📦</div><div class="si-name">BigQuery</div><div class="si-desc">Entrepôt analytique — requêtes SQL sur millions de lignes, datasets partitionnés, marts métier</div><div class="si-tier">Data Warehouse</div></div>
-      <div class="si"><div class="si-ico">🔄</div><div class="si-name">dbt Core</div><div class="si-desc">Transformation — modèles SQL versionnés, tests automatiques, documentation générée</div><div class="si-tier">Transformation</div></div>
-      <div class="si"><div class="si-ico">🏗️</div><div class="si-name">Terraform</div><div class="si-desc">Infrastructure as Code — provisionnement reproductible, state GCS, déployable en minutes</div><div class="si-tier">IaC</div></div>
-      <div class="si"><div class="si-ico">🎛️</div><div class="si-name">Airflow</div><div class="si-desc">Orchestration de workflows — DAGs robustes, retry automatique, monitoring des échecs</div><div class="si-tier">Orchestration</div></div>
-      <div class="si"><div class="si-ico">⚡</div><div class="si-name">FastAPI · Python</div><div class="si-desc">API backend — endpoints métier, auth JWT &amp; Identity Token GCP, cache TTL, BigQuery</div><div class="si-tier">Backend</div></div>
-      <div class="si"><div class="si-ico">🐳</div><div class="si-name">Docker · Cloud Build</div><div class="si-desc">Conteneurisation et CI/CD — build parallélisé, déploiement automatique sur push Git</div><div class="si-tier">CI/CD</div></div>
-      <div class="si"><div class="si-ico">📊</div><div class="si-name">Power BI · Next.js</div><div class="si-desc">Visualisation et reporting — dashboards Power BI connectés BigQuery, interfaces web modernes</div><div class="si-tier">Visualisation</div></div>
+      <div class="si"><div class="si-name">Google Cloud Platform</div><div class="si-desc">Cloud Run, Pub/Sub, Dataflow, Cloud Scheduler, Artifact Registry, Secret Manager, IAM</div><div class="si-tier">Infrastructure</div></div>
+      <div class="si"><div class="si-name">BigQuery</div><div class="si-desc">Entrepôt analytique — requêtes SQL sur millions de lignes, datasets partitionnés, marts métier</div><div class="si-tier">Data Warehouse</div></div>
+      <div class="si"><div class="si-name">dbt Core</div><div class="si-desc">Transformation — modèles SQL versionnés, tests automatiques, documentation générée</div><div class="si-tier">Transformation</div></div>
+      <div class="si"><div class="si-name">Terraform</div><div class="si-desc">Infrastructure as Code — provisionnement reproductible, state GCS, déployable en minutes</div><div class="si-tier">IaC</div></div>
+      <div class="si"><div class="si-name">Airflow</div><div class="si-desc">Orchestration de workflows — DAGs robustes, retry automatique, monitoring des échecs</div><div class="si-tier">Orchestration</div></div>
+      <div class="si"><div class="si-name">FastAPI · Python</div><div class="si-desc">API backend — endpoints métier, auth JWT &amp; Identity Token GCP, cache TTL, BigQuery</div><div class="si-tier">Backend</div></div>
+      <div class="si"><div class="si-name">Docker · Cloud Build</div><div class="si-desc">Conteneurisation et CI/CD — build parallélisé, déploiement automatique sur push Git</div><div class="si-tier">CI/CD</div></div>
+      <div class="si"><div class="si-name">Power BI · Next.js</div><div class="si-desc">Visualisation et reporting — dashboards Power BI connectés BigQuery, interfaces web modernes</div><div class="si-tier">Visualisation</div></div>
     </div>
   </div>
 </section>
