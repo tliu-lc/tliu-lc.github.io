@@ -228,38 +228,63 @@ img{max-width:100%;display:block}
 @media(min-width:960px){.promo20{flex:0 0 calc(33.333% - 6px)}}
 @media(min-width:1440px){.promo20{flex:0 0 calc(25% - 6px)}}
 
-.promo20-inner{display:flex;flex-direction:column;cursor:pointer;text-decoration:none}
-
-/* Promo-media — border-radius:30px BCG exact */
-.promo20-media{
-  aspect-ratio:3/4;border-radius:var(--r-media);overflow:hidden;
-  margin-bottom:20px;position:relative;
-  transition:transform .3s ease-in-out;
+/* ── Promo20 BCG exact : image fills card, text overlaid, panel slides up ── */
+.promo20-inner{
+  position:relative;display:block;
+  aspect-ratio:3/4;
+  border-radius:var(--r-media);overflow:hidden;
+  cursor:pointer;text-decoration:none;
 }
-.promo20-inner:hover .promo20-media{transform:scale(1.02)}
+
+/* Image — remplit tout le card */
+.promo20-media{
+  position:absolute;inset:0;
+}
 .promo20-media img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* Categorie — "Cost Management" BCG */
+/* Gradient sombre pour lisibilité du texte */
+.promo20-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,.08) 55%,transparent 100%);
+}
+
+/* Texte visible en bas de l'image (défaut) */
+.promo20-vis{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 20px 24px;z-index:2;
+}
 .promo20-cat{
   font-size:11px;font-weight:400;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--black);opacity:.5;
-  margin-bottom:10px;
+  letter-spacing:.1em;color:rgba(255,255,255,.65);
+  margin-bottom:8px;
 }
-/* Titre */
 .promo20-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(15px,1.3vw,20px);font-weight:400;line-height:1.22;
-  color:var(--black);
+  font-size:clamp(15px,1.3vw,18px);font-weight:400;line-height:1.22;
+  color:#fff;
 }
-/* Description révélée au hover */
-.promo20-desc{
-  max-height:0;overflow:hidden;opacity:0;
-  transition:max-height .3s ease-in-out .1s,opacity .25s ease-in-out .15s;
-  margin-top:0;
+
+/* Panel caché — slide up au hover (BCG exact: top:62% → top:0) */
+.promo20-hid{
+  position:absolute;
+  top:62%;left:0;right:0;
+  height:100%;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  opacity:0;
+  padding:24px;
+  background:var(--beige);
+  z-index:3;
+  transition:all .3s ease-in-out .1s;
 }
-.promo20-inner:hover .promo20-desc{max-height:160px;opacity:1;margin-top:12px}
-.promo20-desc p{font-size:13px;color:var(--black);opacity:.6;line-height:1.6;margin-bottom:14px}
-/* CTA arrow button — primary-button BCG */
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner:hover .promo20-hid{top:0;opacity:1}
+}
+.promo20-hid .promo20-cat{color:var(--black);opacity:.45}
+.promo20-hid .promo20-title{color:var(--black);margin-bottom:14px}
+.promo20-hid p{font-size:13px;color:var(--black);opacity:.6;line-height:1.6;flex:1}
+
+/* CTA arrow button */
 .promo20-cta{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--y);color:var(--black);
@@ -584,10 +609,14 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
-          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Architecture de données"></div>
-          <div class="promo20-cat">Notre approche</div>
-          <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
-          <div class="promo20-desc">
+          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Notre approche"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Notre approche</div>
+            <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Notre approche</div>
+            <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
             <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation — documenté et transmissible.</p>
             <span class="promo20-cta">En savoir plus →</span>
           </div>
@@ -597,9 +626,13 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
           <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
-          <div class="promo20-cat">Architecture de données</div>
-          <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
-          <div class="promo20-desc">
+          <div class="promo20-vis">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
             <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, modélisation — robustes en production.</p>
             <span class="promo20-cta">En savoir plus →</span>
           </div>
@@ -609,10 +642,14 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
           <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
-          <div class="promo20-cat">Infrastructure cloud</div>
-          <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
-          <div class="promo20-desc">
-            <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise.</p>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
+            <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise entre les environnements.</p>
             <span class="promo20-cta">En savoir plus →</span>
           </div>
         </a>
@@ -621,9 +658,13 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
           <div class="promo20-media"><img src="images/card-auto.jpg" alt="Conseil & Audit data"></div>
-          <div class="promo20-cat">Conseil &amp; Audit data</div>
-          <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
-          <div class="promo20-desc">
+          <div class="promo20-vis">
+            <div class="promo20-cat">Conseil &amp; Audit data</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Conseil &amp; Audit data</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
             <p>Audit des sources existantes, diagnostic des risques, roadmap chiffrée. Livré en 2 semaines, sans engagement.</p>
             <span class="promo20-cta">En savoir plus →</span>
           </div>
@@ -632,11 +673,15 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
-          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage"></div>
-          <div class="promo20-cat">Pilotage &amp; visualisation</div>
-          <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
-          <div class="promo20-desc">
-            <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement.</p>
+          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage & visualisation"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Pilotage &amp; visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Pilotage &amp; visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+            <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
             <span class="promo20-cta">En savoir plus →</span>
           </div>
         </a>
