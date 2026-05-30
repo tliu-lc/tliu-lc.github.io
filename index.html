@@ -344,53 +344,96 @@ img { max-width:100%; display:block }
 .rc h3 { font-size:.9rem; font-weight:600; color:var(--black); line-height:1.4 }
 .rc p { font-size:.82rem; color:var(--muted); line-height:1.72; flex:1 }
 
-/* ─── EXPERTISE ─── */
+/* ─── EXPERTISE — BCG Promo20 style ─── */
 #expertise { padding:96px 0; background:#fff }
-.section-head {
-  display:flex; justify-content:space-between; align-items:flex-end;
-  margin-bottom:52px; gap:48px;
+
+/* ModuleHeader BCG style */
+.mod-header { margin-bottom:56px }
+.mod-eyebrow {
+  font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted); margin-bottom:14px;
 }
-.section-head-note {
-  max-width:340px; font-size:.88rem; color:var(--muted);
-  text-align:right; line-height:1.7;
+.mod-title {
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:400; line-height:1.1; letter-spacing:-.015em;
+  color:var(--ink); max-width:680px; margin-bottom:18px;
 }
-.cg { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border) }
-.card {
-  background:#fff; padding:44px 40px;
-  border-right:1px solid var(--border);
-  display:flex; flex-direction:column; gap:16px;
-  transition:background .2s;
+.mod-desc { font-size:.95rem; color:var(--muted); max-width:540px; line-height:1.7 }
+
+/* Grille 4 colonnes + 1 large (2 col) */
+.promo-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
 }
-.card:nth-child(3n) { border-right:none }
-.card:nth-child(n+4) { border-top:1px solid var(--border) }
-.card:hover { background:var(--warm) }
-.card-tag {
-  font-size:.62rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--y);
+
+/* BCG Promo20 — flat, image portrait, no card box */
+.promo {
+  display:flex; flex-direction:column;
+  text-decoration:none; cursor:pointer;
 }
-.card h3 { font-size:1rem; font-weight:600; line-height:1.45; color:var(--ink) }
-.card p { font-size:.875rem; color:var(--muted); line-height:1.8; flex:1 }
-.card-lnk {
-  font-size:.8rem; font-weight:600; color:var(--black);
-  display:flex; align-items:center; gap:6px;
-  transition:gap .2s; width:fit-content; margin-top:8px;
+.promo.feat-promo { grid-column:span 2 }
+
+/* Image avec border-radius:30px — EXACT BCG */
+.promo-media {
+  aspect-ratio:3/4;
+  border-radius:30px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
 }
-.card-lnk:hover { gap:10px }
-.card.feat { background:var(--black); border-color:var(--black); grid-row:span 2 }
-.card.feat:hover { background:#2e3135 }
-.card.feat .card-tag { color:var(--y) }
-.card.feat h3 { color:#fff; font-size:1.15rem }
-.card.feat p { color:rgba(255,255,255,.48) }
-.card.feat .card-lnk { color:rgba(255,255,255,.6) }
-.feat-list {
-  list-style:none; display:flex; flex-direction:column;
-  gap:10px; margin-top:8px;
+.promo.feat-promo .promo-media { aspect-ratio:16/10 }
+.promo:hover .promo-media { transform:scale(1.025) }
+
+/* Backgrounds colorés (sans photo) */
+.pm-bg { position:absolute; inset:0 }
+.pm-dark-amber { background:linear-gradient(145deg,#1a0e00 0%,#6b3800 55%,#b05a00 100%) }
+.pm-navy      { background:linear-gradient(145deg,#00183a 0%,#003f88 55%,#006ac8 100%) }
+.pm-amber     { background:linear-gradient(145deg,#3a2000 0%,#e8a020 60%,#f5c14a 100%) }
+.pm-warm-dark { background:linear-gradient(145deg,#100900 0%,#3d2000 55%,#7a4400 100%) }
+.pm-deep-blue { background:linear-gradient(145deg,#00112a 0%,#00296b 55%,#00509d 100%) }
+.pm-feat      { background:linear-gradient(135deg,#0a0600 0%,#2d1800 35%,#6b3800 65%,#e8a020 100%) }
+
+/* Motif grille subtil dans le background */
+.pm-grid {
+  position:absolute; inset:0; opacity:.15;
+  background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);
+  background-size:32px 32px;
 }
-.feat-list li {
-  font-size:.8rem; color:rgba(255,255,255,.4);
-  display:flex; gap:9px; line-height:1.5;
+
+/* Catégorie — uppercase 11px EXACT BCG */
+.promo-cat {
+  font-size:11px; font-weight:400; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--muted); margin-bottom:10px;
 }
-.feat-list li span { color:var(--y); flex-shrink:0 }
+
+/* Titre card */
+.promo-title {
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(16px,1.4vw,20px);
+  line-height:1.22; font-weight:400; color:var(--ink);
+}
+
+/* Description + CTA — slide au hover comme BCG */
+.promo-body {
+  max-height:0; overflow:hidden; opacity:0;
+  transition:max-height .42s ease, opacity .32s ease;
+}
+.promo:hover .promo-body { max-height:200px; opacity:1 }
+.promo-body p {
+  font-size:14px; color:var(--ink2); line-height:1.6;
+  margin:14px 0 16px;
+}
+.promo-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13px; font-weight:600; color:var(--black);
+  border-bottom:1px solid var(--black); padding-bottom:1px;
+  transition:gap .2s;
+}
+.promo:hover .promo-cta { gap:10px }
 
 /* ─── APPROCHE ─── */
 #approach { padding:96px 0; background:var(--warm); border-top:1px solid var(--border) }
@@ -464,9 +507,9 @@ img { max-width:100%; display:block }
 .osol h3 { font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:8px }
 .osol p { font-size:.875rem; color:var(--muted); max-width:500px }
 
-/* ─── FRANCE — "LIU Consulting en France" ─── */
+/* ─── FRANCE — "LIU Consulting en France" avec photo ─── */
 #france { background:var(--black); padding:100px 0 }
-.france-inner { display:grid; grid-template-columns:1fr 1fr; gap:96px; margin-top:56px; align-items:start }
+.france-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:56px; align-items:start }
 .france-locs { border-top:1px solid rgba(255,255,255,.1) }
 .france-loc {
   display:flex; justify-content:space-between; align-items:baseline;
@@ -474,10 +517,35 @@ img { max-width:100%; display:block }
 }
 .fl-type { font-size:.64rem; font-weight:700; letter-spacing:.17em; text-transform:uppercase; color:rgba(255,255,255,.25) }
 .fl-val { font-size:.9rem; color:rgba(255,255,255,.68) }
-.france-right { display:flex; flex-direction:column; gap:28px }
-.france-map { display:flex; justify-content:center }
-.france-map svg { width:100%; max-width:260px }
-.france-note { font-size:.88rem; color:rgba(255,255,255,.38); line-height:1.75 }
+.france-note { font-size:.88rem; color:rgba(255,255,255,.38); line-height:1.75; margin-top:32px }
+
+/* Photo France — comme BCG offices photo */
+.france-photo-wrap { position:relative }
+.france-photo {
+  width:100%; aspect-ratio:4/5;
+  border-radius:30px; /* MÊME QUE BCG Promo-media */
+  overflow:hidden;
+  position:relative;
+}
+.france-photo img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:top center;
+  display:block;
+}
+.france-photo-caption {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:32px 28px 28px;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  border-radius:0 0 30px 30px;
+}
+.france-photo-name {
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem; font-weight:400; color:#fff; margin-bottom:4px;
+}
+.france-photo-role {
+  font-size:.72rem; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--y);
+}
 
 /* ─── ABOUT ─── */
 #about { padding:96px 0; background:#fff; border-top:1px solid var(--border) }
@@ -555,25 +623,32 @@ footer {
 /* ─── RESPONSIVE ─── */
 @media(max-width:1024px) {
   .stmt-grid,.france-inner,.abl,.ctg { grid-template-columns:1fr; gap:48px }
-  .cg { grid-template-columns:1fr 1fr }
-  .card.feat { grid-row:auto }
   .ot { grid-template-columns:1fr }
   .rg { grid-template-columns:repeat(2,1fr) }
-  .section-head { flex-direction:column; align-items:flex-start }
-  .section-head-note { text-align:left }
   .osol { flex-direction:column; align-items:flex-start }
   .ag { grid-template-columns:1fr }
   .ac { border-right:none; border-bottom:1px solid var(--border) }
+  /* promo grid: 2 colonnes */
+  .promo-grid { grid-template-columns:repeat(2,1fr) }
+  .promo.feat-promo { grid-column:span 2 }
+  .promo.feat-promo .promo-media { aspect-ratio:16/9 }
 }
 @media(max-width:768px) {
   .wrap { padding:0 24px }
   #nav { width:calc(100% - 32px); padding:0 20px }
   footer { padding:20px 24px }
-  .cg,.rg { grid-template-columns:1fr }
+  .rg { grid-template-columns:1fr }
   .hero-strip { grid-template-columns:1fr 1fr }
   .nav-links a:not(.nav-cta) { display:none }
   .ob { padding:36px 28px }
   .osol { padding:32px 28px }
+  /* promo grid: 1 colonne sur mobile */
+  .promo-grid { grid-template-columns:1fr }
+  .promo.feat-promo { grid-column:span 1 }
+  .promo-media { aspect-ratio:4/3 }
+  .promo.feat-promo .promo-media { aspect-ratio:4/3 }
+  /* hero strip 1 col */
+  .hero-strip { grid-template-columns:1fr 1fr }
 }
 </style>
 </head>
@@ -688,54 +763,90 @@ footer {
   </div>
 </section>
 
-<!-- ─── EXPERTISE ─── -->
+<!-- ─── EXPERTISE — BCG Promo20 style ─── -->
 <section id="expertise">
   <div class="wrap">
-    <div class="section-head rv">
-      <div>
-        <div class="sl">Périmètre d'intervention</div>
-        <h2 class="sec-h">Ce que je construis pour vous</h2>
-      </div>
-      <p class="section-head-note">De l'architecture à la visualisation — l'ensemble de la chaîne data, géré par un seul interlocuteur.</p>
+
+    <!-- ModuleHeader BCG -->
+    <div class="mod-header rv">
+      <div class="mod-eyebrow">Périmètre d'intervention</div>
+      <h2 class="mod-title">Ce que je construis pour vous</h2>
+      <p class="mod-desc">De l'architecture à la visualisation — l'ensemble de la chaîne data géré par un seul interlocuteur, du cadrage à la formation.</p>
     </div>
-    <div class="cg rv d1">
-      <div class="card feat">
-        <div class="card-tag">Notre approche</div>
-        <h3>De la donnée brute à la décision — sans complexité inutile</h3>
-        <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation. Chaque livrable est documenté et transmissible à vos équipes.</p>
-        <ul class="feat-list">
-          <li><span>—</span>Collecte &amp; structuration des données</li>
-          <li><span>—</span>Stockage &amp; requêtage performant</li>
-          <li><span>—</span>Automatisation &amp; orchestration</li>
-          <li><span>—</span>Infrastructure reproductible</li>
-          <li><span>—</span>Pilotage &amp; visualisation</li>
-        </ul>
-        <a href="#contact" class="card-lnk" style="margin-top:auto">Discuter de votre projet →</a>
-      </div>
-      <div class="card rv d1">
-        <div class="card-tag">Architecture de données</div>
-        <h3>Flux fiables, de la source à l'entrepôt</h3>
-        <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, enrichissement, modélisation — robustes en production.</p>
-        <a href="#contact" class="card-lnk">En savoir plus →</a>
-      </div>
-      <div class="card rv d2">
-        <div class="card-tag">Infrastructure &amp; déploiement</div>
-        <h3>Environnements reproductibles et automatisés</h3>
-        <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise entre environnements.</p>
-        <a href="#contact" class="card-lnk">En savoir plus →</a>
-      </div>
-      <div class="card rv d1">
-        <div class="card-tag">Automatisation &amp; orchestration</div>
-        <h3>Éliminer les tâches manuelles et les échecs silencieux</h3>
-        <p>Workflows planifiés, alertes sur anomalies, rapports envoyés automatiquement — vos équipes informées sans intervenir.</p>
-        <a href="#contact" class="card-lnk">En savoir plus →</a>
-      </div>
-      <div class="card rv d2">
-        <div class="card-tag">Pilotage &amp; visualisation</div>
-        <h3>Des tableaux de bord que vos équipes utilisent vraiment</h3>
-        <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
-        <a href="#contact" class="card-lnk">En savoir plus →</a>
-      </div>
+
+    <!-- Grille BCG Promo20 — image portrait + texte, no box -->
+    <div class="promo-grid rv d1">
+
+      <!-- Card featured (2 colonnes) — aperçu global -->
+      <a class="promo feat-promo" href="#contact">
+        <div class="promo-media">
+          <div class="pm-bg pm-feat"></div>
+          <div class="pm-grid"></div>
+        </div>
+        <div class="promo-cat">Notre approche</div>
+        <h3 class="promo-title">De la donnée brute à la décision — sans complexité inutile</h3>
+        <div class="promo-body">
+          <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation. Chaque livrable est documenté et transmissible à vos équipes.</p>
+          <span class="promo-cta">Discuter de votre projet →</span>
+        </div>
+      </a>
+
+      <!-- Card 1 -->
+      <a class="promo" href="#contact">
+        <div class="promo-media">
+          <div class="pm-bg pm-dark-amber"></div>
+          <div class="pm-grid"></div>
+        </div>
+        <div class="promo-cat">Architecture de données</div>
+        <h3 class="promo-title">Flux fiables, de la source à l'entrepôt</h3>
+        <div class="promo-body">
+          <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, enrichissement, modélisation — robustes en production.</p>
+          <span class="promo-cta">En savoir plus →</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="promo" href="#contact">
+        <div class="promo-media">
+          <div class="pm-bg pm-navy"></div>
+          <div class="pm-grid"></div>
+        </div>
+        <div class="promo-cat">Infrastructure &amp; déploiement</div>
+        <h3 class="promo-title">Environnements reproductibles et automatisés</h3>
+        <div class="promo-body">
+          <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise entre environnements.</p>
+          <span class="promo-cta">En savoir plus →</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="promo" href="#contact">
+        <div class="promo-media">
+          <div class="pm-bg pm-amber"></div>
+          <div class="pm-grid"></div>
+        </div>
+        <div class="promo-cat">Automatisation &amp; orchestration</div>
+        <h3 class="promo-title">Éliminer les tâches manuelles et les échecs silencieux</h3>
+        <div class="promo-body">
+          <p>Workflows planifiés, alertes sur anomalies, rapports envoyés automatiquement — vos équipes informées sans intervenir.</p>
+          <span class="promo-cta">En savoir plus →</span>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a class="promo" href="#contact">
+        <div class="promo-media">
+          <div class="pm-bg pm-deep-blue"></div>
+          <div class="pm-grid"></div>
+        </div>
+        <div class="promo-cat">Pilotage &amp; visualisation</div>
+        <h3 class="promo-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+        <div class="promo-body">
+          <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
+          <span class="promo-cta">En savoir plus →</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -800,33 +911,35 @@ footer {
   </div>
 </section>
 
-<!-- ─── FRANCE ─── -->
+<!-- ─── FRANCE — avec photo comme BCG ─── -->
 <section id="france">
   <div class="wrap">
     <div class="rv"><div class="sl sl-w">Présence</div><h2 class="sec-h" style="color:#fff">LIU Consulting en France</h2></div>
     <div class="france-inner rv d1">
-      <div class="france-locs">
-        <div class="france-loc"><span class="fl-type">Siège social</span><span class="fl-val">Île-de-France</span></div>
-        <div class="france-loc"><span class="fl-type">Interventions sur site</span><span class="fl-val">Toute la France</span></div>
-        <div class="france-loc"><span class="fl-type">Missions à distance</span><span class="fl-val">France &amp; Europe</span></div>
-        <div class="france-loc"><span class="fl-type">Langues de travail</span><span class="fl-val">Français · Anglais</span></div>
-        <div class="france-loc"><span class="fl-type">SIRET</span><span class="fl-val">919 293 076 00023</span></div>
-      </div>
-      <div class="france-right">
-        <div class="france-map">
-          <svg viewBox="0 0 280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M138 8 L215 34 L262 98 L252 192 L196 272 L138 298 L80 272 L26 192 L18 98 L64 34 Z"
-              stroke="rgba(255,255,255,.15)" stroke-width="1.5" fill="rgba(255,255,255,.04)"/>
-            <path d="M138 8 L215 34 L262 98 L252 192 L196 272 L138 298 L80 272 L26 192 L18 98 L64 34 Z"
-              stroke="rgba(232,160,32,.25)" stroke-width="1" fill="none" stroke-dasharray="4 5"/>
-            <circle cx="152" cy="142" r="5" fill="#E8A020"/>
-            <circle cx="152" cy="142" r="14" stroke="#E8A020" stroke-width="1" fill="none" opacity=".3"/>
-            <circle cx="152" cy="142" r="30" stroke="#E8A020" stroke-width="1" fill="none" opacity=".12"/>
-            <text x="163" y="147" font-family="DM Sans,Arial,sans-serif" font-size="11" fill="rgba(255,255,255,.6)" font-weight="500">Paris</text>
-          </svg>
+
+      <!-- Infos localisation -->
+      <div>
+        <div class="france-locs">
+          <div class="france-loc"><span class="fl-type">Siège social</span><span class="fl-val">Île-de-France</span></div>
+          <div class="france-loc"><span class="fl-type">Interventions sur site</span><span class="fl-val">Toute la France</span></div>
+          <div class="france-loc"><span class="fl-type">Missions à distance</span><span class="fl-val">France &amp; Europe</span></div>
+          <div class="france-loc"><span class="fl-type">Langues de travail</span><span class="fl-val">Français · Anglais</span></div>
+          <div class="france-loc"><span class="fl-type">SIRET</span><span class="fl-val">919 293 076 00023</span></div>
         </div>
         <p class="france-note">Basé en Île-de-France, j'interviens sur site auprès de vos équipes partout en France, ou à distance selon vos besoins et contraintes organisationnelles.</p>
       </div>
+
+      <!-- Photo — border-radius:30px comme BCG Promo-media -->
+      <div class="france-photo-wrap rv d2">
+        <div class="france-photo">
+          <img src="tim.png" alt="Tim LIU — LIU Consulting, Île-de-France">
+          <div class="france-photo-caption">
+            <div class="france-photo-name">Tim LIU</div>
+            <div class="france-photo-role">Fondateur · Île-de-France</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
