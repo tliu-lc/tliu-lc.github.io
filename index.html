@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0b1728;--navy-2:#152238;
+  --navy:#1A1812;--navy-2:#252218;
   --yellow:#F0B429;--yellow-l:#F7CC5A;--yellow-d:#C8911A;
   --white:#fff;--off:#f7f6f2;--off-2:#eceae4;
   --ink:#0f1923;--ink-2:#334155;--muted:#64748b;--light:#94a3b8;
@@ -82,8 +82,8 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 #clients{background:#fff;padding:44px 0;border-bottom:1px solid var(--border);}
 .cl-label{font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--light);text-align:center;margin-bottom:32px;}
 .cl-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
-.cl-logo{padding:10px 32px;opacity:.75;transition:opacity .25s;cursor:default;display:flex;align-items:center;}
-.cl-logo:hover{opacity:1;}
+.cl-logo{padding:12px 36px;display:flex;align-items:center;justify-content:center;transition:opacity .25s;}
+.cl-logo img,.cl-logo svg{height:44px;width:auto;object-fit:contain;display:block;}
 
 /* RÉALISATIONS */
 #results{background:var(--off);padding:88px 0;}
@@ -326,60 +326,11 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
   <div class="wrap">
     <div class="cl-label rv">Ils nous ont fait confiance</div>
     <div class="cl-row rv d1">
-
-      <!-- L'Oréal -->
-      <div class="cl-logo">
-        <svg width="110" height="44" viewBox="0 0 110 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="55" y="28" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="19" font-weight="700" fill="#1a1a1a" letter-spacing="1.5">L'ORÉAL</text>
-          <text x="55" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-weight="400" fill="#555" letter-spacing="4">PARIS</text>
-        </svg>
-      </div>
-
-      <!-- Deezer -->
-      <div class="cl-logo">
-        <svg width="110" height="44" viewBox="0 0 110 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Frequency bars -->
-          <rect x="4" y="20" width="5" height="8" rx="2" fill="#CC3777"/>
-          <rect x="12" y="14" width="5" height="14" rx="2" fill="#AA2260"/>
-          <rect x="20" y="10" width="5" height="18" rx="2" fill="#881D50"/>
-          <rect x="28" y="16" width="5" height="12" rx="2" fill="#661545"/>
-          <text x="40" y="29" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700" fill="#111" letter-spacing="-.3">deezer</text>
-        </svg>
-      </div>
-
-      <!-- Bureau Vallée -->
-      <div class="cl-logo">
-        <svg width="130" height="44" viewBox="0 0 130 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="22" height="28" rx="3" fill="#CC1122"/>
-          <text x="16" y="27" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing=".5">BV</text>
-          <text x="36" y="21" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#CC1122" letter-spacing=".2">bureau</text>
-          <text x="36" y="34" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#CC1122" letter-spacing=".2">vallée</text>
-        </svg>
-      </div>
-
-      <!-- TotalEnergies -->
-      <div class="cl-logo">
-        <svg width="150" height="44" viewBox="0 0 150 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Sunburst oval -->
-          <ellipse cx="16" cy="22" rx="12" ry="12" fill="none" stroke="#D42027" stroke-width="3.5"/>
-          <ellipse cx="16" cy="22" rx="6" ry="6" fill="#D42027"/>
-          <line x1="16" y1="4" x2="16" y2="8" stroke="#D42027" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="16" y1="36" x2="16" y2="40" stroke="#D42027" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="4" y1="22" x2="0" y2="22" stroke="#D42027" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="28" y1="22" x2="32" y2="22" stroke="#D42027" stroke-width="2.5" stroke-linecap="round"/>
-          <text x="40" y="27" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="600" fill="#0D4F8B" letter-spacing="-.3">TotalEnergies</text>
-        </svg>
-      </div>
-
-      <!-- Servier -->
-      <div class="cl-logo">
-        <svg width="100" height="44" viewBox="0 0 100 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Arc stylisé -->
-          <path d="M10 30 Q28 8 46 28" stroke="#006CB5" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <text x="50" y="33" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="500" fill="#006CB5" letter-spacing=".3">servier</text>
-        </svg>
-      </div>
-
+      <div class="cl-logo"><img src="logos/loreal.png" alt="L'Oréal"></div>
+      <div class="cl-logo"><img src="logos/deezer.png" alt="Deezer"></div>
+      <div class="cl-logo"><img src="logos/bureau-vallee.png" alt="Bureau Vallée"></div>
+      <div class="cl-logo"><img src="logos/totalenergies.svg" alt="TotalEnergies"></div>
+      <div class="cl-logo"><img src="logos/servier.png" alt="Servier"></div>
     </div>
   </div>
 </section>
