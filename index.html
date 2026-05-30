@@ -10,7 +10,7 @@
 <style>
 :root{
   --navy:#00296B;--navy-2:#003F88;--blue:#00509D;
-  --yellow:#FFD500;--yellow-l:#FFE54D;--yellow-d:#FDC500;
+  --yellow:#E8A020;--yellow-l:#F0B840;--yellow-d:#C07018;
   --white:#fff;--off:#f5f7fb;--off-2:#e8ecf4;
   --ink:#0f1923;--ink-2:#334155;--muted:#64748b;--light:#94a3b8;
   --border:#e2e8f0;--bord-2:#cbd5e1;
@@ -48,15 +48,13 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 
 /* AURORA */
 .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
-.aur{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
-.aur-1{width:65%;height:80%;top:-25%;left:-15%;background:radial-gradient(ellipse,rgba(255,213,0,.45) 0%,transparent 65%);animation:aur1 14s ease-in-out infinite alternate;}
-.aur-2{width:55%;height:65%;top:5%;right:-20%;background:radial-gradient(ellipse,rgba(253,197,0,.3) 0%,transparent 65%);animation:aur2 10s ease-in-out infinite alternate;}
-.aur-3{width:50%;height:70%;bottom:-30%;left:15%;background:radial-gradient(ellipse,rgba(255,230,60,.35) 0%,transparent 65%);animation:aur3 17s ease-in-out infinite alternate;}
-.aur-4{width:35%;height:45%;top:35%;left:30%;background:radial-gradient(ellipse,rgba(255,213,0,.18) 0%,transparent 65%);animation:aur4 9s ease-in-out infinite alternate;}
-@keyframes aur1{to{transform:translate(22%,18%) scale(1.15)}}
-@keyframes aur2{to{transform:translate(-18%,22%) scale(0.88)}}
-@keyframes aur3{to{transform:translate(14%,-22%) scale(1.12)}}
-@keyframes aur4{to{transform:translate(-12%,14%) scale(1.2)}}
+.aur{position:absolute;border-radius:50%;mix-blend-mode:screen;will-change:transform;}
+.aur-1{width:75%;height:90%;top:-15%;left:-10%;filter:blur(52px);background:radial-gradient(ellipse,rgba(232,160,32,.85) 0%,rgba(232,160,32,.35) 45%,transparent 70%);animation:aur1 7s ease-in-out infinite alternate;}
+.aur-2{width:60%;height:75%;top:0%;right:-5%;filter:blur(60px);background:radial-gradient(ellipse,rgba(240,184,64,.75) 0%,rgba(240,184,64,.2) 50%,transparent 70%);animation:aur2 5s ease-in-out infinite alternate;}
+.aur-3{width:55%;height:65%;bottom:-10%;left:20%;filter:blur(48px);background:radial-gradient(ellipse,rgba(200,140,20,.7) 0%,transparent 65%);animation:aur3 9s ease-in-out infinite alternate;}
+@keyframes aur1{from{transform:translate(0,0) scale(1)}to{transform:translate(28%,18%) scale(1.12)}}
+@keyframes aur2{from{transform:translate(0,0) scale(1.05)}to{transform:translate(-24%,22%) scale(0.9)}}
+@keyframes aur3{from{transform:translate(0,0) scale(1)}to{transform:translate(18%,-24%) scale(1.1)}}
 
 .hl-t{padding:76px 56px 68px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1;}
 .hero-tag{display:inline-flex;font-size:.64rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:5px 14px;border:1px solid rgba(255,255,255,.14);border-radius:100px;margin-bottom:4px;width:fit-content;}
@@ -83,16 +81,18 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,.97)
 .cl-label{font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--light);text-align:center;margin-bottom:32px;}
 .cl-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;}
 .cl-logo{width:180px;height:72px;display:flex;align-items:center;justify-content:center;padding:10px 20px;flex-shrink:0;}
-.cl-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;}
-.cl-logo svg{max-width:100%;max-height:100%;}
+.cl-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;filter:grayscale(1) opacity(.55);transition:filter .3s;}
+.cl-logo:hover img{filter:grayscale(0) opacity(1);}
+.cl-logo svg{max-width:100%;max-height:100%;filter:grayscale(1) opacity(.55);transition:filter .3s;}
+.cl-logo:hover svg{filter:grayscale(0) opacity(1);}
 
 /* RÉALISATIONS */
 #results{background:var(--off);padding:88px 0;}
 .rg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
 .rc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:34px 28px;display:flex;flex-direction:column;gap:14px;transition:box-shadow .25s,border-color .25s;}
 .rc:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:var(--bord-2);}
-.rc-kpi{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;color:var(--navy);line-height:1;}
-.rc-bar{width:28px;height:3px;background:var(--yellow);border-radius:2px;margin-bottom:4px;}
+.rc-num{font-family:'DM Serif Display',serif;font-size:2rem;font-weight:400;color:var(--off-2);line-height:1;}
+.rc-kpi{font-family:'DM Serif Display',serif;font-size:2.4rem;font-weight:400;color:var(--navy);line-height:1;margin-top:2px;}
 .rc h3{font-size:.9rem;color:var(--navy);font-weight:600;line-height:1.45;}
 .rc p{font-size:.82rem;color:var(--muted);line-height:1.75;flex:1;}
 
@@ -252,7 +252,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
     <a href="#expertise">Expertise</a>
     <a href="#offres">Offres</a>
     <a href="#about">À propos</a>
-    <a href="#contact" class="nc">Nous contacter</a>
+    <a href="#contact" class="nc">Me contacter</a>
   </div>
 </nav>
 
@@ -269,7 +269,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
     <div class="hl-t">
       <div class="hero-tag rv">Data Engineering · Google Cloud Platform</div>
       <h1 class="rv d1">Des données<br>à la décision.<br>Clé en main.</h1>
-      <p class="rv d2">Vous avez des données à exploiter mais pas l'infrastructure pour le faire ? Nous concevons et livrons des solutions data complètes sur GCP — de l'ingestion jusqu'au dashboard, dans un cadre forfaitaire clair et sans surprise.</p>
+      <p class="rv d2">Vous avez des données à exploiter mais pas l'infrastructure pour le faire ? Je conçois et livre des solutions data complètes sur GCP — de l'ingestion jusqu'au dashboard, dans un cadre forfaitaire clair et sans surprise.</p>
       <div class="ha rv d3">
         <a href="#offres" class="bg">Découvrir les offres</a>
         <a href="#contact" class="bgg"><span>Prendre contact</span> →</a>
@@ -317,7 +317,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
   <div class="hp-strip">
     <div class="hp rv"><div class="hp-l">Sur mesure</div><p>Conçu pour votre organisation, vos données, vos équipes — pas une plateforme générique.</p></div>
     <div class="hp rv d1"><div class="hp-l">Clé en main</div><p>De la collecte à l'outil utilisé au quotidien — toute la chaîne gérée de bout en bout.</p></div>
-    <div class="hp rv d2"><div class="hp-l">Forfaitaire</div><p>On cadre le besoin ensemble, nous livrons. Pas de régie, pas de flou — un engagement clair.</p></div>
+    <div class="hp rv d2"><div class="hp-l">Forfaitaire</div><p>On cadre le besoin ensemble, je livre. Pas de régie, pas de flou — un engagement clair.</p></div>
     <div class="hp rv d3"><div class="hp-l">Indépendant</div><p>Aucun intérêt à vendre une plateforme particulière. Vos intérêts avant tout.</p></div>
   </div>
 </section>
@@ -325,7 +325,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 <!-- CLIENT LOGOS -->
 <section id="clients">
   <div class="wrap">
-    <div class="cl-label rv">Ils nous ont fait confiance</div>
+    <div class="cl-label rv">Ils m'ont fait confiance</div>
     <div class="cl-row rv d1">
       <div class="cl-logo"><img src="logos/loreal.png" alt="L'Oréal"></div>
       <div class="cl-logo"><img src="logos/deezer.png" alt="Deezer"></div>
@@ -339,25 +339,26 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 <!-- RÉALISATIONS -->
 <section id="results" style="background:var(--off);padding:88px 0;">
   <div class="wrap">
-    <div class="rv"><div class="sl">Résultats concrets</div><h2>Ce que nous avons livré</h2></div>
+    <div class="rv"><div class="sl">Résultats concrets</div><h2>Ce que j'ai livré</h2></div>
     <div class="rg">
       <div class="rc rv d1">
+        <div class="rc-num">01</div>
         <div class="rc-kpi">−70%</div>
         <h3>Temps de traitement réduit</h3>
         <p>Optimisation de pipelines d'appels API à fort volume — moins d'attente, plus de données traitées dans les délais opérationnels.</p>
       </div>
       <div class="rc rv d2">
-        <div class="rc-bar"></div>
+        <div class="rc-num">02</div>
         <h3>Workflows Airflow refondu</h3>
         <p>Élimination des goulots d'étranglement et des échecs silencieux. Orchestration fiable, observable, résistante aux pannes.</p>
       </div>
       <div class="rc rv d3">
-        <div class="rc-bar"></div>
+        <div class="rc-num">03</div>
         <h3>Pipelines GCP bout-en-bout</h3>
         <p>Infrastructure complète : ingestion, transformation dbt, BigQuery, déploiement Terraform + CI/CD automatisé. Maintenable par les équipes.</p>
       </div>
       <div class="rc rv d4">
-        <div class="rc-bar"></div>
+        <div class="rc-num">04</div>
         <h3>Plateforme retail clé en main</h3>
         <p>Monitoring des ventes, relance client automatisée, prospection et dashboarding. Un seul interlocuteur, de A à Z.</p>
       </div>
@@ -368,12 +369,12 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 <!-- EXPERTISE CARDS -->
 <section id="expertise" style="padding:88px 0;background:#fff;">
   <div class="wrap">
-    <div class="rv"><div class="sl">Périmètre d'intervention</div><h2>Ce que nous construisons pour vous</h2></div>
+    <div class="rv"><div class="sl">Périmètre d'intervention</div><h2>Ce que je construis pour vous</h2></div>
     <div class="cg rv">
       <div class="card feat">
         <div class="card-tag">Data Engineering · Cloud GCP</div>
         <h3>De la donnée brute au tableau de bord — sans complexité inutile</h3>
-        <p>Nous prenons en charge l'ensemble de la chaîne data : connexion aux sources, transformation, stockage, visualisation. Chaque composant est documenté et maintenable par vos équipes à l'issue du projet.</p>
+        <p>Je prends en charge l'ensemble de la chaîne data : connexion aux sources, transformation, stockage, visualisation. Chaque composant est documenté et maintenable par vos équipes à l'issue du projet.</p>
         <ul class="feat-list">
           <li><span>—</span>Ingestion &amp; transformation (Dataflow, Pub/Sub, dbt, SQL)</li>
           <li><span>—</span>Stockage &amp; requêtage performant (BigQuery)</li>
@@ -415,7 +416,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 <section id="stack">
   <div class="wrap">
     <div class="sh rv">
-      <div><div class="sl sl-w">Stack technique</div><h2 style="color:#fff">Les technologies que nous maîtrisons</h2></div>
+      <div><div class="sl sl-w">Stack technique</div><h2 style="color:#fff">Les technologies que je maîtrise</h2></div>
       <p>Sélection de technologies cloud-native et open-source, choisies pour leur fiabilité en production et la valeur qu'elles apportent à chaque projet.</p>
     </div>
     <div class="sg rv">
@@ -434,9 +435,9 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 <!-- APPROCHE -->
 <section id="approach">
   <div class="wrap">
-    <div class="rv"><div class="sl">Méthode de travail</div><h2>Comment nous travaillons</h2></div>
+    <div class="rv"><div class="sl">Méthode de travail</div><h2>Comment je travaille</h2></div>
     <div class="ag">
-      <div class="ac rv d1"><span class="an">01</span><h3>Cadrage &amp; connexion aux données</h3><p>Nous commençons par comprendre votre activité, vos sources et vos enjeux. En une semaine, vos données sont connectées et les premières tables chargées.</p></div>
+      <div class="ac rv d1"><span class="an">01</span><h3>Cadrage &amp; connexion aux données</h3><p>Je commence par comprendre votre activité, vos sources et vos enjeux. En une semaine, vos données sont connectées et les premières tables chargées.</p></div>
       <div class="ac rv d2"><span class="an">02</span><h3>Construction &amp; personnalisation</h3><p>Pipeline, modèles métier, interface — construits itérativement. Vous voyez la solution évoluer et validez à chaque étape. Aucune surprise à la livraison.</p></div>
       <div class="ac rv d3"><span class="an">03</span><h3>Livraison &amp; autonomie</h3><p>Formation de vos équipes, documentation complète, mise en production. L'objectif : que vous soyez autonomes sur l'outil livré, pas dépendants pour le faire fonctionner.</p></div>
     </div>
@@ -449,7 +450,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
     <div class="rv">
       <div class="sl">Offres</div>
       <h2>Comment travailler ensemble</h2>
-      <p class="off-intro">Nous travaillons en forfait : on cadre ensemble le besoin, nous livrons, vous avez la main. Pas de régie, pas de flou.</p>
+      <p class="off-intro">Je travaille en forfait : on cadre ensemble le besoin, je livre, vous avez la main. Pas de régie, pas de flou.</p>
     </div>
     <div class="ot rv">
       <div class="ob dark">
@@ -469,7 +470,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
       <div class="ob">
         <div><span class="of-tag">Abonnement</span></div>
         <h3>Hébergement, maintenance et support inclus</h3>
-        <p>La solution déployée et maintenue par nos soins. Vos équipes utilisent, nous gérons l'infrastructure. Aucune compétence technique requise de votre côté.</p>
+        <p>La solution déployée et maintenue par mes soins. Vos équipes utilisent, je gère l'infrastructure. Aucune compétence technique requise de votre côté.</p>
         <hr>
         <ul class="of-list">
           <li>Solution opérationnelle en 4 à 6 semaines</li>
@@ -503,9 +504,9 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
       </div>
       <div class="abt rv d1">
         <h2>Un interlocuteur unique,<br>de bout en bout.</h2>
-        <p>Après 3 ans chez L'Oréal et des missions chez Deezer et Bureau Vallée, nous avons appris à construire des pipelines qui tiennent en production : fiables, documentés, maintenables par vos équipes.</p>
-        <p>Spécialisés dans l'écosystème Google Cloud Platform, nous couvrons l'ensemble de la chaîne data — de l'ingestion des données brutes jusqu'au tableau de bord utilisé au quotidien. Nous avons également intervenu chez TotalEnergies et Servier. Chaque mission est conduite sans sous-traitance — un seul interlocuteur du cadrage à la formation.</p>
-        <p>Curieux de l'IA appliquée à la data, nous sommes en veille active sur les usages LLM pour l'automatisation et la valorisation des données.</p>
+        <p>Après 3 ans chez L'Oréal et des missions chez Deezer et Bureau Vallée, j'ai appris à construire des pipelines qui tiennent en production : fiables, documentés, maintenables par vos équipes.</p>
+        <p>Spécialisé dans l'écosystème Google Cloud Platform, je couvre l'ensemble de la chaîne data — de l'ingestion des données brutes jusqu'au tableau de bord utilisé au quotidien. J'ai également intervenu chez TotalEnergies et Servier. Chaque mission est conduite sans sous-traitance — un seul interlocuteur du cadrage à la formation.</p>
+        <p>Curieux de l'IA appliquée à la data, je suis en veille active sur les usages LLM pour l'automatisation et la valorisation des données.</p>
         <div class="ab-links">
           <a href="mailto:tim.liu.liuconsulting@gmail.com" class="al"><span class="alt">Email</span><span class="alv">tim.liu.liuconsulting@gmail.com</span></a>
           <a href="tel:+33603655398" class="al"><span class="alt">Téléphone</span><span class="alv">06 03 65 53 98</span></a>
@@ -535,7 +536,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
       <div class="rv">
         <div class="sl sl-w">Contact</div>
         <h2 style="color:#fff;margin-bottom:16px">Parlons de votre projet.</h2>
-        <p style="color:rgba(255,255,255,.45);font-size:.97rem;line-height:1.85">Un échange de trente minutes pour évaluer si notre approche correspond à votre situation — sans engagement de votre part.</p>
+        <p style="color:rgba(255,255,255,.45);font-size:.97rem;line-height:1.85">Un échange de trente minutes pour évaluer si mon approche correspond à votre situation — sans engagement de votre part.</p>
       </div>
       <div class="rv d1">
         <div class="ctl-list">
