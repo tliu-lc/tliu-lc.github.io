@@ -122,47 +122,47 @@ img{max-width:100%;display:block}
   background:radial-gradient(ellipse at 48% 48%,rgba(255,205,65,.65) 0%,rgba(240,180,40,.3) 40%,transparent 66%);
   filter:blur(30px);animation:a2 4.5s ease-in-out infinite alternate}
 
-/* ── Rayons qui tournent en sens OPPOSÉS ── */
+/* ── Rayons 360° — pivot unique + vitesse unique pour chacun ── */
 
-/* Rayon 1 — large, sens antihoraire */
+/* Rayon 1 — bleu, pivot bas-gauche (15%,88%), CW 3.5s */
 .bl3{
   width:32%;height:145%;top:-30%;left:22%;
   background:linear-gradient(to bottom,transparent 0%,rgba(0,110,215,.38) 16%,rgba(0,140,235,.62) 40%,rgba(0,110,215,.38) 65%,transparent 100%);
   filter:blur(10px);
-  transform-origin:50% 90%;
-  animation:rot-ccw 2.2s ease-in-out infinite alternate}
+  transform-origin:15% 88%;
+  animation:spin-cw 3.5s linear infinite}
 
-/* Rayon 2 — large ambre, sens horaire */
+/* Rayon 2 — ambre, pivot bas-droit (88%,92%), CCW 2.2s */
 .bl7{
   width:28%;height:138%;top:-28%;left:33%;
   background:linear-gradient(to bottom,transparent 0%,rgba(255,190,35,.5) 18%,rgba(255,218,68,.78) 44%,rgba(255,190,35,.48) 70%,transparent 100%);
   filter:blur(8px);
-  transform-origin:50% 90%;
-  animation:rot-cw 1.8s ease-in-out infinite alternate}
+  transform-origin:88% 92%;
+  animation:spin-ccw 2.2s linear infinite}
 
-/* Rayon 3 — moyen or, sens antihoraire lent */
+/* Rayon 3 — or, pivot haut-centre (50%,10%), CW 5s */
 .bl8{
   width:24%;height:125%;top:-22%;right:28%;
   background:linear-gradient(to bottom,transparent 0%,rgba(232,160,32,.55) 20%,rgba(252,200,58,.82) 46%,rgba(232,160,32,.52) 72%,transparent 100%);
   filter:blur(7px);
-  transform-origin:50% 90%;
-  animation:rot-ccw2 2.8s ease-in-out infinite alternate}
+  transform-origin:50% 10%;
+  animation:spin-cw 5s linear infinite}
 
-/* Rayon 4 — bleu, sens horaire rapide */
+/* Rayon 4 — bleu, pivot centre (50%,50%), CCW 1.8s */
 .bl9{
   width:22%;height:115%;top:-18%;right:18%;
   background:linear-gradient(to bottom,transparent 0%,rgba(0,90,195,.4) 24%,rgba(0,118,215,.58) 50%,rgba(0,90,195,.38) 76%,transparent 100%);
   filter:blur(7px);
-  transform-origin:50% 90%;
-  animation:rot-cw2 1.5s ease-in-out infinite alternate}
+  transform-origin:50% 50%;
+  animation:spin-ccw 1.8s linear infinite}
 
-/* Rayon 5 — large ambre droit, sens antihoraire */
+/* Rayon 5 — ambre, pivot haut-droit (80%,8%), CW 7s */
 .bl10{
   width:30%;height:130%;top:-24%;left:12%;
   background:linear-gradient(to bottom,transparent 0%,rgba(255,195,45,.46) 18%,rgba(255,224,72,.72) 44%,rgba(255,195,45,.44) 72%,transparent 100%);
   filter:blur(9px);
-  transform-origin:50% 90%;
-  animation:rot-ccw3 2s ease-in-out infinite alternate}
+  transform-origin:80% 8%;
+  animation:spin-cw 7s linear infinite}
 
 /* Nappe lumineuse accent */
 .bl4{width:44%;height:50%;top:-18%;left:-2%;
@@ -185,11 +185,9 @@ img{max-width:100%;display:block}
 @keyframes a6{0%{transform:translate(0,0)}100%{transform:translate(-3%,5%) scale(.93)}}
 
 /* Rotations pendulaires — sens OPPOSÉS par rayon */
-@keyframes rot-ccw  {0%{transform:rotate(-24deg)} 100%{transform:rotate(14deg)}}   /* antihoraire→horaire */
-@keyframes rot-cw   {0%{transform:rotate(18deg)}  100%{transform:rotate(-14deg)}}   /* horaire→antihoraire */
-@keyframes rot-ccw2 {0%{transform:rotate(-10deg)} 100%{transform:rotate(26deg)}}   /* antihoraire→horaire ample */
-@keyframes rot-cw2  {0%{transform:rotate(20deg)}  100%{transform:rotate(-22deg)}}   /* horaire→antihoraire fort */
-@keyframes rot-ccw3 {0%{transform:rotate(-20deg)} 100%{transform:rotate(10deg)}}    /* antihoraire→horaire */
+/* Rotations continues 360° */
+@keyframes spin-cw  {from{transform:rotate(0deg)}  to{transform:rotate(360deg)}}
+@keyframes spin-ccw {from{transform:rotate(0deg)}  to{transform:rotate(-360deg)}}
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
