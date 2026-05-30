@@ -99,7 +99,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(12,26,53,.97);ba
 /* ABOUT */
 #ab{background:var(--white);border-bottom:1px solid var(--border);}
 .abg{display:grid;grid-template-columns:360px 1fr;gap:96px;align-items:start;}
-.apc{background:var(--warm-2);border:1px solid var(--border);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
+.apc{background:var(--warm-2);border:1px solid var(--border);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;border:none;}
 .api{width:80px;height:80px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:var(--white);}
 .app{font-size:.75rem;color:var(--muted);letter-spacing:.06em;text-align:center;line-height:1.6;}
 .apc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,var(--navy),transparent);}
@@ -248,11 +248,12 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
     <div class="abg">
       <div class="rv">
         <div class="ey" style="margin-bottom:20px">À propos</div>
-        <div class="apc">
-          <div class="api">TL</div>
-          <div class="app">Photo professionnelle<br>à venir</div>
-          <div class="apn">Tim LIU</div>
-          <div class="apr">Fondateur</div>
+        <div class="apc" style="background:var(--navy);padding:0;justify-content:flex-end;">
+          <img src="tim.png" alt="Tim LIU — Fondateur LIU Consulting"
+               style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;position:absolute;inset:0;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,26,53,.85) 0%,rgba(12,26,53,.1) 45%,transparent 100%);z-index:1;"></div>
+          <div class="apn" style="z-index:2">Tim LIU</div>
+          <div class="apr" style="z-index:2">Fondateur</div>
         </div>
       </div>
       <div class="abt rv d1">
