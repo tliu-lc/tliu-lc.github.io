@@ -108,33 +108,71 @@ img{max-width:100%;display:block}
   background:var(--charcoal);
   display:flex;flex-direction:column;
 }
-/* Aurora (blobs ambrés sur fond noir) */
+/* Aurora — moins flou, plus rapide, plus de rayons */
 .aurora{position:absolute;inset:-8%;pointer-events:none;overflow:hidden}
 .bl{position:absolute;will-change:transform;mix-blend-mode:screen}
-.bl1{width:90%;height:80%;top:-10%;right:-15%;
-  background:radial-gradient(ellipse at 40% 45%,rgba(232,160,32,.9) 0%,rgba(240,178,50,.6) 30%,transparent 70%);
-  filter:blur(45px);animation:a1 6s ease-in-out infinite alternate}
-.bl2{width:75%;height:85%;top:5%;left:-10%;
-  background:radial-gradient(ellipse at 48% 48%,rgba(255,220,100,.5) 0%,rgba(240,190,60,.25) 45%,transparent 68%);
-  filter:blur(60px);animation:a2 9s ease-in-out infinite alternate}
-.bl3{width:25%;height:130%;top:-20%;right:18%;
-  background:linear-gradient(to bottom,transparent,rgba(0,100,200,.35) 22%,rgba(0,130,220,.5) 45%,rgba(0,100,200,.3) 68%,transparent);
-  filter:blur(20px);transform:rotate(-12deg);animation:a3 4s ease-in-out infinite alternate}
-.bl4{width:55%;height:55%;top:-18%;left:-5%;
-  background:radial-gradient(ellipse at 50% 55%,rgba(255,200,50,.7) 0%,rgba(240,180,40,.4) 30%,transparent 62%);
-  filter:blur(35px);animation:a4 7s ease-in-out infinite alternate}
-.bl5{width:22%;height:26%;top:14%;left:22%;
-  background:radial-gradient(ellipse,rgba(255,240,160,.8) 0%,rgba(255,220,100,.4) 35%,transparent 65%);
-  filter:blur(12px);animation:a5 2.5s ease-in-out infinite alternate}
-.bl6{width:16%;height:18%;top:55%;right:26%;
-  background:radial-gradient(ellipse,rgba(255,230,120,.7) 0%,rgba(255,210,80,.3) 40%,transparent 65%);
-  filter:blur(9px);animation:a6 2s ease-in-out infinite alternate}
-@keyframes a1{0%{transform:translate(0,0) rotate(-2deg)}100%{transform:translate(-8%,-6%) rotate(4deg) scale(1.04)}}
-@keyframes a2{0%{transform:translate(0,0)}100%{transform:translate(7%,7%) scale(1.06)}}
-@keyframes a3{0%{transform:rotate(-12deg)}100%{transform:rotate(-6deg) translate(-7%,5%)}}
-@keyframes a4{0%{transform:translate(0,0)}100%{transform:translate(12%,8%) scale(.94)}}
-@keyframes a5{0%{transform:translate(0,0)}100%{transform:translate(5%,-4%) scale(1.07)}}
-@keyframes a6{0%{transform:translate(0,0)}100%{transform:translate(-4%,7%) scale(.94)}}
+
+/* Nappes larges */
+.bl1{width:85%;height:75%;top:-8%;right:-12%;
+  background:radial-gradient(ellipse at 40% 42%,rgba(232,160,32,.95) 0%,rgba(240,178,50,.7) 28%,transparent 62%);
+  filter:blur(22px);animation:a1 3s ease-in-out infinite alternate}
+.bl2{width:68%;height:80%;top:8%;left:-8%;
+  background:radial-gradient(ellipse at 48% 48%,rgba(255,210,70,.72) 0%,rgba(240,185,45,.38) 38%,transparent 64%);
+  filter:blur(28px);animation:a2 4.5s ease-in-out infinite alternate}
+
+/* Rayon bleu diagonal principal */
+.bl3{width:22%;height:140%;top:-25%;right:19%;
+  background:linear-gradient(to bottom,transparent 0%,rgba(0,105,210,.42) 18%,rgba(0,135,230,.68) 42%,rgba(0,105,210,.42) 66%,transparent 100%);
+  filter:blur(9px);transform:rotate(-13deg);transform-origin:center;
+  animation:a3 2.2s ease-in-out infinite alternate}
+
+/* Rayon ambre fin */
+.bl7{width:10%;height:130%;top:-18%;right:40%;
+  background:linear-gradient(to bottom,transparent 0%,rgba(255,195,40,.52) 20%,rgba(255,215,65,.78) 45%,rgba(255,195,40,.5) 70%,transparent 100%);
+  filter:blur(6px);transform:rotate(-7deg);
+  animation:a7 1.8s ease-in-out infinite alternate}
+
+/* Rayon or centre */
+.bl8{width:8%;height:120%;top:-12%;left:48%;
+  background:linear-gradient(to bottom,transparent 0%,rgba(232,160,32,.6) 22%,rgba(250,195,55,.82) 48%,rgba(232,160,32,.55) 74%,transparent 100%);
+  filter:blur(5px);transform:rotate(6deg);
+  animation:a8 2.8s ease-in-out infinite alternate}
+
+/* Rayon bleu fin droit */
+.bl9{width:7%;height:110%;top:-10%;left:65%;
+  background:linear-gradient(to bottom,transparent 0%,rgba(0,85,190,.42) 25%,rgba(0,115,210,.6) 50%,rgba(0,85,190,.38) 75%,transparent 100%);
+  filter:blur(5px);transform:rotate(-4deg);
+  animation:a9 1.5s ease-in-out infinite alternate}
+
+/* Rayon ambre gauche */
+.bl10{width:9%;height:125%;top:-20%;left:28%;
+  background:linear-gradient(to bottom,transparent 0%,rgba(255,200,50,.48) 20%,rgba(255,220,70,.72) 46%,rgba(255,200,50,.44) 72%,transparent 100%);
+  filter:blur(6px);transform:rotate(3deg);
+  animation:a10 2s ease-in-out infinite alternate}
+
+/* Nappe ambre haut-gauche */
+.bl4{width:42%;height:48%;top:-16%;left:-4%;
+  background:radial-gradient(ellipse at 50% 55%,rgba(255,210,55,.88) 0%,rgba(242,185,42,.55) 28%,transparent 60%);
+  filter:blur(18px);animation:a4 3.5s ease-in-out infinite alternate}
+
+/* Reflets vifs */
+.bl5{width:18%;height:22%;top:13%;left:21%;
+  background:radial-gradient(ellipse,rgba(255,248,190,.9) 0%,rgba(255,230,100,.55) 30%,transparent 65%);
+  filter:blur(5px);animation:a5 1.2s ease-in-out infinite alternate}
+.bl6{width:12%;height:15%;top:54%;right:25%;
+  background:radial-gradient(ellipse,rgba(255,238,130,.88) 0%,rgba(255,215,80,.45) 35%,transparent 62%);
+  filter:blur(4px);animation:a6 .9s ease-in-out infinite alternate}
+
+@keyframes a1 {0%{transform:translate(0,0) rotate(-2deg)}100%{transform:translate(-7%,-5%) rotate(4deg) scale(1.04)}}
+@keyframes a2 {0%{transform:translate(0,0)}100%{transform:translate(6%,6%) scale(1.05)}}
+@keyframes a3 {0%{transform:rotate(-13deg) translate(0,0)}100%{transform:rotate(-6deg) translate(-6%,4%)}}
+@keyframes a4 {0%{transform:translate(0,0)}100%{transform:translate(10%,7%) scale(.95)}}
+@keyframes a5 {0%{transform:translate(0,0)}100%{transform:translate(4%,-4%) scale(1.08)}}
+@keyframes a6 {0%{transform:translate(0,0)}100%{transform:translate(-3%,6%) scale(.93)}}
+@keyframes a7 {0%{transform:rotate(-7deg) translate(0,0)}100%{transform:rotate(-2deg) translate(-5%,4%)}}
+@keyframes a8 {0%{transform:rotate(6deg) translate(0,0)}100%{transform:rotate(10deg) translate(4%,-3%)}}
+@keyframes a9 {0%{transform:rotate(-4deg) translate(0,0)}100%{transform:rotate(2deg) translate(3%,5%)}}
+@keyframes a10{0%{transform:rotate(3deg) translate(0,0)}100%{transform:rotate(-2deg) translate(-4%,3%)}}
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
@@ -606,6 +644,8 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   <div class="aurora" aria-hidden="true">
     <div class="bl bl1"></div><div class="bl bl2"></div><div class="bl bl3"></div>
     <div class="bl bl4"></div><div class="bl bl5"></div><div class="bl bl6"></div>
+    <div class="bl bl7"></div><div class="bl bl8"></div><div class="bl bl9"></div>
+    <div class="bl bl10"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
