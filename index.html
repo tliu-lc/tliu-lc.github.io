@@ -3,504 +3,512 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIU Consulting — Solutions data sur mesure pour PME</title>
-<meta name="description" content="LIU Consulting — Développement de solutions d'aide à la décision sur mesure pour PME et distributeurs. Tim LIU, ingénieur data et développeur full-stack.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='4' fill='%23334155'/><text y='.88em' font-size='68' x='16' fill='white' font-family='Georgia,serif' font-weight='bold'>L</text></svg>">
+<title>LIU Consulting — Solutions data pour dirigeants de PME</title>
+<meta name="description" content="LIU Consulting aide les dirigeants de PME à piloter leur activité par la donnée. Solutions sur mesure, opérationnelles en 4 à 6 semaines.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f1f3d'/><text y='.86em' font-size='62' x='14' fill='white' font-family='Georgia,serif' font-weight='bold'>LC</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
-/* ═══════════════════════════════════════════
-   TOKENS
-═══════════════════════════════════════════ */
+/* ═══════════════════ TOKENS ═══════════════════ */
 :root {
-  --bg:        #fafaf8;
-  --bg-2:      #f3f2ef;
-  --ink:       #0f172a;
-  --ink-2:     #334155;
-  --muted:     #64748b;
-  --border:    #e2e8f0;
-  --border-dk: #cbd5e1;
-  --accent:    #334155;
-  --accent-h:  #1e293b;
+  --navy:    #0f1f3d;
+  --navy-2:  #162540;
+  --slate:   #334155;
+  --white:   #ffffff;
+  --off:     #f7f7f5;
+  --off-2:   #eeecea;
+  --ink:     #1a1a2e;
+  --muted:   #64748b;
+  --border:  #e5e3e0;
+  --accent:  #2d6a9f;   /* bleu ardoise légèrement plus vif pour les liens */
 }
 
-/* ═══════════════════════════════════════════
-   RESET
-═══════════════════════════════════════════ */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
-a { color: inherit; text-decoration: none; }
-p { color: var(--muted); line-height: 1.75; }
+/* ═══════════════════ RESET ═══════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',system-ui,sans-serif; background:var(--white); color:var(--ink); line-height:1.6; overflow-x:hidden; font-weight:300; }
+a { color:inherit; text-decoration:none; }
 
-/* ═══════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════ */
-.container { max-width: 1040px; margin: 0 auto; padding: 0 40px; }
-section { padding: 96px 0; }
+/* ═══════════════════ LAYOUT ═══════════════════ */
+.wrap { max-width:1200px; margin:0 auto; padding:0 48px; }
+.wrap-sm { max-width:880px; margin:0 auto; padding:0 48px; }
 
-/* ═══════════════════════════════════════════
-   TYPOGRAPHIE
-═══════════════════════════════════════════ */
-.eyebrow {
-  display: inline-block;
-  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 20px;
+/* ═══════════════════ TYPE ═══════════════════ */
+.label {
+  display:inline-block; font-size:0.68rem; font-weight:600;
+  letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:24px;
 }
-h1 { font-family: 'Lora', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); }
-h2 { font-family: 'Lora', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 16px; }
-h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.label-white { color:rgba(255,255,255,0.55); }
+h1 {
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2.8rem,5.5vw,5rem);
+  font-weight:700; line-height:1.1; letter-spacing:-0.02em;
+  color:var(--white);
+}
+h2 {
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700; line-height:1.15; letter-spacing:-0.01em;
+  color:var(--navy); margin-bottom:20px;
+}
+h2.on-dark { color:var(--white); }
+h3 { font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:10px; letter-spacing:0; }
+p { color:var(--muted); line-height:1.75; font-weight:300; }
+p.lead { font-size:1.1rem; line-height:1.7; }
 
-/* ═══════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════ */
+/* ═══════════════════ NAV ═══════════════════ */
 nav {
-  position: fixed; top: 0; width: 100%; z-index: 999;
-  background: rgba(250,250,248,0.92); backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 40px; height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
+  position:fixed; top:0; width:100%; z-index:999;
+  background:var(--navy);
+  padding:0 48px; height:68px;
+  display:flex; align-items:center; justify-content:space-between;
 }
-.nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.95rem; font-weight: 700; color: var(--ink); letter-spacing: 0.01em;
+.nav-brand {
+  display:flex; align-items:center; gap:12px;
+  font-size:0.82rem; font-weight:600; color:var(--white);
+  letter-spacing:0.08em; text-transform:uppercase;
 }
-.nav-logo-mark {
-  width: 32px; height: 32px; background: var(--accent); border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Lora', Georgia, serif; font-size: 1rem; font-weight: 600; color: #fff;
-}
-.nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-links a { font-size: 0.875rem; color: var(--muted); font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--ink); }
+.nav-brand-rule { width:28px; height:1px; background:rgba(255,255,255,0.35); }
+.nav-links { display:flex; align-items:center; gap:36px; }
+.nav-links a { font-size:0.8rem; color:rgba(255,255,255,0.65); font-weight:400; letter-spacing:0.02em; transition:color 0.2s; }
+.nav-links a:hover { color:var(--white); }
 .nav-cta {
-  background: var(--accent); color: #fff !important;
-  padding: 8px 20px; border-radius: 4px;
-  font-size: 0.875rem !important; font-weight: 600 !important;
-  transition: background 0.2s !important;
+  font-size:0.8rem !important; font-weight:600 !important;
+  color:var(--white) !important; border:1px solid rgba(255,255,255,0.4);
+  padding:8px 20px; transition:all 0.2s !important; letter-spacing:0.04em;
 }
-.nav-cta:hover { background: var(--accent-h) !important; }
+.nav-cta:hover { background:rgba(255,255,255,0.1) !important; border-color:rgba(255,255,255,0.7) !important; }
 
-/* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
+/* ═══════════════════ HERO ═══════════════════ */
 #hero {
-  padding-top: 140px; padding-bottom: 80px;
-  border-bottom: 1px solid var(--border);
+  background:var(--navy);
+  padding:160px 0 100px;
+  position:relative; overflow:hidden;
 }
-.hero-inner { max-width: 720px; }
-.hero-inner h1 { margin-bottom: 24px; }
-.hero-inner p { font-size: 1.1rem; max-width: 560px; margin-bottom: 40px; }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; border-radius: 4px;
-  font-size: 0.9rem; font-weight: 600;
-  transition: all 0.2s; border: none; cursor: pointer;
+.hero-bg-line {
+  position:absolute; top:0; right:0; bottom:0; width:38%;
+  background:linear-gradient(135deg, transparent 0%, rgba(45,106,159,0.08) 100%);
+  border-left:1px solid rgba(255,255,255,0.05);
 }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-h); }
-.btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border-dk); }
-.btn-outline:hover { background: var(--bg-2); }
-.hero-divider {
-  width: 48px; height: 3px; background: var(--accent);
-  margin-bottom: 32px;
+.hero-grid-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; }
+.hero-left { }
+.hero-eyebrow { display:flex; align-items:center; gap:16px; margin-bottom:36px; }
+.hero-eyebrow-line { width:36px; height:1px; background:rgba(255,255,255,0.4); }
+.hero-eyebrow span { font-size:0.7rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+.hero-left h1 { margin-bottom:32px; }
+.hero-left p { color:rgba(255,255,255,0.6); font-size:1rem; max-width:460px; margin-bottom:44px; line-height:1.8; }
+.hero-actions { display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+.btn-hero {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--white); color:var(--navy);
+  padding:14px 28px; font-size:0.85rem; font-weight:600;
+  letter-spacing:0.02em; transition:all 0.2s;
 }
+.btn-hero:hover { background:var(--off-2); }
+.btn-hero-ghost {
+  display:inline-flex; align-items:center; gap:10px;
+  color:rgba(255,255,255,0.7); font-size:0.85rem; font-weight:400;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+  padding-bottom:2px; transition:all 0.2s; letter-spacing:0.02em;
+}
+.btn-hero-ghost:hover { color:var(--white); border-color:var(--white); }
+.hero-right { padding-bottom:8px; }
+.hero-stat-list { border-top:1px solid rgba(255,255,255,0.12); }
+.hero-stat {
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:22px 0; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.hero-stat-num {
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:2.2rem; font-weight:700; color:var(--white); line-height:1;
+}
+.hero-stat-label { font-size:0.78rem; color:rgba(255,255,255,0.45); max-width:180px; text-align:right; line-height:1.4; }
 
-/* ═══════════════════════════════════════════
-   CHIFFRES
-═══════════════════════════════════════════ */
-#chiffres {
-  padding: 48px 0; border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
-.chiffres-grid {
-  display: flex; gap: 0; justify-content: space-between; flex-wrap: wrap;
-}
-.chiffre { padding: 0 40px 0 0; }
-.chiffre:first-child { padding-left: 0; }
-.chiffre-num { font-family: 'Lora', Georgia, serif; font-size: 2.2rem; font-weight: 600; color: var(--ink); line-height: 1; }
-.chiffre-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+/* ═══════════════════ INTRO STRIP ═══════════════════ */
+#intro { background:var(--off); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; }
+.intro-inner { display:flex; align-items:center; gap:80px; }
+.intro-rule { width:48px; height:2px; background:var(--navy); flex-shrink:0; }
+.intro-inner p { font-size:1rem; color:var(--slate); line-height:1.75; font-weight:400; max-width:740px; }
 
-/* ═══════════════════════════════════════════
-   EXPERTISES
-═══════════════════════════════════════════ */
-#expertises { background: var(--bg-2); border-bottom: 1px solid var(--border); }
-.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
-.exp-item { }
-.exp-num {
-  font-family: 'Lora', serif; font-size: 0.8rem; font-weight: 600;
-  color: var(--accent); margin-bottom: 16px; display: block;
-}
-.exp-item h3 { font-size: 1rem; margin-bottom: 10px; }
-.exp-item p { font-size: 0.875rem; }
-.exp-rule { width: 32px; height: 2px; background: var(--border-dk); margin-bottom: 16px; }
+/* ═══════════════════ EXPERTISES ═══════════════════ */
+#expertises { padding:100px 0; background:var(--white); border-bottom:1px solid var(--border); }
+.exp-header { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-bottom:72px; }
+.exp-header p { font-size:1rem; padding-top:8px; }
+.exp-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border); }
+.exp-item { padding:40px 40px 40px 0; border-right:1px solid var(--border); }
+.exp-item:last-child { border-right:none; padding-right:0; }
+.exp-item:not(:first-child) { padding-left:40px; }
+.exp-num { font-size:0.7rem; font-weight:600; letter-spacing:0.15em; color:var(--muted); margin-bottom:20px; display:block; }
+.exp-item h3 { font-size:1rem; font-weight:600; margin-bottom:12px; color:var(--navy); }
+.exp-item p { font-size:0.875rem; }
 
-/* ═══════════════════════════════════════════
-   OFFRES
-═══════════════════════════════════════════ */
-#offres { border-bottom: 1px solid var(--border); }
-.offres-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; background: var(--border); border: 1px solid var(--border); }
-.offre-card {
-  background: var(--bg); padding: 36px 32px;
-  display: flex; flex-direction: column; gap: 20px;
-  transition: background 0.2s;
+/* ═══════════════════ OFFRES ═══════════════════ */
+#offres { background:var(--off); padding:100px 0; border-bottom:1px solid var(--border); }
+.offres-header { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; margin-bottom:64px; }
+.offres-header p { font-size:1rem; }
+.offres-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:0; border:1px solid var(--border); }
+.offre-item {
+  background:var(--white); padding:40px;
+  border-right:1px solid var(--border);
+  display:flex; flex-direction:column; gap:24px;
+  transition:background 0.2s;
 }
-.offre-card:hover { background: var(--bg-2); }
-.offre-card.active { background: var(--accent); }
-.offre-card.active h3,
-.offre-card.active .offre-tag,
-.offre-card.active p,
-.offre-card.active li { color: rgba(255,255,255,0.9) !important; }
-.offre-card.active .offre-tag { background: rgba(255,255,255,0.12); }
-.offre-card.active .offre-link { background: #fff; color: var(--accent); }
-.offre-card.active .offre-link:hover { background: #f0f4f8; }
-.offre-card.active hr { border-color: rgba(255,255,255,0.15); }
+.offre-item:hover { background:var(--off); }
+.offre-item:last-child { border-right:none; }
+.offre-item.featured { background:var(--navy); }
+.offre-item.featured:hover { background:var(--navy-2); }
 .offre-tag {
-  display: inline-block; background: var(--bg-2);
-  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--muted);
-  padding: 3px 10px; border-radius: 2px; width: fit-content;
+  display:inline-block; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase;
+  padding:4px 10px; border:1px solid var(--border);
+  color:var(--muted); width:fit-content;
 }
-.offre-card h3 { font-size: 1.05rem; }
-.offre-card p { font-size: 0.875rem; flex: 1; }
-.offre-card hr { border: none; border-top: 1px solid var(--border); }
-.offre-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.offre-features li { font-size: 0.82rem; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
-.offre-features li::before { content: '—'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+.offre-item.featured .offre-tag { border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); }
+.offre-item.featured h3 { color:var(--white); }
+.offre-item.featured p { color:rgba(255,255,255,0.6); }
+.offre-item.featured hr { border-color:rgba(255,255,255,0.1); }
+.offre-item.featured li { color:rgba(255,255,255,0.7) !important; }
+.offre-item.featured li::before { color:rgba(255,255,255,0.4) !important; }
+.offre-item.featured .offre-link { color:var(--white); border-color:rgba(255,255,255,0.3); }
+.offre-item.featured .offre-link:hover { background:rgba(255,255,255,0.08); }
+.offre-item h3 { font-size:1.05rem; font-weight:600; color:var(--navy); }
+.offre-item p { font-size:0.875rem; flex:1; }
+.offre-item hr { border:none; border-top:1px solid var(--border); }
+.offre-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.offre-features li { font-size:0.82rem; color:var(--muted); display:flex; gap:10px; align-items:flex-start; font-weight:300; }
+.offre-features li::before { content:'–'; color:var(--muted); flex-shrink:0; }
 .offre-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--ink); color: #fff;
-  padding: 10px 18px; border-radius: 4px;
-  font-size: 0.82rem; font-weight: 600;
-  transition: all 0.2s; width: fit-content;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:0.82rem; font-weight:500; color:var(--navy);
+  border-bottom:1px solid var(--navy); padding-bottom:1px;
+  transition:all 0.2s; width:fit-content; letter-spacing:0.02em;
 }
-.offre-link:hover { background: var(--accent); }
-.offre-soon {
-  display: inline-flex; align-items: center; gap: 6px;
-  border: 1px solid var(--border); color: var(--muted);
-  padding: 9px 18px; border-radius: 4px;
-  font-size: 0.82rem; font-weight: 500;
-  width: fit-content;
-}
+.offre-link:hover { color:var(--accent); border-color:var(--accent); }
+.offre-coming { font-size:0.8rem; color:var(--muted); font-style:italic; }
 
-/* ═══════════════════════════════════════════
-   APROPOS
-═══════════════════════════════════════════ */
-#about { background: var(--bg-2); border-bottom: 1px solid var(--border); }
-.about-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; margin-top: 56px; }
-.about-left { }
-.about-avatar {
-  width: 88px; height: 88px; background: var(--accent);
-  border-radius: 4px; display: flex; align-items: center; justify-content: center;
-  font-family: 'Lora', serif; font-size: 2rem; font-weight: 600; color: #fff;
-  margin-bottom: 24px;
-}
-.about-left h3 { font-size: 1.2rem; margin-bottom: 4px; }
-.about-role { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
-.about-links { display: flex; flex-direction: column; gap: 8px; }
-.about-link {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.85rem; color: var(--muted); font-weight: 500;
-  transition: color 0.2s;
-}
-.about-link:hover { color: var(--ink); }
-.about-right p { font-size: 0.95rem; margin-bottom: 20px; }
-.about-right p:last-child { margin-bottom: 0; }
-.siret {
-  margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);
-  font-size: 0.8rem; color: var(--muted); letter-spacing: 0.02em;
-}
+/* ═══════════════════ À PROPOS ═══════════════════ */
+#about { padding:100px 0; background:var(--white); border-bottom:1px solid var(--border); }
+.about-grid { display:grid; grid-template-columns:1fr 1.6fr; gap:100px; align-items:start; }
+.about-left {}
+.about-id { margin-bottom:32px; }
+.about-id-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.about-id-role { font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; margin-bottom:24px; font-weight:400; }
+.about-links { display:flex; flex-direction:column; gap:12px; }
+.about-link { display:flex; align-items:center; gap:12px; font-size:0.85rem; color:var(--muted); font-weight:400; transition:color 0.2s; }
+.about-link:hover { color:var(--navy); }
+.about-link-rule { width:16px; height:1px; background:var(--border); flex-shrink:0; }
+.about-right p { font-size:0.95rem; margin-bottom:20px; color:var(--slate); font-weight:300; }
+.about-right p:last-of-type { margin-bottom:0; }
+.about-siret { margin-top:36px; padding-top:24px; border-top:1px solid var(--border); font-size:0.75rem; color:var(--muted); letter-spacing:0.04em; }
 
-/* ═══════════════════════════════════════════
-   CONTACT
-═══════════════════════════════════════════ */
-#contact { }
-.contact-inner { max-width: 640px; }
-.contact-inner h2 { margin-bottom: 16px; }
-.contact-inner > p { margin-bottom: 40px; font-size: 1rem; }
-.contact-items { display: flex; flex-direction: column; gap: 16px; }
+/* ═══════════════════ CONTACT ═══════════════════ */
+#contact { background:var(--navy); padding:100px 0; }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+.contact-left h2 { color:var(--white); margin-bottom:20px; }
+.contact-left p { color:rgba(255,255,255,0.55); font-size:1rem; }
+.contact-right { }
+.contact-items { display:flex; flex-direction:column; gap:0; border-top:1px solid rgba(255,255,255,0.1); }
 .contact-item {
-  display: flex; align-items: center; gap: 16px;
-  padding: 18px 24px; border: 1px solid var(--border);
-  border-radius: 4px; background: var(--bg);
-  transition: border-color 0.2s, background 0.2s;
+  display:flex; align-items:center; gap:20px;
+  padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:all 0.2s;
 }
-.contact-item:hover { border-color: var(--border-dk); background: var(--bg-2); }
-.contact-item-icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
-.contact-item-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-.contact-item-value { font-size: 0.9rem; color: var(--ink); font-weight: 600; }
+.contact-item:hover .contact-item-value { color:var(--white); }
+.contact-item-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.3); width:72px; flex-shrink:0; }
+.contact-item-value { font-size:0.9rem; color:rgba(255,255,255,0.7); font-weight:400; transition:color 0.2s; }
 
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
+/* ═══════════════════ FOOTER ═══════════════════ */
 footer {
-  border-top: 1px solid var(--border); padding: 28px 40px;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 10px; font-size: 0.78rem; color: var(--muted);
+  background:var(--navy); border-top:1px solid rgba(255,255,255,0.08);
+  padding:28px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:10px;
 }
-.footer-logo { font-weight: 700; font-size: 0.9rem; color: var(--ink); }
+.footer-brand { font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+.footer-right { font-size:0.75rem; color:rgba(255,255,255,0.25); }
 
-/* ═══════════════════════════════════════════
-   REVEAL
-═══════════════════════════════════════════ */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; }
+/* ═══════════════════ REVEAL ═══════════════════ */
+.reveal { opacity:0; transform:translateY(16px); transition:opacity 0.55s ease,transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.d1{transition-delay:0.08s} .d2{transition-delay:0.16s} .d3{transition-delay:0.24s} .d4{transition-delay:0.32s}
 
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media (max-width: 900px) {
-  .exp-grid { grid-template-columns: 1fr; gap: 32px; }
-  .offres-grid { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .chiffres-grid { gap: 32px; }
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media(max-width:960px){
+  .hero-grid-inner{grid-template-columns:1fr;gap:60px}
+  .hero-right{display:none}
+  .exp-header{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr;border-top:none}
+  .exp-item{border-right:none;border-top:1px solid var(--border);padding:32px 0}
+  .exp-item:not(:first-child){padding-left:0}
+  .offres-header{grid-template-columns:1fr}
+  .offres-grid{grid-template-columns:1fr}
+  .offre-item{border-right:none;border-bottom:1px solid var(--border)}
+  .offre-item:last-child{border-bottom:none}
+  .contact-grid{grid-template-columns:1fr;gap:60px}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .intro-inner{flex-direction:column;gap:24px}
 }
-@media (max-width: 640px) {
-  .container { padding: 0 24px; }
-  nav { padding: 0 24px; }
-  footer { padding: 24px; }
-  .nav-links a:not(.nav-cta) { display: none; }
-  section { padding: 64px 0; }
+@media(max-width:640px){
+  .wrap,.wrap-sm{padding:0 24px}
+  nav,.footer{padding:0 24px}
+  footer{padding:24px}
+  .nav-links a:not(.nav-cta){display:none}
+  section{padding:72px 0}
 }
 </style>
 </head>
 <body>
 
-<!-- ════════ NAV ════════ -->
+<!-- ════════════════ NAV ════════════════ -->
 <nav>
-  <div class="nav-logo">
-    <div class="nav-logo-mark">L</div>
+  <div class="nav-brand">
     LIU Consulting
+    <div class="nav-brand-rule"></div>
+    <span style="font-weight:300;opacity:0.5;letter-spacing:0.04em;text-transform:none;font-size:0.78rem">Solutions data</span>
   </div>
   <div class="nav-links">
     <a href="#expertises">Expertises</a>
     <a href="#offres">Offres</a>
     <a href="#about">À propos</a>
-    <a href="#contact" class="nav-cta">Me contacter</a>
+    <a href="#contact" class="nav-cta">Nous contacter</a>
   </div>
 </nav>
 
-<!-- ════════ HERO ════════ -->
+<!-- ════════════════ HERO ════════════════ -->
 <section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-divider reveal"></div>
-      <span class="eyebrow reveal">Cabinet de conseil · Solutions data</span>
-      <h1 class="reveal d1">
-        Des décisions éclairées,<br>pas des fichiers Excel de plus.
-      </h1>
-      <p class="reveal d2">
-        Je conçois et livre des outils de pilotage sur mesure pour les PME distributeurs et grossistes — connectés à vos données existantes, opérationnels en 4 à 6 semaines.
-      </p>
-      <div class="hero-btns reveal d3">
-        <a href="#offres" class="btn btn-primary">Voir mes offres</a>
-        <a href="#contact" class="btn btn-outline">Me contacter</a>
+  <div class="hero-bg-line"></div>
+  <div class="wrap">
+    <div class="hero-grid-inner">
+
+      <div class="hero-left">
+        <div class="hero-eyebrow reveal">
+          <div class="hero-eyebrow-line"></div>
+          <span>Cabinet de conseil · Data & Systèmes d'information</span>
+        </div>
+        <h1 class="reveal d1">
+          Vos données.<br>Votre avantage<br>compétitif.
+        </h1>
+        <p class="reveal d2">
+          Nous aidons les dirigeants de PME à transformer leurs données opérationnelles en outils de décision — concrets, rapides à déployer, sans complexité technique.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="#offres" class="btn-hero">Découvrir nos offres</a>
+          <a href="#contact" class="btn-hero-ghost">Prendre contact →</a>
+        </div>
       </div>
+
+      <div class="hero-right reveal d2">
+        <div class="hero-stat-list">
+          <div class="hero-stat">
+            <div class="hero-stat-num">4–6</div>
+            <div class="hero-stat-label">semaines pour être opérationnel</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">0</div>
+            <div class="hero-stat-label">compétence technique requise côté client</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">J+1</div>
+            <div class="hero-stat-label">données actualisées chaque matin</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">14</div>
+            <div class="hero-stat-label">modules métier disponibles</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ════════ CHIFFRES ════════ -->
-<section id="chiffres">
-  <div class="container">
-    <div class="chiffres-grid">
-      <div class="chiffre reveal">
-        <div class="chiffre-num">4–6</div>
-        <div class="chiffre-label">semaines pour être opérationnel</div>
-      </div>
-      <div class="chiffre reveal d1">
-        <div class="chiffre-num">14</div>
-        <div class="chiffre-label">modules métier disponibles</div>
-      </div>
-      <div class="chiffre reveal d2">
-        <div class="chiffre-num">0</div>
-        <div class="chiffre-label">compétence technique requise de votre côté</div>
-      </div>
-      <div class="chiffre reveal d3">
-        <div class="chiffre-num">J+1</div>
-        <div class="chiffre-label">vos données actualisées chaque matin</div>
-      </div>
+<!-- ════════════════ INTRO ════════════════ -->
+<section id="intro">
+  <div class="wrap">
+    <div class="intro-inner reveal">
+      <div class="intro-rule"></div>
+      <p>LIU Consulting conçoit et déploie des solutions de pilotage sur mesure pour les PME distributeurs et grossistes multi-sites — de la connexion aux données brutes jusqu'à l'écran de vos équipes, clé en main.</p>
     </div>
   </div>
 </section>
 
-<!-- ════════ EXPERTISES ════════ -->
+<!-- ════════════════ EXPERTISES ════════════════ -->
 <section id="expertises">
-  <div class="container">
-    <span class="eyebrow reveal">Expertises</span>
-    <h2 class="reveal d1">Ce que je sais faire</h2>
+  <div class="wrap">
+    <div class="exp-header">
+      <div>
+        <span class="label reveal">Expertises</span>
+        <h2 class="reveal d1">Ce que nous faisons</h2>
+      </div>
+      <p class="reveal d2" style="padding-top:40px">
+        Nous intervenons sur l'ensemble de la chaîne de valeur de la donnée — de la collecte brute à la décision opérationnelle — avec une approche pragmatique orientée résultat.
+      </p>
+    </div>
+
     <div class="exp-grid">
       <div class="exp-item reveal d1">
-        <div class="exp-rule"></div>
         <span class="exp-num">01</span>
-        <h3>Tableaux de bord opérationnels</h3>
-        <p>Centralisation et visualisation de vos données métier — ventes, stocks, clients, prospection — en un seul endroit, mis à jour automatiquement chaque matin.</p>
+        <h3>Tableaux de bord & pilotage</h3>
+        <p>Conception et déploiement de dashboards opérationnels connectés à vos systèmes de gestion. Ventes, stocks, clients, alertes — une vue consolidée, actualisée automatiquement.</p>
       </div>
       <div class="exp-item reveal d2">
-        <div class="exp-rule"></div>
         <span class="exp-num">02</span>
         <h3>Automatisation des flux de données</h3>
-        <p>Connexion de vos systèmes existants — EBP, ERP, exports CSV — vers une base centralisée. Fini les consolidations manuelles et les fichiers qui circulent par email.</p>
+        <p>Mise en place de pipelines automatisés entre vos sources (ERP, EBP, exports CSV) et une base centralisée. Suppression des tâches manuelles répétitives et des consolidations à risque.</p>
       </div>
       <div class="exp-item reveal d3">
-        <div class="exp-rule"></div>
         <span class="exp-num">03</span>
-        <h3>Infrastructure cloud clé en main</h3>
-        <p>Déploiement et maintenance de vos applications sur Google Cloud. Disponibilité, sécurité, mises à jour — entièrement gérés de mon côté.</p>
+        <h3>Infrastructure cloud & déploiement</h3>
+        <p>Hébergement, sécurisation et maintenance de vos applications sur Google Cloud. Disponibilité et mises à jour entièrement gérées, sans intervention de votre équipe.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ OFFRES ════════ -->
+<!-- ════════════════ OFFRES ════════════════ -->
 <section id="offres">
-  <div class="container">
-    <span class="eyebrow reveal">Offres</span>
-    <h2 class="reveal d1">Mes solutions</h2>
-    <p class="reveal d2" style="max-width:520px">Chaque solution est construite sur un socle éprouvé et adaptée à votre activité et vos données.</p>
+  <div class="wrap">
+    <div class="offres-header">
+      <div>
+        <span class="label reveal">Offres</span>
+        <h2 class="reveal d1">Nos solutions</h2>
+      </div>
+      <p class="reveal d2">Chaque solution est construite sur un socle technique éprouvé, adapté à votre activité et déployable en quelques semaines.</p>
+    </div>
 
     <div class="offres-grid reveal">
 
-      <!-- Offre principale — mise en avant -->
-      <div class="offre-card active">
-        <div>
-          <div class="offre-tag" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)">Disponible</div>
-        </div>
+      <div class="offre-item featured">
+        <div class="offre-tag">Disponible</div>
         <h3>Tableau de bord opérationnel</h3>
-        <p>Pilotez toutes vos boutiques en temps réel — ventes, stocks, clients, alertes, prospection. Une seule vue, toutes les enseignes consolidées.</p>
+        <p>Solution complète de pilotage pour grossistes et distributeurs multi-sites. Ventes, stocks, segmentation clients, alertes proactives, prospection commerciale.</p>
         <hr>
         <ul class="offre-features">
-          <li>14 vues métier — tableau de bord complet</li>
-          <li>Vue client unifiée multi-boutiques</li>
-          <li>Alertes churn et segmentation clients</li>
-          <li>72 000 prospects qualifiés (base INSEE)</li>
+          <li>14 modules métier — vision 360° de votre activité</li>
+          <li>Vue client unifiée toutes enseignes confondues</li>
+          <li>Alertes churn et segmentation RFM automatiques</li>
+          <li>Base de prospection qualifiée — 72 000 établissements</li>
           <li>Opérationnel en 4 à 6 semaines</li>
         </ul>
-        <a href="https://tliu-lc.github.io/retail-dashboard/" class="offre-link">
-          Découvrir l'offre →
+        <a href="https://tliu-lc.github.io/retail-dashboard/" class="offre-link" style="color:white;border-color:rgba(255,255,255,0.4)">
+          En savoir plus →
         </a>
       </div>
 
-      <!-- Offre 2 -->
-      <div class="offre-card">
-        <div><div class="offre-tag">Bientôt</div></div>
+      <div class="offre-item">
+        <div class="offre-tag">Bientôt</div>
         <h3>Automatisation des reportings</h3>
-        <p>Vos rapports hebdomadaires et mensuels générés et envoyés automatiquement par email — sans aucune action de votre part.</p>
+        <p>Génération et envoi automatique de vos rapports périodiques — sans intervention manuelle, personnalisables par destinataire.</p>
         <hr>
         <ul class="offre-features">
           <li>Rapports PDF ou Excel automatiques</li>
-          <li>Envoi planifié par email</li>
-          <li>Connexion à vos outils existants</li>
+          <li>Planification et envoi par email</li>
+          <li>Connexion à vos sources existantes</li>
           <li>Personnalisable par destinataire</li>
         </ul>
-        <div class="offre-soon">Disponible prochainement</div>
+        <span class="offre-coming">Disponible prochainement</span>
       </div>
 
-      <!-- Offre 3 -->
-      <div class="offre-card">
-        <div><div class="offre-tag">Bientôt</div></div>
-        <h3>Audit &amp; diagnostic data</h3>
-        <p>Analyse de votre situation actuelle — qualité des données, opportunités de gains, recommandations priorisées. Sans engagement sur la suite.</p>
+      <div class="offre-item">
+        <div class="offre-tag">Bientôt</div>
+        <h3>Audit & diagnostic data</h3>
+        <p>Analyse de la maturité de votre système d'information — identification des angles morts, plan d'action priorisé et chiffré.</p>
         <hr>
         <ul class="offre-features">
           <li>Cartographie de vos sources de données</li>
-          <li>Identification des angles morts</li>
-          <li>Plan d'action concret et chiffré</li>
-          <li>Livré en 2 semaines</li>
+          <li>Identification des opportunités de gains</li>
+          <li>Recommandations actionnables</li>
+          <li>Livré en 2 semaines, sans engagement</li>
         </ul>
-        <div class="offre-soon">Disponible prochainement</div>
+        <span class="offre-coming">Disponible prochainement</span>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ════════ À PROPOS ════════ -->
+<!-- ════════════════ À PROPOS ════════════════ -->
 <section id="about">
-  <div class="container">
-    <span class="eyebrow reveal">À propos</span>
+  <div class="wrap">
     <div class="about-grid">
       <div class="about-left reveal">
-        <div class="about-avatar">T</div>
-        <h3>Tim LIU</h3>
-        <div class="about-role">Fondateur, LIU Consulting</div>
+        <span class="label">À propos</span>
+        <div class="about-id">
+          <div class="about-id-name">Tim LIU</div>
+          <div class="about-id-role">Fondateur, LIU Consulting</div>
+        </div>
         <div class="about-links">
           <a href="mailto:tim.liu.liuconsulting@gmail.com" class="about-link">
-            <span>✉</span> tim.liu.liuconsulting@gmail.com
+            <span class="about-link-rule"></span>
+            tim.liu.liuconsulting@gmail.com
           </a>
           <a href="tel:+33603655398" class="about-link">
-            <span>☎</span> 06 03 65 53 98
+            <span class="about-link-rule"></span>
+            06 03 65 53 98
           </a>
           <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="about-link">
-            <span>in</span> LinkedIn
+            <span class="about-link-rule"></span>
+            LinkedIn
           </a>
         </div>
       </div>
       <div class="about-right reveal d1">
         <p>
-          Ingénieur full-stack et data, j'interviens auprès de PME distributeurs et grossistes pour concevoir et livrer des outils de pilotage sur mesure — de la connexion aux données brutes jusqu'à l'écran de vos équipes opérationnelles.
+          Ingénieur full-stack et data, Tim LIU accompagne des dirigeants de PME dans la valorisation de leurs données opérationnelles. Son approche combine rigueur technique et compréhension des enjeux métier — avec pour principe de livrer ce qui est utile, pas ce qui est impressionnant.
         </p>
         <p>
-          J'ai conçu et déployé un tableau de bord complet pour un grossiste textile avec 4 boutiques : pipeline de données automatisé, 14 vues métier, infrastructure cloud entièrement gérée. Ce socle technique est maintenant disponible pour d'autres clients, ce qui me permet de livrer en 4 à 6 semaines au lieu de plusieurs mois.
+          Il a conçu et déployé un système complet de pilotage pour un grossiste textile avec quatre enseignes : pipeline de données automatisé, quatorze modules métier, infrastructure cloud entièrement gérée. Ce socle technique permet aujourd'hui de déployer pour un nouveau client en quatre à six semaines.
         </p>
         <p>
-          Mon approche : comprendre votre métier avant de parler technique, livrer ce qui est utile plutôt que ce qui est impressionnant, et m'assurer que vous êtes autonome à la fin.
+          LIU Consulting intervient principalement auprès de PME distributeurs, grossistes et réseaux multi-sites dont le chiffre d'affaires est compris entre cinq et cinquante millions d'euros.
         </p>
-        <div class="siret">SIRET 91929307600023</div>
+        <div class="about-siret">SIRET 91929307600023</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ CONTACT ════════ -->
+<!-- ════════════════ CONTACT ════════════════ -->
 <section id="contact">
-  <div class="container">
-    <div class="contact-inner">
-      <span class="eyebrow reveal">Contact</span>
-      <h2 class="reveal d1">Parlons de votre projet</h2>
-      <p class="reveal d2">Un échange de 30 minutes pour comprendre votre situation et voir si je peux vous aider — sans engagement.</p>
-      <div class="contact-items reveal d2">
-        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item">
-          <span class="contact-item-icon">✉</span>
-          <div>
-            <div class="contact-item-label">Email</div>
-            <div class="contact-item-value">tim.liu.liuconsulting@gmail.com</div>
-          </div>
-        </a>
-        <a href="tel:+33603655398" class="contact-item">
-          <span class="contact-item-icon">☎</span>
-          <div>
-            <div class="contact-item-label">Téléphone</div>
-            <div class="contact-item-value">06 03 65 53 98</div>
-          </div>
-        </a>
-        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item">
-          <span class="contact-item-icon">in</span>
-          <div>
-            <div class="contact-item-label">LinkedIn</div>
-            <div class="contact-item-value">linkedin.com/in/tim-liu-liuconsulting</div>
-          </div>
-        </a>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <span class="label label-white">Contact</span>
+        <h2 class="on-dark">Parlons de votre projet</h2>
+        <p>Un échange de trente minutes pour évaluer si notre approche correspond à votre situation — sans engagement de votre part.</p>
+      </div>
+      <div class="contact-right reveal d1">
+        <div class="contact-items">
+          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-value">tim.liu.liuconsulting@gmail.com</span>
+          </a>
+          <a href="tel:+33603655398" class="contact-item">
+            <span class="contact-item-label">Téléphone</span>
+            <span class="contact-item-value">06 03 65 53 98</span>
+          </a>
+          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item">
+            <span class="contact-item-label">LinkedIn</span>
+            <span class="contact-item-value">linkedin.com/in/tim-liu-liuconsulting</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ FOOTER ════════ -->
+<!-- ════════════════ FOOTER ════════════════ -->
 <footer>
-  <span class="footer-logo">LIU Consulting</span>
-  <span>© 2026 Tim LIU — SIRET 91929307600023</span>
-  <span>Tous droits réservés</span>
+  <span class="footer-brand">LIU Consulting</span>
+  <span class="footer-right">© 2026 Tim LIU — SIRET 91929307600023 — Tous droits réservés</span>
 </footer>
 
 <script>
 const obs = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0.1 }
+  e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),
+  { threshold: 0.08 }
 );
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
