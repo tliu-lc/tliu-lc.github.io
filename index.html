@@ -113,49 +113,66 @@ img{max-width:100%;display:block}
 .aurora{position:absolute;inset:-5%;pointer-events:none;overflow:hidden}
 .galet{position:absolute;will-change:transform}
 
-/* Galet A — grand ambre, balaie depuis le haut-droit, orbite CW */
+/* Galet A — grand ambre 3D avec facettes */
 .ga{
   width:75vw; height:65vw;
   top:-15%; right:-18%;
-  background:radial-gradient(ellipse at 38% 42%,
-    rgba(232,160,32,.96) 0%,
-    rgba(240,178,45,.82) 25%,
-    rgba(215,145,18,.6)  50%,
-    rgba(175,110,5,.25)  72%,
-    transparent 88%);
-  filter:blur(32px);
+  background:
+    /* Reflet spéculaire blanc — facette la plus éclairée */
+    radial-gradient(ellipse 22% 16% at 26% 24%, rgba(255,255,230,.92) 0%, transparent 100%),
+    /* Facette claire haut-gauche */
+    linear-gradient(140deg, rgba(255,242,160,.72) 0%, transparent 38%),
+    /* Facette secondaire centre */
+    radial-gradient(ellipse 35% 28% at 48% 40%, rgba(255,215,80,.65) 0%, transparent 100%),
+    /* Arête lumineuse diagonale */
+    linear-gradient(125deg, transparent 30%, rgba(255,235,120,.45) 48%, transparent 62%),
+    /* Facette sombre bas-droit */
+    linear-gradient(318deg, rgba(110,55,0,.6) 0%, transparent 42%),
+    /* Ombre droite */
+    linear-gradient(240deg, rgba(145,75,0,.4) 0%, transparent 32%),
+    /* Base ambre */
+    radial-gradient(ellipse at 38% 42%,rgba(232,160,32,.96) 0%,rgba(215,140,18,.82) 40%,rgba(160,90,4,.5) 68%,transparent 86%);
+  filter:blur(18px);
   border-radius:62% 38% 28% 72% / 55% 68% 32% 45%;
   animation:morph-a 7s ease-in-out infinite alternate,
             drift-a 11s ease-in-out infinite alternate;
 }
 
-/* Galet B — crème lumineux, centre-gauche (= white heart BCG) */
+/* Galet B — crème lumineux 3D */
 .gb{
   width:68vw; height:72vw;
   top:0%; left:-15%;
-  background:radial-gradient(ellipse at 52% 48%,
-    rgba(255,253,240,1)  0%,
-    rgba(255,248,220,.88) 22%,
-    rgba(254,242,200,.6)  44%,
-    rgba(252,235,180,.25) 65%,
-    transparent 80%);
-  filter:blur(28px);
+  background:
+    /* Reflet spéculaire */
+    radial-gradient(ellipse 20% 14% at 38% 28%, rgba(255,255,255,.88) 0%, transparent 100%),
+    /* Facette claire */
+    linear-gradient(150deg, rgba(255,252,240,.7) 0%, transparent 40%),
+    /* Arête lumineuse */
+    linear-gradient(130deg, transparent 35%, rgba(255,248,220,.5) 50%, transparent 62%),
+    /* Facette sombre */
+    linear-gradient(310deg, rgba(200,165,80,.35) 0%, transparent 35%),
+    /* Base crème */
+    radial-gradient(ellipse at 52% 48%,rgba(255,253,240,1) 0%,rgba(255,246,210,.88) 28%,rgba(252,238,188,.55) 52%,transparent 76%);
+  filter:blur(22px);
   border-radius:48% 52% 62% 38% / 42% 58% 38% 62%;
   animation:morph-b 9s ease-in-out infinite alternate,
             drift-b 13s ease-in-out infinite alternate;
 }
 
-/* Galet C — bande bleue diagonale (= teal streak BCG) */
+/* Galet C — bande bleue 3D */
 .gc{
   width:28vw; height:130vh;
   top:-20%; right:20%;
-  background:linear-gradient(to bottom,
-    transparent 0%,
-    rgba(0,105,210,.28) 18%,
-    rgba(0,135,230,.5)  40%,
-    rgba(0,105,210,.28) 65%,
-    transparent 90%);
-  filter:blur(18px);
+  background:
+    /* Reflet blanc sur l'arête */
+    linear-gradient(to right, rgba(200,230,255,.65) 0%, transparent 30%),
+    /* Facette lumineuse gauche */
+    linear-gradient(to right, rgba(140,200,255,.45) 0%, transparent 45%),
+    /* Facette sombre droite */
+    linear-gradient(to left, rgba(0,40,130,.5) 0%, transparent 38%),
+    /* Base bleue */
+    linear-gradient(to bottom,transparent 0%,rgba(0,105,210,.32) 18%,rgba(0,135,230,.56) 40%,rgba(0,105,210,.32) 65%,transparent 90%);
+  filter:blur(12px);
   border-radius:45% 55% 60% 40% / 55% 45% 50% 50%;
   transform:rotate(-14deg);
   animation:morph-c 6s ease-in-out infinite alternate,
@@ -166,11 +183,13 @@ img{max-width:100%;display:block}
 .gd{
   width:50vw; height:50vw;
   top:-18%; left:-8%;
-  background:radial-gradient(ellipse at 55% 58%,
-    rgba(252,210,55,.88) 0%,
-    rgba(245,192,38,.62) 32%,
-    transparent 65%);
-  filter:blur(26px);
+  background:
+    radial-gradient(ellipse 18% 14% at 32% 28%, rgba(255,255,210,.88) 0%, transparent 100%),
+    linear-gradient(145deg, rgba(255,238,140,.65) 0%, transparent 35%),
+    linear-gradient(128deg, transparent 38%, rgba(255,228,100,.42) 52%, transparent 64%),
+    linear-gradient(312deg, rgba(130,65,0,.5) 0%, transparent 38%),
+    radial-gradient(ellipse at 55% 58%,rgba(252,210,55,.9) 0%,rgba(238,182,28,.65) 35%,rgba(180,105,5,.35) 62%,transparent 80%);
+  filter:blur(16px);
   border-radius:55% 45% 38% 62% / 62% 38% 55% 45%;
   animation:morph-d 8s ease-in-out infinite alternate,
             drift-d 12s ease-in-out infinite alternate;
