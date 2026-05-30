@@ -191,9 +191,24 @@ img{max-width:100%;display:block}
 .hero-scroll svg{width:16px;height:16px}
 @keyframes scroll-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 
-/* ─── SECTION WELCOME (= BCG List12 "Welcome to BCG") ─── */
+/* ─── SECTION WELCOME ─── */
 #welcome{background:var(--white);padding:var(--sp-v) 0}
 .welcome-inner{padding:0 var(--sp-h)}
+.carousel-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:28px;gap:20px;
+}
+.carousel-nav{display:flex;gap:8px}
+.carousel-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--black);color:#fff;
+  font-size:1rem;cursor:pointer;border:none;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .15s;
+  pointer-events:all;
+}
+.carousel-btn:hover{background:var(--navy);transform:scale(1.05)}
+.carousel-btn:disabled{background:var(--gray-300);cursor:default;transform:none}
 
 /* ModuleHeader BCG exact */
 .module-header{text-align:center;margin-bottom:48px}
@@ -264,25 +279,60 @@ img{max-width:100%;display:block}
   color:#fff;
 }
 
-/* Panel caché — slide up au hover (BCG exact: top:62% → top:0) */
+/* Panel semi-transparent — visible en bas (38%), s'agrandit au hover */
 .promo20-hid{
   position:absolute;
-  top:62%;left:0;right:0;
-  height:100%;
+  bottom:0;left:0;right:0;
+  height:38%;                           /* déjà visible en bas */
   display:flex;flex-direction:column;
+  justify-content:flex-end;             /* texte collé en bas par défaut */
   overflow:hidden;
-  opacity:0;
-  padding:24px;
-  background:var(--beige);
+  padding:20px;
+  background:rgba(241,238,234,.82);     /* beige semi-transparent */
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   z-index:3;
-  transition:all .3s ease-in-out .1s;
+  border-radius:0 0 var(--r-media) var(--r-media);
+  transition:height .42s cubic-bezier(.25,.46,.45,.94),
+             border-radius .42s ease,
+             justify-content 0s .2s;
 }
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid{top:0;opacity:1}
+  .promo20-inner:hover .promo20-hid{
+    height:100%;
+    border-radius:var(--r-media);
+    justify-content:flex-start;
+  }
 }
-.promo20-hid .promo20-cat{color:var(--black);opacity:.45}
-.promo20-hid .promo20-title{color:var(--black);margin-bottom:14px}
-.promo20-hid p{font-size:13px;color:var(--black);opacity:.6;line-height:1.6;flex:1}
+.promo20-hid .promo20-cat{
+  color:var(--black);opacity:.45;
+  font-size:11px;margin-bottom:8px;
+}
+.promo20-hid .promo20-title{
+  color:var(--black);
+  font-size:clamp(15px,1.3vw,17px);
+  margin-bottom:0;
+  transition:font-size .35s ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner:hover .promo20-hid .promo20-title{
+    font-size:clamp(17px,1.5vw,20px);   /* s'agrandit au hover */
+    margin-bottom:14px;
+  }
+}
+/* Description + CTA : invisibles au repos, apparaissent à l'expansion */
+.promo20-hid p,.promo20-hid .promo20-cta{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .25s ease .2s,transform .25s ease .2s;
+}
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner:hover .promo20-hid p,
+  .promo20-inner:hover .promo20-hid .promo20-cta{
+    opacity:1;transform:none;
+  }
+}
+.promo20-hid p{font-size:13px;color:var(--black);opacity:0;line-height:1.6;flex:1}
 
 /* CTA arrow button */
 .promo20-cta{
@@ -604,8 +654,21 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <!-- ─── WELCOME (= BCG List12 "Welcome to BCG") ─── -->
 <section id="welcome">
   <div class="welcome-inner">
+
+    <!-- Titre + flèches de navigation -->
+    <div class="carousel-head rv">
+      <div>
+        <span class="module-eyebrow">Expertises</span>
+        <h2 class="module-title" style="text-align:left;margin:0">Ce que je peux faire pour vous</h2>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="prev-btn" aria-label="Précédent">←</button>
+        <button class="carousel-btn" id="next-btn" aria-label="Suivant">→</button>
+      </div>
+    </div>
+
     <!-- Carousel Promo20 BCG style -->
-    <div class="promo-carousel rv d1">
+    <div class="promo-carousel rv d1" id="promo-carousel">
 
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
@@ -830,29 +893,59 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </section>
 
-<!-- ─── OFFRES (section blanche) ─── -->
+<!-- ─── OFFRES — même style Promo20 avec images ─── -->
 <section id="offres" style="background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)">
-  <div class="rv"><span class="module-eyebrow" style="text-align:left;display:block;margin-bottom:12px">Offres</span>
-  <h2 class="module-title" style="text-align:left;margin:0 0 48px">Comment travailler ensemble</h2></div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gray-300)" class="rv d1">
-    <div style="background:var(--beige);padding:44px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(0,0,0,.35);margin-bottom:14px">Audit &amp; Diagnostic</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--black);margin-bottom:16px">Cartographier l'existant, poser les priorités</h3>
-      <p style="font-size:.88rem;color:rgba(0,0,0,.5);line-height:1.75;margin-bottom:28px">Audit des sources de données, diagnostic des risques et opportunités, roadmap technique chiffrée. Livré en 2 semaines, sans engagement préalable.</p>
-      <a href="#contact" class="btn-primary">En savoir plus →</a>
-    </div>
-    <div style="background:var(--charcoal);padding:44px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:14px">Forfait mission</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:#fff;margin-bottom:16px">Code source et infrastructure — propriété du client</h3>
-      <p style="font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:28px">Développement complet livré clé en main — architecture, pipelines, dashboards. Documentation et formation incluses. Indépendance totale à l'issue du projet.</p>
-      <a href="#contact" class="btn-primary">Discuter d'une mission →</a>
-    </div>
-    <div style="background:var(--white);padding:44px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(0,0,0,.3);margin-bottom:14px">Abonnement</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--black);margin-bottom:16px">Hébergement, maintenance et support inclus</h3>
-      <p style="font-size:.88rem;color:rgba(0,0,0,.45);line-height:1.75;margin-bottom:28px">Solution déployée et maintenue. Vos équipes utilisent, je gère l'infrastructure. Aucune compétence technique requise de votre côté.</p>
-      <a href="#contact" class="btn-primary">Demander un devis →</a>
-    </div>
+  <div class="rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Offres</span>
+    <h2 class="module-title" style="text-align:left;margin:0 0 36px">Comment travailler ensemble</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="rv d1">
+
+    <!-- Card Audit — même structure que promo20 -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Audit & Diagnostic"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Audit &amp; Diagnostic</div>
+        <h3 class="promo20-title">Cartographier l'existant, poser les priorités</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Audit &amp; Diagnostic</div>
+        <h3 class="promo20-title">Cartographier l'existant, poser les priorités</h3>
+        <p>Audit des sources de données, diagnostic des risques, roadmap technique chiffrée. Livré en 2 semaines, sans engagement préalable.</p>
+        <span class="promo20-cta">Prendre contact →</span>
+      </div>
+    </a>
+
+    <!-- Card Mission -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-mission.jpg" alt="Forfait mission"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Forfait mission</div>
+        <h3 class="promo20-title">Code source et infrastructure — propriété du client</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Forfait mission</div>
+        <h3 class="promo20-title">Code source et infrastructure — propriété du client</h3>
+        <p>Développement complet livré clé en main. Documentation et formation incluses. Indépendance totale à l'issue du projet.</p>
+        <span class="promo20-cta">Discuter d'une mission →</span>
+      </div>
+    </a>
+
+    <!-- Card Abonnement -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-abonnement.jpg" alt="Abonnement"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Abonnement</div>
+        <h3 class="promo20-title">Hébergement, maintenance et support inclus</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Abonnement</div>
+        <h3 class="promo20-title">Hébergement, maintenance et support inclus</h3>
+        <p>Solution déployée et maintenue. Vos équipes utilisent, je gère l'infrastructure. Aucune compétence technique requise.</p>
+        <span class="promo20-cta">Demander un devis →</span>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -1005,6 +1098,21 @@ window.addEventListener('scroll', () => {
   }
   lastY = y;
 }, { passive:true });
+
+/* Carousel prev/next */
+const carousel = document.getElementById('promo-carousel');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+if (carousel && prevBtn && nextBtn) {
+  const scrollAmt = () => carousel.querySelector('.promo20')?.offsetWidth + 8 || 320;
+  nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmt(), behavior: 'smooth' }));
+  prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmt(), behavior: 'smooth' }));
+  carousel.addEventListener('scroll', () => {
+    prevBtn.disabled = carousel.scrollLeft < 10;
+    nextBtn.disabled = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth - 10;
+  }, { passive: true });
+  prevBtn.disabled = true;
+}
 
 /* Chips filter (assist section) */
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
