@@ -4,513 +4,300 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LIU Consulting — Solutions data pour dirigeants de PME</title>
-<meta name="description" content="LIU Consulting aide les dirigeants de PME à piloter leur activité par la donnée. Solutions sur mesure, opérationnelles en 4 à 6 semaines.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f1f3d'/><text y='.86em' font-size='62' x='14' fill='white' font-family='Georgia,serif' font-weight='bold'>LC</text></svg>">
+<meta name="description" content="LIU Consulting aide les dirigeants de PME à transformer leurs données en outils de décision — sur mesure, clé en main, sans complexité technique.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-
-/* ═══════════════════ TOKENS ═══════════════════ */
-:root {
-  --navy:    #0f1f3d;
-  --navy-2:  #162540;
-  --slate:   #334155;
-  --white:   #ffffff;
-  --off:     #f7f7f5;
-  --off-2:   #eeecea;
-  --ink:     #1a1a2e;
-  --muted:   #64748b;
-  --border:  #e5e3e0;
-  --accent:  #2d6a9f;   /* bleu ardoise légèrement plus vif pour les liens */
-}
-
-/* ═══════════════════ RESET ═══════════════════ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:'Inter',system-ui,sans-serif; background:var(--white); color:var(--ink); line-height:1.6; overflow-x:hidden; font-weight:300; }
-a { color:inherit; text-decoration:none; }
-
-/* ═══════════════════ LAYOUT ═══════════════════ */
-.wrap { max-width:1200px; margin:0 auto; padding:0 48px; }
-.wrap-sm { max-width:880px; margin:0 auto; padding:0 48px; }
-
-/* ═══════════════════ TYPE ═══════════════════ */
-.label {
-  display:inline-block; font-size:0.68rem; font-weight:600;
-  letter-spacing:0.18em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:24px;
-}
-.label-white { color:rgba(255,255,255,0.55); }
-h1 {
-  font-family:'Playfair Display',Georgia,serif;
-  font-size:clamp(2.8rem,5.5vw,5rem);
-  font-weight:700; line-height:1.1; letter-spacing:-0.02em;
-  color:var(--white);
-}
-h2 {
-  font-family:'Playfair Display',Georgia,serif;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);
-  font-weight:700; line-height:1.15; letter-spacing:-0.01em;
-  color:var(--navy); margin-bottom:20px;
-}
-h2.on-dark { color:var(--white); }
-h3 { font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:10px; letter-spacing:0; }
-p { color:var(--muted); line-height:1.75; font-weight:300; }
-p.lead { font-size:1.1rem; line-height:1.7; }
-
-/* ═══════════════════ NAV ═══════════════════ */
-nav {
-  position:fixed; top:0; width:100%; z-index:999;
-  background:var(--navy);
-  padding:0 48px; height:68px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.nav-brand {
-  display:flex; align-items:center; gap:12px;
-  font-size:0.82rem; font-weight:600; color:var(--white);
-  letter-spacing:0.08em; text-transform:uppercase;
-}
-.nav-brand-rule { width:28px; height:1px; background:rgba(255,255,255,0.35); }
-.nav-links { display:flex; align-items:center; gap:36px; }
-.nav-links a { font-size:0.8rem; color:rgba(255,255,255,0.65); font-weight:400; letter-spacing:0.02em; transition:color 0.2s; }
-.nav-links a:hover { color:var(--white); }
-.nav-cta {
-  font-size:0.8rem !important; font-weight:600 !important;
-  color:var(--white) !important; border:1px solid rgba(255,255,255,0.4);
-  padding:8px 20px; transition:all 0.2s !important; letter-spacing:0.04em;
-}
-.nav-cta:hover { background:rgba(255,255,255,0.1) !important; border-color:rgba(255,255,255,0.7) !important; }
-
-/* ═══════════════════ HERO ═══════════════════ */
-#hero {
-  background:var(--navy);
-  padding:160px 0 100px;
-  position:relative; overflow:hidden;
-}
-.hero-bg-line {
-  position:absolute; top:0; right:0; bottom:0; width:38%;
-  background:linear-gradient(135deg, transparent 0%, rgba(45,106,159,0.08) 100%);
-  border-left:1px solid rgba(255,255,255,0.05);
-}
-.hero-grid-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; }
-.hero-left { }
-.hero-eyebrow { display:flex; align-items:center; gap:16px; margin-bottom:36px; }
-.hero-eyebrow-line { width:36px; height:1px; background:rgba(255,255,255,0.4); }
-.hero-eyebrow span { font-size:0.7rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
-.hero-left h1 { margin-bottom:32px; }
-.hero-left p { color:rgba(255,255,255,0.6); font-size:1rem; max-width:460px; margin-bottom:44px; line-height:1.8; }
-.hero-actions { display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
-.btn-hero {
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--white); color:var(--navy);
-  padding:14px 28px; font-size:0.85rem; font-weight:600;
-  letter-spacing:0.02em; transition:all 0.2s;
-}
-.btn-hero:hover { background:var(--off-2); }
-.btn-hero-ghost {
-  display:inline-flex; align-items:center; gap:10px;
-  color:rgba(255,255,255,0.7); font-size:0.85rem; font-weight:400;
-  border-bottom:1px solid rgba(255,255,255,0.3);
-  padding-bottom:2px; transition:all 0.2s; letter-spacing:0.02em;
-}
-.btn-hero-ghost:hover { color:var(--white); border-color:var(--white); }
-.hero-right { padding-bottom:8px; }
-.hero-stat-list { border-top:1px solid rgba(255,255,255,0.12); }
-.hero-stat {
-  display:flex; justify-content:space-between; align-items:baseline;
-  padding:22px 0; border-bottom:1px solid rgba(255,255,255,0.08);
-}
-.hero-stat-num {
-  font-family:'Playfair Display',Georgia,serif;
-  font-size:2.2rem; font-weight:700; color:var(--white); line-height:1;
-}
-.hero-stat-label { font-size:0.78rem; color:rgba(255,255,255,0.45); max-width:180px; text-align:right; line-height:1.4; }
-
-/* ═══════════════════ INTRO STRIP ═══════════════════ */
-#intro { background:var(--off); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; }
-.intro-inner { display:flex; align-items:center; gap:80px; }
-.intro-rule { width:48px; height:2px; background:var(--navy); flex-shrink:0; }
-.intro-inner p { font-size:1rem; color:var(--slate); line-height:1.75; font-weight:400; max-width:740px; }
-
-/* ═══════════════════ EXPERTISES ═══════════════════ */
-#expertises { padding:100px 0; background:var(--white); border-bottom:1px solid var(--border); }
-.exp-header { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-bottom:72px; }
-.exp-header p { font-size:1rem; padding-top:8px; }
-.exp-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border); }
-.exp-item { padding:40px 40px 40px 0; border-right:1px solid var(--border); }
-.exp-item:last-child { border-right:none; padding-right:0; }
-.exp-item:not(:first-child) { padding-left:40px; }
-.exp-num { font-size:0.7rem; font-weight:600; letter-spacing:0.15em; color:var(--muted); margin-bottom:20px; display:block; }
-.exp-item h3 { font-size:1rem; font-weight:600; margin-bottom:12px; color:var(--navy); }
-.exp-item p { font-size:0.875rem; }
-
-/* ═══════════════════ OFFRES ═══════════════════ */
-#offres { background:var(--off); padding:100px 0; border-bottom:1px solid var(--border); }
-.offres-header { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; margin-bottom:64px; }
-.offres-header p { font-size:1rem; }
-.offres-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:0; border:1px solid var(--border); }
-.offre-item {
-  background:var(--white); padding:40px;
-  border-right:1px solid var(--border);
-  display:flex; flex-direction:column; gap:24px;
-  transition:background 0.2s;
-}
-.offre-item:hover { background:var(--off); }
-.offre-item:last-child { border-right:none; }
-.offre-item.featured { background:var(--navy); }
-.offre-item.featured:hover { background:var(--navy-2); }
-.offre-tag {
-  display:inline-block; font-size:0.65rem; font-weight:700;
-  letter-spacing:0.14em; text-transform:uppercase;
-  padding:4px 10px; border:1px solid var(--border);
-  color:var(--muted); width:fit-content;
-}
-.offre-item.featured .offre-tag { border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); }
-.offre-item.featured h3 { color:var(--white); }
-.offre-item.featured p { color:rgba(255,255,255,0.6); }
-.offre-item.featured hr { border-color:rgba(255,255,255,0.1); }
-.offre-item.featured li { color:rgba(255,255,255,0.7) !important; }
-.offre-item.featured li::before { color:rgba(255,255,255,0.4) !important; }
-.offre-item.featured .offre-link { color:var(--white); border-color:rgba(255,255,255,0.3); }
-.offre-item.featured .offre-link:hover { background:rgba(255,255,255,0.08); }
-.offre-item h3 { font-size:1.05rem; font-weight:600; color:var(--navy); }
-.offre-item p { font-size:0.875rem; flex:1; }
-.offre-item hr { border:none; border-top:1px solid var(--border); }
-.offre-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
-.offre-features li { font-size:0.82rem; color:var(--muted); display:flex; gap:10px; align-items:flex-start; font-weight:300; }
-.offre-features li::before { content:'–'; color:var(--muted); flex-shrink:0; }
-.offre-link {
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:0.82rem; font-weight:500; color:var(--navy);
-  border-bottom:1px solid var(--navy); padding-bottom:1px;
-  transition:all 0.2s; width:fit-content; letter-spacing:0.02em;
-}
-.offre-link:hover { color:var(--accent); border-color:var(--accent); }
-.offre-coming { font-size:0.8rem; color:var(--muted); font-style:italic; }
-
-/* ═══════════════════ À PROPOS ═══════════════════ */
-#about { padding:100px 0; background:var(--white); border-bottom:1px solid var(--border); }
-.about-grid { display:grid; grid-template-columns:1fr 1.6fr; gap:100px; align-items:start; }
-.about-left {}
-.about-id { margin-bottom:32px; }
-.about-id-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
-.about-id-role { font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; margin-bottom:24px; font-weight:400; }
-.about-links { display:flex; flex-direction:column; gap:12px; }
-.about-link { display:flex; align-items:center; gap:12px; font-size:0.85rem; color:var(--muted); font-weight:400; transition:color 0.2s; }
-.about-link:hover { color:var(--navy); }
-.about-link-rule { width:16px; height:1px; background:var(--border); flex-shrink:0; }
-.about-right p { font-size:0.95rem; margin-bottom:20px; color:var(--slate); font-weight:300; }
-.about-right p:last-of-type { margin-bottom:0; }
-.about-siret { margin-top:36px; padding-top:24px; border-top:1px solid var(--border); font-size:0.75rem; color:var(--muted); letter-spacing:0.04em; }
-
-/* ═══════════════════ CONTACT ═══════════════════ */
-#contact { background:var(--navy); padding:100px 0; }
-.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
-.contact-left h2 { color:var(--white); margin-bottom:20px; }
-.contact-left p { color:rgba(255,255,255,0.55); font-size:1rem; }
-.contact-right { }
-.contact-items { display:flex; flex-direction:column; gap:0; border-top:1px solid rgba(255,255,255,0.1); }
-.contact-item {
-  display:flex; align-items:center; gap:20px;
-  padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.08);
-  transition:all 0.2s;
-}
-.contact-item:hover .contact-item-value { color:var(--white); }
-.contact-item-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.3); width:72px; flex-shrink:0; }
-.contact-item-value { font-size:0.9rem; color:rgba(255,255,255,0.7); font-weight:400; transition:color 0.2s; }
-
-/* ═══════════════════ FOOTER ═══════════════════ */
-footer {
-  background:var(--navy); border-top:1px solid rgba(255,255,255,0.08);
-  padding:28px 48px;
-  display:flex; justify-content:space-between; align-items:center;
-  flex-wrap:wrap; gap:10px;
-}
-.footer-brand { font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
-.footer-right { font-size:0.75rem; color:rgba(255,255,255,0.25); }
-
-/* ═══════════════════ REVEAL ═══════════════════ */
-.reveal { opacity:0; transform:translateY(16px); transition:opacity 0.55s ease,transform 0.55s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-.d1{transition-delay:0.08s} .d2{transition-delay:0.16s} .d3{transition-delay:0.24s} .d4{transition-delay:0.32s}
-
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
-@media(max-width:960px){
-  .hero-grid-inner{grid-template-columns:1fr;gap:60px}
-  .hero-right{display:none}
-  .exp-header{grid-template-columns:1fr}
-  .exp-grid{grid-template-columns:1fr;border-top:none}
-  .exp-item{border-right:none;border-top:1px solid var(--border);padding:32px 0}
-  .exp-item:not(:first-child){padding-left:0}
-  .offres-header{grid-template-columns:1fr}
-  .offres-grid{grid-template-columns:1fr}
-  .offre-item{border-right:none;border-bottom:1px solid var(--border)}
-  .offre-item:last-child{border-bottom:none}
-  .contact-grid{grid-template-columns:1fr;gap:60px}
-  .about-grid{grid-template-columns:1fr;gap:48px}
-  .intro-inner{flex-direction:column;gap:24px}
-}
-@media(max-width:640px){
-  .wrap,.wrap-sm{padding:0 24px}
-  nav,.footer{padding:0 24px}
-  footer{padding:24px}
-  .nav-links a:not(.nav-cta){display:none}
-  section{padding:72px 0}
-}
+:root{--navy:#0c1a35;--navy-2:#1a2f52;--gold:#b08d57;--gold-l:#c9a96e;--white:#fff;--warm:#fafaf8;--warm-2:#f2f0ec;--warm-3:#e8e4de;--ink:#1c1c28;--ink-2:#374151;--muted:#6b7280;--border:#e5e0d8;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--warm);color:var(--ink);line-height:1.65;font-weight:400;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 48px;}
+section{padding:96px 0;}
+/* EYEBROW */
+.ey{display:flex;align-items:center;gap:14px;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;}
+.ey::before{content:'';width:28px;height:1px;background:var(--gold);flex-shrink:0;}
+.ey-w{color:rgba(255,255,255,.4);}
+.ey-w::before{background:rgba(255,255,255,.25);}
+/* TYPE */
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--white);}
+h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:700;line-height:1.2;letter-spacing:-.01em;color:var(--navy);margin-bottom:16px;}
+h2.lh{color:var(--white);}
+h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:10px;}
+p{color:var(--ink-2);line-height:1.8;}
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(12,26,53,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05);height:66px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;}
+.nb{font-size:.82rem;font-weight:600;color:var(--white);letter-spacing:.12em;text-transform:uppercase;}
+.nb span{color:var(--gold);}
+.nl{display:flex;align-items:center;gap:32px;}
+.nl a{font-size:.82rem;color:rgba(255,255,255,.6);font-weight:400;transition:color .2s;}
+.nl a:hover{color:rgba(255,255,255,.95);}
+.nc{font-size:.82rem !important;font-weight:500 !important;color:var(--gold) !important;border:1px solid rgba(176,141,87,.4);padding:8px 20px;transition:all .25s !important;}
+.nc:hover{background:rgba(176,141,87,.1) !important;border-color:var(--gold) !important;}
+/* HERO */
+#hero{background:var(--navy);padding:140px 0 0;overflow:hidden;position:relative;}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(176,141,87,.05),transparent);pointer-events:none;}
+.hl{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:end;}
+.hl-t{padding-bottom:72px;}
+.hl-t h1{margin-bottom:28px;}
+.hl-t p{color:rgba(255,255,255,.58);font-size:1.05rem;max-width:440px;margin-bottom:44px;line-height:1.8;}
+.hb{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.bp{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:13px 28px;font-size:.875rem;font-weight:600;transition:all .2s;}
+.bp:hover{background:var(--gold-l);}
+.bg{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.6);font-size:.875rem;transition:color .2s;}
+.bg:hover{color:var(--white);}
+.bg span{border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px;transition:border-color .2s;}
+.bg:hover span{border-color:rgba(255,255,255,.6);}
+.hv{border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 -20px 70px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.05);position:relative;}
+.hv img{width:100%;}
+.hv::after{content:'';position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(to top,var(--navy),transparent);}
+/* PRINCIPLES */
+#pr{background:var(--warm-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;}
+.prg{display:grid;grid-template-columns:repeat(4,1fr);}
+.pri{padding:40px 36px;border-right:1px solid var(--border);transition:background .2s;}
+.pri:last-child{border-right:none;}
+.pri:hover{background:var(--warm-3);}
+.prl{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.pri p{font-size:.85rem;color:var(--muted);line-height:1.65;}
+/* EXPERTISES */
+#ex{background:var(--white);border-bottom:1px solid var(--border);}
+.exg{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);}
+.exc{padding:44px 40px 44px 0;border-right:1px solid var(--border);}
+.exc:last-child{border-right:none;padding-right:0;}
+.exc:not(:first-child){padding-left:40px;}
+.exn{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:600;color:var(--warm-3);line-height:1;margin-bottom:20px;display:block;user-select:none;}
+.exc h3{font-size:1rem;margin-bottom:12px;color:var(--navy);}
+.exc p{font-size:.875rem;}
+/* OFFRES */
+#of{background:var(--warm);border-bottom:1px solid var(--border);}
+.ofh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;gap:60px;}
+.ofh p{font-size:.95rem;max-width:400px;text-align:right;}
+.ofg{display:grid;grid-template-columns:1.5fr 1fr 1fr;border:1px solid var(--border);}
+.ofc{padding:40px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:20px;background:var(--white);transition:background .2s;}
+.ofc:hover{background:var(--warm);}
+.ofc:last-child{border-right:none;}
+.ofc.prim{background:var(--navy);}
+.ofc.prim:hover{background:var(--navy-2);}
+.ot{display:inline-flex;align-items:center;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:3px 10px;width:fit-content;}
+.ot.ac{color:var(--gold);border-color:rgba(176,141,87,.35);}
+.ofc.prim h3{color:var(--white);}
+.ofc.prim p{color:rgba(255,255,255,.55);}
+.ofc.prim hr{border-color:rgba(255,255,255,.1);}
+.ofc.prim li{color:rgba(255,255,255,.6);}
+.ofc.prim li::before{color:rgba(176,141,87,.6) !important;}
+.ofc h3{font-size:1.05rem;}
+.ofc p{font-size:.875rem;flex:1;}
+.ofc hr{border:none;border-top:1px solid var(--border);}
+.ofl{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ofl li{font-size:.82rem;color:var(--muted);display:flex;gap:10px;align-items:flex-start;}
+.ofl li::before{content:'—';color:var(--warm-3);flex-shrink:0;}
+.olk{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--gold);transition:gap .2s;width:fit-content;}
+.olk:hover{gap:12px;}
+.oco{font-size:.8rem;color:var(--muted);font-style:italic;}
+/* ABOUT */
+#ab{background:var(--white);border-bottom:1px solid var(--border);}
+.abg{display:grid;grid-template-columns:360px 1fr;gap:96px;align-items:start;}
+.apc{background:var(--warm-2);border:1px solid var(--border);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
+.api{width:80px;height:80px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:var(--white);}
+.app{font-size:.75rem;color:var(--muted);letter-spacing:.06em;text-align:center;line-height:1.6;}
+.apc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,var(--navy),transparent);}
+.apn{position:absolute;bottom:24px;left:24px;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--white);z-index:1;line-height:1.3;}
+.apr{position:absolute;bottom:28px;right:24px;font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);z-index:1;}
+.abt h2{margin-bottom:28px;}
+.abt p{margin-bottom:18px;}
+.abt p:last-of-type{margin-bottom:0;}
+.acl{display:flex;flex-direction:column;gap:0;margin-top:40px;border-top:1px solid var(--border);}
+.ace{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);transition:all .2s;}
+.ace:hover .acev{color:var(--gold);}
+.acet{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.acev{font-size:.875rem;color:var(--ink-2);transition:color .2s;}
+.absi{margin-top:24px;font-size:.75rem;color:var(--muted);}
+/* CONTACT */
+#ct{background:var(--navy);}
+.ctg{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.ctl p{color:rgba(255,255,255,.5);font-size:1rem;line-height:1.8;margin-top:20px;}
+.ctll{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.1);}
+.cte{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:all .2s;}
+.cte:hover .ctev{color:var(--gold);}
+.ctet{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.28);flex-shrink:0;}
+.ctev{font-size:.9rem;color:rgba(255,255,255,.65);transition:color .2s;text-align:right;}
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.fb{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.fr{font-size:.75rem;color:rgba(255,255,255,.18);}
+/* REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+.rv.in{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+/* RESPONSIVE */
+@media(max-width:1024px){.hl{grid-template-columns:1fr}.hv{display:none}.hl-t{padding-bottom:80px}.abg{grid-template-columns:1fr}.apc{aspect-ratio:unset;height:260px}.ofg{grid-template-columns:1fr}.ofc{border-right:none;border-bottom:1px solid var(--border)}.ofc:last-child{border-bottom:none}.ctg{grid-template-columns:1fr;gap:56px}}
+@media(max-width:768px){.wrap{padding:0 24px}nav{padding:0 24px}footer{padding:24px}section{padding:64px 0}.exg{grid-template-columns:1fr}.exc{border-right:none;border-top:1px solid var(--border);padding:36px 0}.exc:not(:first-child){padding-left:0}.prg{grid-template-columns:1fr 1fr}.pri{border-bottom:1px solid var(--border)}.ofh{flex-direction:column;align-items:flex-start}.ofh p{text-align:left;max-width:100%}.nl a:not(.nc){display:none}}
+@media(max-width:480px){.prg{grid-template-columns:1fr}.hb{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
 
-<!-- ════════════════ NAV ════════════════ -->
 <nav>
-  <div class="nav-brand">
-    LIU Consulting
-    <div class="nav-brand-rule"></div>
-    <span style="font-weight:300;opacity:0.5;letter-spacing:0.04em;text-transform:none;font-size:0.78rem">Solutions data</span>
-  </div>
-  <div class="nav-links">
-    <a href="#expertises">Expertises</a>
-    <a href="#offres">Offres</a>
-    <a href="#about">À propos</a>
-    <a href="#contact" class="nav-cta">Nous contacter</a>
+  <div class="nb">LIU <span>&nbsp;</span>Consulting</div>
+  <div class="nl">
+    <a href="#ex">Expertises</a>
+    <a href="#of">Offres</a>
+    <a href="#ab">À propos</a>
+    <a href="#ct" class="nc">Nous contacter</a>
   </div>
 </nav>
 
-<!-- ════════════════ HERO ════════════════ -->
 <section id="hero">
-  <div class="hero-bg-line"></div>
   <div class="wrap">
-    <div class="hero-grid-inner">
-
-      <div class="hero-left">
-        <div class="hero-eyebrow reveal">
-          <div class="hero-eyebrow-line"></div>
-          <span>Cabinet de conseil · Data & Systèmes d'information</span>
-        </div>
-        <h1 class="reveal d1">
-          Vos données.<br>Votre avantage<br>compétitif.
-        </h1>
-        <p class="reveal d2">
-          Nous aidons les dirigeants de PME à transformer leurs données opérationnelles en outils de décision — concrets, rapides à déployer, sans complexité technique.
-        </p>
-        <div class="hero-actions reveal d3">
-          <a href="#offres" class="btn-hero">Découvrir nos offres</a>
-          <a href="#contact" class="btn-hero-ghost">Prendre contact →</a>
+    <div class="hl">
+      <div class="hl-t">
+        <div class="ey ey-w rv">Cabinet de conseil · Data &amp; Systèmes d'information</div>
+        <h1 class="rv d1">Vos données.<br>Votre avantage<br>compétitif.</h1>
+        <p class="rv d2">Nous aidons les dirigeants de PME à transformer leurs données opérationnelles en outils de décision — concrets, rapides à déployer, sans complexité technique.</p>
+        <div class="hb rv d3">
+          <a href="#of" class="bp">Découvrir nos offres</a>
+          <a href="#ct" class="bg"><span>Prendre contact</span> →</a>
         </div>
       </div>
-
-      <div class="hero-right reveal d2">
-        <div class="hero-stat-list">
-          <div class="hero-stat">
-            <div class="hero-stat-num" style="font-size:1rem;font-weight:600;letter-spacing:0.01em">Sur mesure</div>
-            <div class="hero-stat-label">chaque solution est conçue pour votre organisation, vos données, votre équipe</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num" style="font-size:1rem;font-weight:600;letter-spacing:0.01em">Clé en main</div>
-            <div class="hero-stat-label">de la collecte des données brutes à l'outil utilisé au quotidien par vos équipes</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num" style="font-size:1rem;font-weight:600;letter-spacing:0.01em">Pragmatique</div>
-            <div class="hero-stat-label">ce qui est utile et durable plutôt que ce qui est techniquement impressionnant</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num" style="font-size:1rem;font-weight:600;letter-spacing:0.01em">Indépendant</div>
-            <div class="hero-stat-label">aucun intérêt à vendre une plateforme ou un éditeur en particulier</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════ INTRO ════════════════ -->
-<section id="intro">
-  <div class="wrap">
-    <div class="intro-inner reveal">
-      <div class="intro-rule"></div>
-      <p>LIU Consulting conçoit et déploie des solutions de pilotage sur mesure pour les PME distributeurs et grossistes multi-sites — de la connexion aux données brutes jusqu'à l'écran de vos équipes, clé en main.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════ EXPERTISES ════════════════ -->
-<section id="expertises">
-  <div class="wrap">
-    <div class="exp-header">
-      <div>
-        <span class="label reveal">Expertises</span>
-        <h2 class="reveal d1">Ce que nous faisons</h2>
-      </div>
-      <p class="reveal d2" style="padding-top:40px">
-        Nous intervenons sur l'ensemble de la chaîne de valeur de la donnée — de la collecte brute à la décision opérationnelle — avec une approche pragmatique orientée résultat.
-      </p>
-    </div>
-
-    <div class="exp-grid">
-      <div class="exp-item reveal d1">
-        <span class="exp-num">01</span>
-        <h3>Tableaux de bord & pilotage</h3>
-        <p>Conception et déploiement de dashboards opérationnels connectés à vos systèmes de gestion. Ventes, stocks, clients, alertes — une vue consolidée, actualisée automatiquement.</p>
-      </div>
-      <div class="exp-item reveal d2">
-        <span class="exp-num">02</span>
-        <h3>Automatisation des flux de données</h3>
-        <p>Mise en place de pipelines automatisés entre vos sources (ERP, EBP, exports CSV) et une base centralisée. Suppression des tâches manuelles répétitives et des consolidations à risque.</p>
-      </div>
-      <div class="exp-item reveal d3">
-        <span class="exp-num">03</span>
-        <h3>Infrastructure cloud & déploiement</h3>
-        <p>Hébergement, sécurisation et maintenance de vos applications sur Google Cloud. Disponibilité et mises à jour entièrement gérées, sans intervention de votre équipe.</p>
+      <div class="hv rv d2">
+        <img src="dashboard.png" alt="Exemple de tableau de bord opérationnel">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════ OFFRES ════════════════ -->
-<section id="offres">
+<section id="pr">
+  <div class="prg">
+    <div class="pri rv"><div class="prl">Sur mesure</div><p>Chaque solution est conçue pour votre organisation, vos données, votre équipe — jamais une plateforme générique.</p></div>
+    <div class="pri rv d1"><div class="prl">Clé en main</div><p>De la collecte des données brutes à l'outil utilisé au quotidien — nous gérons l'ensemble de la chaîne.</p></div>
+    <div class="pri rv d2"><div class="prl">Pragmatique</div><p>Ce qui est utile et durable, plutôt que ce qui est techniquement impressionnant. La valeur, pas la complexité.</p></div>
+    <div class="pri rv d3"><div class="prl">Indépendant</div><p>Aucun intérêt à vendre une plateforme particulière. Nos recommandations sont dictées par votre situation.</p></div>
+  </div>
+</section>
+
+<section id="ex">
   <div class="wrap">
-    <div class="offres-header">
-      <div>
-        <span class="label reveal">Offres</span>
-        <h2 class="reveal d1">Nos solutions</h2>
-      </div>
-      <p class="reveal d2">Chaque solution est construite sur un socle technique éprouvé, adapté à votre activité et déployable en quelques semaines.</p>
+    <div class="rv" style="max-width:560px;margin-bottom:64px">
+      <div class="ey">Expertises</div>
+      <h2>Ce que nous faisons</h2>
+      <p style="margin-top:12px">Nous intervenons de la collecte des données jusqu'à la décision opérationnelle, avec une approche pragmatique orientée résultat.</p>
     </div>
+    <div class="exg">
+      <div class="exc rv d1"><span class="exn">01</span><h3>Tableaux de bord &amp; pilotage</h3><p>Conception et déploiement de dashboards opérationnels connectés à vos systèmes. Vision consolidée, actualisée automatiquement, accessible depuis n'importe où.</p></div>
+      <div class="exc rv d2"><span class="exn">02</span><h3>Automatisation des flux de données</h3><p>Mise en place de pipelines automatisés entre vos sources — ERP, EBP, exports CSV. Suppression des consolidations manuelles et des tâches répétitives à risque d'erreur.</p></div>
+      <div class="exc rv d3"><span class="exn">03</span><h3>Infrastructure cloud &amp; déploiement</h3><p>Hébergement, sécurisation et maintenance de vos applications sur le cloud. Disponibilité, mises à jour, sauvegardes — entièrement gérés.</p></div>
+    </div>
+  </div>
+</section>
 
-    <div class="offres-grid reveal">
-
-      <div class="offre-item featured">
-        <div class="offre-tag">Disponible</div>
+<section id="of">
+  <div class="wrap">
+    <div class="ofh rv">
+      <div><div class="ey">Offres</div><h2>Nos solutions</h2></div>
+      <p>Construites sur un socle technique éprouvé, adaptées à votre activité et déployables rapidement.</p>
+    </div>
+    <div class="ofg rv">
+      <div class="ofc prim">
+        <div class="ot ac">Disponible</div>
         <h3>Tableau de bord opérationnel</h3>
-        <p>Solution complète de pilotage pour grossistes et distributeurs multi-sites. Ventes, stocks, segmentation clients, alertes proactives, prospection commerciale.</p>
+        <p>Solution complète de pilotage pour distributeurs et grossistes multi-sites — ventes, stocks, clients, alertes, prospection.</p>
         <hr>
-        <ul class="offre-features">
-          <li>14 modules métier — vision 360° de votre activité</li>
+        <ul class="ofl">
+          <li>Vision 360° de votre activité en temps réel</li>
           <li>Vue client unifiée toutes enseignes confondues</li>
-          <li>Alertes churn et segmentation RFM automatiques</li>
-          <li>Base de prospection qualifiée — 72 000 établissements</li>
+          <li>Alertes proactives et segmentation clients</li>
+          <li>Base de prospection qualifiée intégrée</li>
           <li>Opérationnel en 4 à 6 semaines</li>
         </ul>
-        <a href="https://tliu-lc.github.io/retail-dashboard/" class="offre-link" style="color:white;border-color:rgba(255,255,255,0.4)">
-          En savoir plus →
-        </a>
+        <a href="https://tliu-lc.github.io/retail-dashboard/" class="olk">En savoir plus →</a>
       </div>
-
-      <div class="offre-item">
-        <div class="offre-tag">Bientôt</div>
+      <div class="ofc">
+        <div class="ot">Bientôt</div>
         <h3>Automatisation des reportings</h3>
-        <p>Génération et envoi automatique de vos rapports périodiques — sans intervention manuelle, personnalisables par destinataire.</p>
+        <p>Génération et envoi automatique de vos rapports périodiques — sans intervention manuelle, personnalisés par destinataire.</p>
         <hr>
-        <ul class="offre-features">
+        <ul class="ofl">
           <li>Rapports PDF ou Excel automatiques</li>
           <li>Planification et envoi par email</li>
-          <li>Connexion à vos sources existantes</li>
+          <li>Connexion à vos outils existants</li>
           <li>Personnalisable par destinataire</li>
         </ul>
-        <span class="offre-coming">Disponible prochainement</span>
+        <span class="oco">Disponible prochainement</span>
       </div>
-
-      <div class="offre-item">
-        <div class="offre-tag">Bientôt</div>
-        <h3>Audit & diagnostic data</h3>
-        <p>Analyse de la maturité de votre système d'information — identification des angles morts, plan d'action priorisé et chiffré.</p>
+      <div class="ofc">
+        <div class="ot">Bientôt</div>
+        <h3>Audit &amp; diagnostic data</h3>
+        <p>Analyse de la maturité de votre système d'information — angles morts, opportunités de gains, plan d'action chiffré.</p>
         <hr>
-        <ul class="offre-features">
+        <ul class="ofl">
           <li>Cartographie de vos sources de données</li>
           <li>Identification des opportunités de gains</li>
           <li>Recommandations actionnables</li>
           <li>Livré en 2 semaines, sans engagement</li>
         </ul>
-        <span class="offre-coming">Disponible prochainement</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════ À PROPOS ════════════════ -->
-<section id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <span class="label">À propos</span>
-        <div class="about-id">
-          <div class="about-id-name">Tim LIU</div>
-          <div class="about-id-role">Fondateur, LIU Consulting</div>
-        </div>
-        <div class="about-links">
-          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="about-link">
-            <span class="about-link-rule"></span>
-            tim.liu.liuconsulting@gmail.com
-          </a>
-          <a href="tel:+33603655398" class="about-link">
-            <span class="about-link-rule"></span>
-            06 03 65 53 98
-          </a>
-          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="about-link">
-            <span class="about-link-rule"></span>
-            LinkedIn
-          </a>
-        </div>
-      </div>
-      <div class="about-right reveal d1">
-        <p>
-          Ingénieur full-stack et data, Tim LIU accompagne des dirigeants de PME dans la valorisation de leurs données opérationnelles. Son approche combine rigueur technique et compréhension des enjeux métier — avec pour principe de livrer ce qui est utile, pas ce qui est impressionnant.
-        </p>
-        <p>
-          Il a conçu et déployé un système complet de pilotage pour un grossiste textile avec quatre enseignes : pipeline de données automatisé, quatorze modules métier, infrastructure cloud entièrement gérée. Ce socle technique permet aujourd'hui de déployer pour un nouveau client en quatre à six semaines.
-        </p>
-        <p>
-          LIU Consulting intervient principalement auprès de PME distributeurs, grossistes et réseaux multi-sites dont le chiffre d'affaires est compris entre cinq et cinquante millions d'euros.
-        </p>
-        <div class="about-siret">SIRET 91929307600023</div>
+        <span class="oco">Disponible prochainement</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════ CONTACT ════════════════ -->
-<section id="contact">
+<section id="ab">
   <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-left reveal">
-        <span class="label label-white">Contact</span>
-        <h2 class="on-dark">Parlons de votre projet</h2>
+    <div class="abg">
+      <div class="rv">
+        <div class="ey" style="margin-bottom:20px">À propos</div>
+        <div class="apc">
+          <div class="api">TL</div>
+          <div class="app">Photo professionnelle<br>à venir</div>
+          <div class="apn">Tim LIU</div>
+          <div class="apr">Fondateur</div>
+        </div>
+      </div>
+      <div class="abt rv d1">
+        <h2>Un interlocuteur unique,<br>de bout en bout.</h2>
+        <p>Ingénieur full-stack et data, Tim LIU accompagne des dirigeants de PME dans la valorisation de leurs données opérationnelles. Son approche combine rigueur technique et compréhension des enjeux métier — avec pour principe de livrer ce qui est utile, pas ce qui est impressionnant.</p>
+        <p>LIU Consulting intervient principalement auprès de PME distributeurs, grossistes et réseaux multi-sites dont le chiffre d'affaires est compris entre cinq et cinquante millions d'euros.</p>
+        <p>Chaque mission est conduite en direct, sans sous-traitance. Le client a un seul interlocuteur, du cadrage initial à la formation des équipes.</p>
+        <div class="acl">
+          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="ace"><span class="acet">Email</span><span class="acev">tim.liu.liuconsulting@gmail.com</span></a>
+          <a href="tel:+33603655398" class="ace"><span class="acet">Téléphone</span><span class="acev">06 03 65 53 98</span></a>
+          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="ace"><span class="acet">LinkedIn</span><span class="acev">linkedin.com/in/tim-liu-liuconsulting</span></a>
+        </div>
+        <div class="absi">SIRET 91929307600023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ct">
+  <div class="wrap">
+    <div class="ctg">
+      <div class="ctl rv">
+        <div class="ey ey-w">Contact</div>
+        <h2 class="lh">Parlons de votre projet.</h2>
         <p>Un échange de trente minutes pour évaluer si notre approche correspond à votre situation — sans engagement de votre part.</p>
       </div>
-      <div class="contact-right reveal d1">
-        <div class="contact-items">
-          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item">
-            <span class="contact-item-label">Email</span>
-            <span class="contact-item-value">tim.liu.liuconsulting@gmail.com</span>
-          </a>
-          <a href="tel:+33603655398" class="contact-item">
-            <span class="contact-item-label">Téléphone</span>
-            <span class="contact-item-value">06 03 65 53 98</span>
-          </a>
-          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item">
-            <span class="contact-item-label">LinkedIn</span>
-            <span class="contact-item-value">linkedin.com/in/tim-liu-liuconsulting</span>
-          </a>
+      <div class="rv d1">
+        <div class="ctll">
+          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="cte"><span class="ctet">Email</span><span class="ctev">tim.liu.liuconsulting@gmail.com</span></a>
+          <a href="tel:+33603655398" class="cte"><span class="ctet">Téléphone</span><span class="ctev">06 03 65 53 98</span></a>
+          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="cte"><span class="ctet">LinkedIn</span><span class="ctev">Tim LIU — LIU Consulting</span></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════ FOOTER ════════════════ -->
 <footer>
-  <span class="footer-brand">LIU Consulting</span>
-  <span class="footer-right">© 2026 Tim LIU — SIRET 91929307600023 — Tous droits réservés</span>
+  <span class="fb">LIU Consulting</span>
+  <span class="fr">© 2026 Tim LIU · SIRET 91929307600023</span>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(
-  e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),
-  { threshold: 0.08 }
-);
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>o.observe(el));
 </script>
 </body>
 </html>
