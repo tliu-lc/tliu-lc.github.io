@@ -102,95 +102,120 @@ img{max-width:100%;display:block}
 }
 .nav-cta:hover{background:var(--y-hover)}
 
-/* ─── HERO — 100vh, aurora comme BCG ─── */
+/* ─── HERO — fond clair comme BCG ─── */
 #hero{
   position:relative;height:100vh;overflow:hidden;
-  background:var(--charcoal);
+  background:#FFF8E8;          /* crème chaud clair, comme BCG */
   display:flex;flex-direction:column;
 }
-/* ─── DEUX SPHÈRES ROCHEUSES EN ORBITE OPPOSÉE ─── */
-/* Conteneur orbital — plein écran, centré */
-.aurora{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
+
+/* ─── GALETS — grandes formes organiques morphantes (style BCG) ─── */
+.aurora{position:absolute;inset:-5%;pointer-events:none;overflow:hidden}
+.galet{position:absolute;will-change:transform}
+
+/* Galet A — grand ambre, balaie depuis le haut-droit, orbite CW */
+.ga{
+  width:75vw; height:65vw;
+  top:-15%; right:-18%;
+  background:radial-gradient(ellipse at 38% 42%,
+    rgba(232,160,32,.96) 0%,
+    rgba(240,178,45,.82) 25%,
+    rgba(215,145,18,.6)  50%,
+    rgba(175,110,5,.25)  72%,
+    transparent 88%);
+  filter:blur(55px);
+  border-radius:62% 38% 28% 72% / 55% 68% 32% 45%;
+  animation:morph-a 12s ease-in-out infinite alternate,
+            drift-a 18s ease-in-out infinite alternate;
 }
 
-/* Wrapper orbital : tourne → l'orbe trace un cercle */
-.orb-wrap{
-  position:absolute;
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  will-change:transform;
-}
-.orb-cw  { animation:spin-cw  14s linear infinite }
-.orb-ccw { animation:spin-ccw 14s linear infinite }
-
-/* Sphère rocheuse — irrégulière, brillante */
-.orb{
-  position:absolute;
-  width:62vmin; height:62vmin;
-  /* Border-radius irrégulier = effet "caillou" */
-  border-radius:42% 58% 55% 45% / 52% 48% 56% 44%;
-  mix-blend-mode:screen;
-  will-change:transform,filter;
+/* Galet B — crème lumineux, centre-gauche (= white heart BCG) */
+.gb{
+  width:68vw; height:72vw;
+  top:0%; left:-15%;
+  background:radial-gradient(ellipse at 52% 48%,
+    rgba(255,253,240,1)  0%,
+    rgba(255,248,220,.88) 22%,
+    rgba(254,242,200,.6)  44%,
+    rgba(252,235,180,.25) 65%,
+    transparent 80%);
+  filter:blur(50px);
+  border-radius:48% 52% 62% 38% / 42% 58% 38% 62%;
+  animation:morph-b 15s ease-in-out infinite alternate,
+            drift-b 22s ease-in-out infinite alternate;
 }
 
-/* Orbe A — offset gauche → orbite CW */
-.orb-a{
-  transform:translate(-50%,-50%) translateX(-22vmin);
-  background:radial-gradient(ellipse at 36% 32%,
-    rgba(255,238,60,1)   0%,
-    rgba(240,170,28,.92) 30%,
-    rgba(210,128,8,.72)  58%,
-    rgba(150,80,0,.35)   78%,
+/* Galet C — bande bleue diagonale (= teal streak BCG) */
+.gc{
+  width:28vw; height:130vh;
+  top:-20%; right:20%;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,105,210,.28) 18%,
+    rgba(0,135,230,.5)  40%,
+    rgba(0,105,210,.28) 65%,
     transparent 90%);
-  filter:blur(6px);
-  animation:orb-pulse 14s linear infinite;
+  filter:blur(28px);
+  border-radius:45% 55% 60% 40% / 55% 45% 50% 50%;
+  transform:rotate(-14deg);
+  animation:morph-c 10s ease-in-out infinite alternate,
+            drift-c 16s ease-in-out infinite alternate;
 }
 
-/* Orbe B — offset droite → orbite CCW */
-.orb-b{
-  transform:translate(-50%,-50%) translateX(22vmin);
-  background:radial-gradient(ellipse at 64% 38%,
-    rgba(255,230,45,1)   0%,
-    rgba(248,172,22,.9)  32%,
-    rgba(218,132,6,.68)  56%,
-    rgba(155,85,0,.32)   76%,
-    transparent 90%);
-  filter:blur(6px);
-  animation:orb-pulse 14s linear infinite 7s; /* déphasé de 7s */
+/* Galet D — accent or haut-gauche (= yellow-green top-left BCG) */
+.gd{
+  width:50vw; height:50vw;
+  top:-18%; left:-8%;
+  background:radial-gradient(ellipse at 55% 58%,
+    rgba(252,210,55,.88) 0%,
+    rgba(245,192,38,.62) 32%,
+    transparent 65%);
+  filter:blur(45px);
+  border-radius:55% 45% 38% 62% / 62% 38% 55% 45%;
+  animation:morph-d 13s ease-in-out infinite alternate,
+            drift-d 20s ease-in-out infinite alternate;
 }
 
-/* Zoom au moment de la collision (25% et 75% de l'orbite = top & bottom) */
-@keyframes orb-pulse{
-  0%   { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
-  22%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
-  25%  { filter:blur(2px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1.55) } /* COLLISION */
-  28%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
-  72%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
-  75%  { filter:blur(2px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1.55) } /* COLLISION */
-  78%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
-  100% { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+/* Morphing border-radius = galets qui changent de forme (irrégulier) */
+@keyframes morph-a{
+  0%  {border-radius:62% 38% 28% 72% / 55% 68% 32% 45%}
+  33% {border-radius:38% 62% 55% 45% / 42% 55% 60% 38%}
+  66% {border-radius:72% 28% 42% 58% / 65% 35% 48% 52%}
+  100%{border-radius:45% 55% 68% 32% / 38% 62% 42% 58%}
+}
+@keyframes morph-b{
+  0%  {border-radius:48% 52% 62% 38% / 42% 58% 38% 62%}
+  33% {border-radius:65% 35% 38% 62% / 55% 45% 62% 38%}
+  66% {border-radius:35% 65% 55% 45% / 68% 32% 45% 55%}
+  100%{border-radius:58% 42% 45% 55% / 35% 65% 52% 48%}
+}
+@keyframes morph-c{
+  0%  {border-radius:45% 55% 60% 40% / 55% 45% 50% 50%;transform:rotate(-14deg)}
+  50% {border-radius:60% 40% 45% 55% / 40% 60% 55% 45%;transform:rotate(-8deg)}
+  100%{border-radius:38% 62% 52% 48% / 62% 38% 45% 55%;transform:rotate(-18deg)}
+}
+@keyframes morph-d{
+  0%  {border-radius:55% 45% 38% 62% / 62% 38% 55% 45%}
+  50% {border-radius:38% 62% 62% 38% / 45% 55% 38% 62%}
+  100%{border-radius:68% 32% 45% 55% / 38% 62% 60% 40%}
 }
 
-/* Flash de lumière à la collision */
-.orb-flash{
-  position:absolute;
-  width:80vmin;height:80vmin;
-  border-radius:50%;
-  background:radial-gradient(ellipse,rgba(255,240,80,.55) 0%,transparent 65%);
-  mix-blend-mode:screen;
-  animation:flash-collision 14s linear infinite;
+/* Dérives lentes (translation + légère rotation) */
+@keyframes drift-a{
+  0%  {transform:translate(0,0) rotate(-3deg)}
+  100%{transform:translate(-8%,-6%) rotate(5deg)}
 }
-@keyframes flash-collision{
-  0%,22%,28%,72%,78%,100%{ opacity:0; transform:scale(.5) }
-  25%,75%                  { opacity:1; transform:scale(1.8) }
+@keyframes drift-b{
+  0%  {transform:translate(0,0)}
+  100%{transform:translate(7%,8%)}
 }
-
-/* Rotations 360° continues */
-@keyframes spin-cw  {from{transform:rotate(0deg)}   to{transform:rotate(360deg)}}
-@keyframes spin-ccw {from{transform:rotate(180deg)} to{transform:rotate(-180deg)}}
+@keyframes drift-c{
+  /* morph-c gère déjà la rotation */
+}
+@keyframes drift-d{
+  0%  {transform:translate(0,0)}
+  100%{transform:translate(10%,7%) scale(.95)}
+}
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
@@ -202,38 +227,38 @@ img{max-width:100%;display:block}
 .hero-welcome{
   display:block;
   font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
+  color:rgba(0,41,107,.5);
   margin-bottom:20px;
 }
 .hero-h1{
   font-family:'DM Serif Display',serif;
   font-size:clamp(2.2rem,5vw,60px);
   font-weight:400;line-height:1.06;letter-spacing:-.025em;
-  color:#fff;
+  color:var(--navy);
   margin-bottom:24px;
 }
 .hero-desc{
   font-size:clamp(.9rem,1.4vw,1.1rem);
   font-weight:300;line-height:1.75;
-  color:rgba(255,255,255,.55);
+  color:rgba(0,41,107,.62);
   max-width:520px;
   margin-bottom:40px;
 }
 .hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .btn-hero-y{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--y);color:var(--black);
+  background:var(--navy);color:#fff;
   padding:14px 28px;border-radius:var(--r-btn);
   font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   transition:background .2s;
 }
-.btn-hero-y:hover{background:var(--y-hover)}
+.btn-hero-y:hover{background:var(--navy-2)}
 .btn-hero-ghost{
-  font-size:.88rem;font-weight:300;color:rgba(255,255,255,.6);
-  border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px;
+  font-size:.88rem;font-weight:300;color:rgba(0,41,107,.6);
+  border-bottom:1px solid rgba(0,41,107,.25);padding-bottom:1px;
   transition:all .2s;
 }
-.btn-hero-ghost:hover{color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-hero-ghost:hover{color:var(--navy);border-color:rgba(0,41,107,.7)}
 
 /* Scroll indicator */
 .hero-scroll{
@@ -660,16 +685,10 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <!-- ─── HERO 100vh — texte sur aurora comme BCG ─── -->
 <section id="hero">
   <div class="aurora" aria-hidden="true">
-    <!-- Orbe A — orbite horaire -->
-    <div class="orb-wrap orb-cw">
-      <div class="orb orb-a"></div>
-    </div>
-    <!-- Orbe B — orbite antihoraire, départ opposé -->
-    <div class="orb-wrap orb-ccw">
-      <div class="orb orb-b"></div>
-    </div>
-    <!-- Flash de lumière à la collision -->
-    <div class="orb-flash"></div>
+    <div class="galet ga"></div>
+    <div class="galet gb"></div>
+    <div class="galet gc"></div>
+    <div class="galet gd"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
