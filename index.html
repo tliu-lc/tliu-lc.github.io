@@ -108,81 +108,89 @@ img{max-width:100%;display:block}
   background:var(--charcoal);
   display:flex;flex-direction:column;
 }
-/* Aurora — rayons qui tournent en sens opposés, larges, superposés */
-.aurora{position:absolute;inset:-8%;pointer-events:none;overflow:hidden}
-.bl{position:absolute;will-change:transform;mix-blend-mode:screen}
+/* ─── DEUX SPHÈRES ROCHEUSES EN ORBITE OPPOSÉE ─── */
+/* Conteneur orbital — plein écran, centré */
+.aurora{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
 
-/* Nappe ambre principale (fond général) */
-.bl1{width:90%;height:78%;top:-10%;right:-10%;
-  background:radial-gradient(ellipse at 42% 44%,rgba(232,160,32,.85) 0%,rgba(240,178,50,.55) 30%,transparent 65%);
-  filter:blur(22px);animation:a1 3s ease-in-out infinite alternate}
+/* Wrapper orbital : tourne → l'orbe trace un cercle */
+.orb-wrap{
+  position:absolute;
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  will-change:transform;
+}
+.orb-cw  { animation:spin-cw  14s linear infinite }
+.orb-ccw { animation:spin-ccw 14s linear infinite }
 
-/* Nappe diffuse complémentaire */
-.bl2{width:72%;height:82%;top:6%;left:-6%;
-  background:radial-gradient(ellipse at 48% 48%,rgba(255,205,65,.65) 0%,rgba(240,180,40,.3) 40%,transparent 66%);
-  filter:blur(30px);animation:a2 4.5s ease-in-out infinite alternate}
+/* Sphère rocheuse — irrégulière, brillante */
+.orb{
+  position:absolute;
+  width:62vmin; height:62vmin;
+  /* Border-radius irrégulier = effet "caillou" */
+  border-radius:42% 58% 55% 45% / 52% 48% 56% 44%;
+  mix-blend-mode:screen;
+  will-change:transform,filter;
+}
 
-/* ── Rayons 360° lents — larges, superposés ── */
+/* Orbe A — offset gauche → orbite CW */
+.orb-a{
+  transform:translate(-50%,-50%) translateX(-22vmin);
+  background:radial-gradient(ellipse at 36% 32%,
+    rgba(255,238,60,1)   0%,
+    rgba(240,170,28,.92) 30%,
+    rgba(210,128,8,.72)  58%,
+    rgba(150,80,0,.35)   78%,
+    transparent 90%);
+  filter:blur(6px);
+  animation:orb-pulse 14s linear infinite;
+}
 
-/* Rayon 1 — bleu large (~demi-écran), pivot bas-gauche, CW 18s */
-.bl3{
-  width:52%;height:145%;top:-30%;left:15%;
-  background:linear-gradient(to bottom,transparent 0%,rgba(0,110,215,.35) 16%,rgba(0,140,235,.58) 40%,rgba(0,110,215,.35) 65%,transparent 100%);
-  filter:blur(12px);
-  transform-origin:15% 88%;
-  animation:spin-cw 18s linear infinite}
+/* Orbe B — offset droite → orbite CCW */
+.orb-b{
+  transform:translate(-50%,-50%) translateX(22vmin);
+  background:radial-gradient(ellipse at 64% 38%,
+    rgba(255,230,45,1)   0%,
+    rgba(248,172,22,.9)  32%,
+    rgba(218,132,6,.68)  56%,
+    rgba(155,85,0,.32)   76%,
+    transparent 90%);
+  filter:blur(6px);
+  animation:orb-pulse 14s linear infinite 7s; /* déphasé de 7s */
+}
 
-/* Rayon 2 — ambre large, pivot bas-droit, CCW 12s */
-.bl7{
-  width:45%;height:138%;top:-28%;left:28%;
-  background:linear-gradient(to bottom,transparent 0%,rgba(255,190,35,.48) 18%,rgba(255,218,68,.74) 44%,rgba(255,190,35,.45) 70%,transparent 100%);
-  filter:blur(10px);
-  transform-origin:88% 92%;
-  animation:spin-ccw 12s linear infinite}
+/* Zoom au moment de la collision (25% et 75% de l'orbite = top & bottom) */
+@keyframes orb-pulse{
+  0%   { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+  22%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+  25%  { filter:blur(2px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1.55) } /* COLLISION */
+  28%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+  72%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+  75%  { filter:blur(2px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1.55) } /* COLLISION */
+  78%  { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+  100% { filter:blur(6px);  transform:translate(-50%,-50%) translateX(-22vmin) scale(1)   }
+}
 
-/* Rayon 3 — or demi-écran, pivot haut-centre, CW 22s */
-.bl8{
-  width:50%;height:125%;top:-22%;right:20%;
-  background:linear-gradient(to bottom,transparent 0%,rgba(232,160,32,.52) 20%,rgba(252,200,58,.78) 46%,rgba(232,160,32,.48) 72%,transparent 100%);
-  filter:blur(9px);
-  transform-origin:50% 10%;
-  animation:spin-cw 22s linear infinite}
+/* Flash de lumière à la collision */
+.orb-flash{
+  position:absolute;
+  width:80vmin;height:80vmin;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,240,80,.55) 0%,transparent 65%);
+  mix-blend-mode:screen;
+  animation:flash-collision 14s linear infinite;
+}
+@keyframes flash-collision{
+  0%,22%,28%,72%,78%,100%{ opacity:0; transform:scale(.5) }
+  25%,75%                  { opacity:1; transform:scale(1.8) }
+}
 
-/* Rayon 4 — bleu moyen, pivot centre, CCW 10s */
-.bl9{
-  width:38%;height:115%;top:-18%;right:12%;
-  background:linear-gradient(to bottom,transparent 0%,rgba(0,90,195,.38) 24%,rgba(0,118,215,.55) 50%,rgba(0,90,195,.36) 76%,transparent 100%);
-  filter:blur(8px);
-  transform-origin:50% 50%;
-  animation:spin-ccw 10s linear infinite}
-
-/* Rayon 5 — ambre très large, pivot haut-droit, CW 28s */
-.bl10{
-  width:55%;height:130%;top:-24%;left:8%;
-  background:linear-gradient(to bottom,transparent 0%,rgba(255,195,45,.42) 18%,rgba(255,224,72,.68) 44%,rgba(255,195,45,.40) 72%,transparent 100%);
-  filter:blur(11px);
-  transform-origin:80% 8%;
-  animation:spin-cw 28s linear infinite}
-
-/* Nappe accent — ralentie */
-.bl4{width:44%;height:50%;top:-18%;left:-2%;
-  background:radial-gradient(ellipse at 50% 55%,rgba(255,215,58,.82) 0%,rgba(245,188,40,.48) 26%,transparent 60%);
-  filter:blur(18px);animation:a4 15s ease-in-out infinite alternate}
-
-/* bl5, bl6 supprimés (points lumineux retirés) */
-.bl5,.bl6{display:none}
-
-/* Translations des nappes */
-@keyframes a1{0%{transform:translate(0,0) rotate(-2deg)}100%{transform:translate(-6%,-5%) rotate(3deg) scale(1.04)}}
-@keyframes a2{0%{transform:translate(0,0)}100%{transform:translate(5%,5%) scale(1.05)}}
-@keyframes a4{0%{transform:translate(0,0)}100%{transform:translate(9%,6%) scale(.95)}}
-@keyframes a5{0%{transform:translate(0,0)}100%{transform:translate(3%,-3%) scale(1.08)}}
-@keyframes a6{0%{transform:translate(0,0)}100%{transform:translate(-3%,5%) scale(.93)}}
-
-/* Rotations pendulaires — sens OPPOSÉS par rayon */
-/* Rotations continues 360° */
-@keyframes spin-cw  {from{transform:rotate(0deg)}  to{transform:rotate(360deg)}}
-@keyframes spin-ccw {from{transform:rotate(0deg)}  to{transform:rotate(-360deg)}}
+/* Rotations 360° continues */
+@keyframes spin-cw  {from{transform:rotate(0deg)}   to{transform:rotate(360deg)}}
+@keyframes spin-ccw {from{transform:rotate(180deg)} to{transform:rotate(-180deg)}}
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
@@ -652,10 +660,16 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <!-- ─── HERO 100vh — texte sur aurora comme BCG ─── -->
 <section id="hero">
   <div class="aurora" aria-hidden="true">
-    <div class="bl bl1"></div><div class="bl bl2"></div><div class="bl bl3"></div>
-    <div class="bl bl4"></div><div class="bl bl5"></div><div class="bl bl6"></div>
-    <div class="bl bl7"></div><div class="bl bl8"></div><div class="bl bl9"></div>
-    <div class="bl bl10"></div>
+    <!-- Orbe A — orbite horaire -->
+    <div class="orb-wrap orb-cw">
+      <div class="orb orb-a"></div>
+    </div>
+    <!-- Orbe B — orbite antihoraire, départ opposé -->
+    <div class="orb-wrap orb-ccw">
+      <div class="orb orb-b"></div>
+    </div>
+    <!-- Flash de lumière à la collision -->
+    <div class="orb-flash"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
