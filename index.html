@@ -8,964 +8,799 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS (fidèles BCG, couleur jaune à la place du vert) ─── */
+/* ─── BCG DESIGN TOKENS (source: CSS BCG analysé) ─── */
 :root {
-  /* Couleurs */
-  --black:  #212427;   /* = BCG --black */
-  --white:  #ffffff;
-  --y:      #E8A020;   /* = BCG --green-500 (notre jaune primary) */
-  --yl:     #F5C14A;   /* = BCG --accent-200 */
-  --yd:     #B07010;   /* = BCG --green-700 hover */
-  --navy:   #00296B;   /* sections sombres secondaires */
-  --n2:     #003F88;
-  --neutral:#f2f2f2;   /* = BCG --neutral-200 */
-  --warm:   #F5F1E8;   /* crème chaude, sections alternées */
-  --ink:    #1a1a1a;   /* corps de texte */
-  --ink2:   #4a4a4a;
-  --muted:  #6e6f73;
-  --light:  #9a9a9a;
-  --border: #e8e2d8;
-  /* Ombres BCG */
-  --shadow: 0 1px 2px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
-  /* Border radius BCG */
-  --r5: 5px; --r10: 10px; --r20: 20px; --r70: 70px;
+  /* BCG exact colors */
+  --black:    #212427;
+  --charcoal: #232326;
+  --white:    #ffffff;
+  --beige:    #F1EEEA;   /* --neutral-200 BCG */
+  --gray-200: #F2F2F2;
+  --gray-300: #D4D4D4;  /* --headerBorderColor BCG */
+
+  /* LIU Consulting: jaune remplace le vert BCG */
+  --y:        #E8A020;  /* = BCG --accent-200 #7EF473 */
+  --y-hover:  #F5C14A;  /* = BCG --accent-300 */
+  --y-dark:   #B07010;  /* = BCG --green-500 */
+  --y-bg:     #FFF8E0;  /* = BCG --green-200 #DCF9E3 */
+  --navy:     #00296B;  /* = BCG --green-700 #0E3E1B */
+  --navy-2:   #003F88;
+
+  /* BCG exact nav values */
+  --header-h:     56px;
+  --nav-margin:   16px;
+  --nav-radius:   20px;   /* --headerRadius BCG */
+  --nav-bg:       hsla(0,0%,100%,0.7);  /* --translucent-white BCG */
+  --nav-shadow:   0px 1px 2px rgba(0,0,0,.12), 0px 2px 6px rgba(0,0,0,.08);  /* --box-shadow BCG */
+
+  /* BCG exact spacing */
+  --sp-v: 32px;    /* section padding vertical mobile */
+  --sp-h: 16px;    /* section padding horizontal mobile */
+
+  /* BCG card/button radius */
+  --r-card: 20px;   /* Promo22 */
+  --r-media: 30px;  /* Promo-media images */
+  --r-btn: 15px;    /* primary-button */
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
-html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased }
-body { font-family:'DM Sans',Arial,Helvetica,sans-serif; color:var(--ink); background:#fff; overflow-x:hidden; font-size:16px; font-weight:300; line-height:1.6 }
-a { text-decoration:none; color:inherit }
-img { max-width:100%; display:block }
-.wrap { max-width:1240px; margin:0 auto; padding:0 48px }
-
-/* ─── NAV — pill flottante (= BCG Page-header + Page-topBar) ─── */
-#nav {
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 64px);
-  max-width: 1240px;
-  z-index: 900;
-  height: 60px;
-  padding: 0 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,255,255,.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--r70);
-  border: 1px solid rgba(255,255,255,.18);
-  transition: background .3s, border-color .3s, box-shadow .3s;
+@media(min-width:768px){
+  :root { --header-h:64px; --nav-margin:32px; --sp-v:40px; --sp-h:40px; }
 }
-#nav.solid {
-  background: rgba(255,255,255,.96);
-  border-color: rgba(0,0,0,.08);
-  box-shadow: var(--shadow);
+@media(min-width:1024px){
+  :root { --sp-v:56px; }
 }
-.nav-logo {
-  font-family:'DM Serif Display',serif;
-  font-size: 1rem; font-weight:400; letter-spacing:.01em;
-  color: #fff;
-  display: flex; align-items:center; gap:9px;
-  transition: color .3s;
-}
-#nav.solid .nav-logo { color: var(--ink) }
-.nav-dot { width:8px; height:8px; background:var(--y); border-radius:50%; flex-shrink:0 }
-.nav-links { display:flex; align-items:center; gap:32px }
-.nav-links a {
-  font-size:.82rem; font-weight:400; color:rgba(255,255,255,.75);
-  transition: color .2s;
-}
-.nav-links a:hover { color:#fff }
-#nav.solid .nav-links a { color:var(--ink); opacity:.7 }
-#nav.solid .nav-links a:hover { opacity:1; color:var(--ink) }
-.nav-cta {
-  background: var(--y); color: var(--black) !important;
-  padding: 9px 22px; font-weight:600; font-size:.82rem;
-  border-radius: var(--r70);
-  transition: background .2s;
-  opacity: 1 !important;
-}
-.nav-cta:hover { background: var(--yl) !important }
-
-/* ─── HERO — 100vh, fond NOIR comme BCG ─── */
-#hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--black);  /* #212427 — MÊME QUE BCG */
-  display: flex;
-  flex-direction: column;
+@media(min-width:1440px){
+  :root { --header-h:72px; --nav-margin:80px; --sp-v:72px; --sp-h:80px; }
 }
 
-/* Aurora — blobs ambrés sur fond noir (comme aurora BCG sur noir) */
-.aurora { position:absolute; inset:-8%; overflow:hidden; pointer-events:none }
-.bl { position:absolute; will-change:transform; mix-blend-mode:screen }
+/* ─── RESET ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'DM Sans',Arial,'Helvetica Neue',sans-serif;color:var(--black);background:var(--white);overflow-x:hidden;font-size:16px;font-weight:300;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
 
-/* Blob 1 — grande nappe ambre (= vert lime BCG) */
-.bl1 {
-  width:90%; height:80%; top:-10%; right:-15%;
-  background: radial-gradient(ellipse at 40% 45%,
-    rgba(232,160,32,.9) 0%,
-    rgba(240,180,50,.6) 30%,
-    rgba(246,200,60,.3) 55%,
-    transparent 72%);
-  filter: blur(45px);
-  animation: a1 6s ease-in-out infinite alternate;
-}
-/* Blob 2 — diffusion centrale (= white center BCG) */
-.bl2 {
-  width:75%; height:85%; top:5%; left:-10%;
-  background: radial-gradient(ellipse at 48% 48%,
-    rgba(255,220,100,.55) 0%,
-    rgba(240,190,60,.3) 25%,
-    rgba(220,160,30,.15) 50%,
-    transparent 70%);
-  filter: blur(60px);
-  animation: a2 9s ease-in-out infinite alternate;
-}
-/* Blob 3 — bande bleue diagonale (= teal BCG) */
-.bl3 {
-  width:25%; height:130%; top:-20%; right:18%;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(0,100,200,.35) 20%,
-    rgba(0,130,220,.5) 45%,
-    rgba(0,100,200,.3) 70%,
-    transparent 92%);
-  filter: blur(20px);
-  transform: rotate(-12deg);
-  transform-origin: center;
-  animation: a3 4s ease-in-out infinite alternate;
-}
-/* Blob 4 — accent chaud haut-gauche */
-.bl4 {
-  width:55%; height:55%; top:-18%; left:-5%;
-  background: radial-gradient(ellipse at 50% 55%,
-    rgba(255,200,50,.7) 0%,
-    rgba(240,180,40,.4) 30%,
-    transparent 62%);
-  filter: blur(35px);
-  animation: a4 7s ease-in-out infinite alternate;
-}
-/* Blob 5 — reflet vif */
-.bl5 {
-  width:22%; height:26%; top:15%; left:25%;
-  background: radial-gradient(ellipse,
-    rgba(255,240,160,.8) 0%,
-    rgba(255,220,100,.4) 35%,
-    transparent 65%);
-  filter: blur(14px);
-  animation: a5 3s ease-in-out infinite alternate;
-}
-/* Blob 6 — reflet secondaire */
-.bl6 {
-  width:16%; height:18%; top:55%; right:28%;
-  background: radial-gradient(ellipse,
-    rgba(255,230,120,.7) 0%,
-    rgba(255,210,80,.3) 40%,
-    transparent 65%);
-  filter: blur(10px);
-  animation: a6 2.2s ease-in-out infinite alternate;
-}
+/* ─── CONTAINER ─── */
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--sp-h)}
 
-@keyframes a1 { 0%{transform:translate(0,0) rotate(-3deg)} 100%{transform:translate(-8%,-6%) rotate(4deg) scale(1.04)} }
-@keyframes a2 { 0%{transform:translate(0,0)} 100%{transform:translate(7%,7%) scale(1.06)} }
-@keyframes a3 { 0%{transform:rotate(-12deg) translate(0,0)} 100%{transform:rotate(-6deg) translate(-7%,5%)} }
-@keyframes a4 { 0%{transform:translate(0,0)} 100%{transform:translate(12%,8%) scale(.94)} }
-@keyframes a5 { 0%{transform:translate(0,0)} 100%{transform:translate(5%,-5%) scale(1.08)} }
-@keyframes a6 { 0%{transform:translate(0,0)} 100%{transform:translate(-4%,7%) scale(.93)} }
+/* ─── SECTION BASE (BCG [data-module]) ─── */
+.section{padding:var(--sp-v) var(--sp-h)}
+@media(min-width:1440px){.section{padding:var(--sp-v) var(--sp-h)}}
 
-/* Contenu hero */
-.hero-body {
-  position: relative; z-index:1;
-  flex: 1; display:flex; align-items:center;
-  padding-top: 76px;
+/* ─── NAV BCG : DEUX PASTILLES SÉPARÉES ─── */
+/* BCG structure: Page-headerMenuLeft + Page-headerMenuRight flottants */
+#nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:900;
+  height:var(--header-h);
+  margin:var(--nav-margin);
+  display:flex;align-items:center;justify-content:space-between;
+  pointer-events:none;
 }
-.hero-text { max-width:900px }
+.nav-left,.nav-right{
+  pointer-events:all;
+  display:flex;align-items:center;gap:0;
+  height:var(--header-h);
+  background:var(--nav-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-radius:var(--nav-radius);
+  box-shadow:var(--nav-shadow);
+}
+.nav-left{padding:0 20px;gap:10px}
+.nav-right{padding:0 6px 0 20px;gap:28px}
+.nav-logo-dot{width:7px;height:7px;background:var(--y);border-radius:50%;flex-shrink:0}
+.nav-logo-text{font-size:.8rem;font-weight:600;color:var(--black);letter-spacing:.05em}
+.nav-link{font-size:.82rem;font-weight:400;color:var(--black);opacity:.65;transition:opacity .2s}
+.nav-link:hover{opacity:1}
+.nav-cta{
+  background:var(--y);color:var(--black);
+  padding:10px 20px;
+  font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:var(--nav-radius);
+  transition:background .2s;
+  margin:6px;
+}
+.nav-cta:hover{background:var(--y-hover)}
 
-/* Eyebrow — "Welcome to BCG" = petit label 11-16px */
-.hero-eyebrow {
-  display: block;
-  font-size: 13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  color: rgba(255,255,255,.5);
-  margin-bottom: 20px;
+/* ─── HERO — 100vh, aurora comme BCG ─── */
+#hero{
+  position:relative;height:100vh;overflow:hidden;
+  background:var(--charcoal);
+  display:flex;flex-direction:column;
 }
-
-/* Welcome label — "Bienvenue chez LIU Consulting" = petit, comme BCG */
-.hero-welcome {
-  display: block;
-  font-size: 14px; font-weight:600; letter-spacing:.06em;
-  color: rgba(255,255,255,.55);
-  margin-bottom: 24px;
-}
-
-/* H1 — la proposition de valeur, GRAND — "Unlocking the Potential..." */
-.hero-text h1 {
-  font-family:'DM Serif Display',serif;
-  font-size: clamp(2.4rem, 5vw, 64px);
-  font-weight:400; line-height:1.06; letter-spacing:-.025em;
-  color: #fff;
-  margin-bottom: 24px;
-}
-
-/* Body — description */
-.hero-text p {
-  font-size: .95rem; line-height:1.8;
-  color: rgba(255,255,255,.48);
-  max-width: 480px; margin-bottom: 44px;
-  font-weight:300;
-}
-.hero-sub { font-style:italic; color:rgba(255,255,255,.6); margin-bottom:16px }
-.hero-ctas { display:flex; gap:20px; align-items:center; flex-wrap:wrap }
-
-/* Bouton primary — pill jaune */
-.btn-y {
-  background: var(--y); color: var(--black);
-  padding: 14px 32px; font-size:.88rem; font-weight:600;
-  border-radius: var(--r70);
-  transition: background .2s, transform .2s;
-  display:inline-flex; align-items:center; gap:8px;
-}
-.btn-y:hover { background:var(--yl); transform:translateY(-1px) }
-
-/* Bouton ghost blanc */
-.btn-ghost {
-  font-size:.88rem; color:rgba(255,255,255,.65);
-  display:inline-flex; align-items:center; gap:8px;
-  border-bottom: 1px solid rgba(255,255,255,.25);
-  padding-bottom:1px; transition:all .2s;
-}
-.btn-ghost:hover { color:#fff; border-color:rgba(255,255,255,.6) }
+/* Aurora (blobs ambrés sur fond noir) */
+.aurora{position:absolute;inset:-8%;pointer-events:none;overflow:hidden}
+.bl{position:absolute;will-change:transform;mix-blend-mode:screen}
+.bl1{width:90%;height:80%;top:-10%;right:-15%;
+  background:radial-gradient(ellipse at 40% 45%,rgba(232,160,32,.9) 0%,rgba(240,178,50,.6) 30%,transparent 70%);
+  filter:blur(45px);animation:a1 6s ease-in-out infinite alternate}
+.bl2{width:75%;height:85%;top:5%;left:-10%;
+  background:radial-gradient(ellipse at 48% 48%,rgba(255,220,100,.5) 0%,rgba(240,190,60,.25) 45%,transparent 68%);
+  filter:blur(60px);animation:a2 9s ease-in-out infinite alternate}
+.bl3{width:25%;height:130%;top:-20%;right:18%;
+  background:linear-gradient(to bottom,transparent,rgba(0,100,200,.35) 22%,rgba(0,130,220,.5) 45%,rgba(0,100,200,.3) 68%,transparent);
+  filter:blur(20px);transform:rotate(-12deg);animation:a3 4s ease-in-out infinite alternate}
+.bl4{width:55%;height:55%;top:-18%;left:-5%;
+  background:radial-gradient(ellipse at 50% 55%,rgba(255,200,50,.7) 0%,rgba(240,180,40,.4) 30%,transparent 62%);
+  filter:blur(35px);animation:a4 7s ease-in-out infinite alternate}
+.bl5{width:22%;height:26%;top:14%;left:22%;
+  background:radial-gradient(ellipse,rgba(255,240,160,.8) 0%,rgba(255,220,100,.4) 35%,transparent 65%);
+  filter:blur(12px);animation:a5 2.5s ease-in-out infinite alternate}
+.bl6{width:16%;height:18%;top:55%;right:26%;
+  background:radial-gradient(ellipse,rgba(255,230,120,.7) 0%,rgba(255,210,80,.3) 40%,transparent 65%);
+  filter:blur(9px);animation:a6 2s ease-in-out infinite alternate}
+@keyframes a1{0%{transform:translate(0,0) rotate(-2deg)}100%{transform:translate(-8%,-6%) rotate(4deg) scale(1.04)}}
+@keyframes a2{0%{transform:translate(0,0)}100%{transform:translate(7%,7%) scale(1.06)}}
+@keyframes a3{0%{transform:rotate(-12deg)}100%{transform:rotate(-6deg) translate(-7%,5%)}}
+@keyframes a4{0%{transform:translate(0,0)}100%{transform:translate(12%,8%) scale(.94)}}
+@keyframes a5{0%{transform:translate(0,0)}100%{transform:translate(5%,-4%) scale(1.07)}}
+@keyframes a6{0%{transform:translate(0,0)}100%{transform:translate(-4%,7%) scale(.94)}}
 
 /* Scroll indicator */
-.hero-scroll {
-  position:relative; z-index:1;
-  display:flex; align-items:center; justify-content:center;
-  padding: 24px 0 32px;
-  gap:8px;
-  font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
-  color:rgba(255,255,255,.3);
-  animation: bounce 2.2s ease-in-out infinite;
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);z-index:1;
+  animation:scroll-bounce 2.2s ease-in-out infinite;
 }
-.hero-scroll svg { width:16px; height:16px }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+.hero-scroll svg{width:16px;height:16px}
+@keyframes scroll-bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
-/* Strip 4 valeurs — sur fond noir, en bas du hero */
-.hero-strip {
-  position:relative; z-index:1;
-  display:grid; grid-template-columns:repeat(4,1fr);
-  border-top:1px solid rgba(255,255,255,.1);
-}
-.hs-item {
-  padding: 24px 32px;
-  border-right: 1px solid rgba(255,255,255,.08);
-}
-.hs-item:last-child { border-right:none }
-.hs-label {
-  font-size:.62rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-  color: var(--y); margin-bottom:6px;
-}
-.hs-item p { font-size:.82rem; color:rgba(255,255,255,.42); line-height:1.55 }
+/* ─── SECTION WELCOME (= BCG List12 "Welcome to BCG") ─── */
+#welcome{background:var(--white);padding:var(--sp-v) 0}
+.welcome-inner{padding:0 var(--sp-h)}
 
-/* ─── SECTION UTILS ─── */
-.sl {
-  font-size:.67rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:20px;
-  display:flex; align-items:center; gap:12px;
+/* ModuleHeader BCG exact */
+.module-header{text-align:center;margin-bottom:48px}
+.module-eyebrow{
+  display:block;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--black);opacity:.45;
+  margin-bottom:14px;
 }
-.sl::before { content:''; width:20px; height:1.5px; background:var(--y) }
-.sl-w { color:rgba(255,255,255,.38) }
-.sl-w::before { background:rgba(255,255,255,.25) }
-
-.sec-h {
+@media(min-width:1440px){.module-eyebrow{font-size:14px}}
+.module-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.6rem,3vw,2.5rem);
-  font-weight:400; line-height:1.12; letter-spacing:-.015em;
-  color:var(--ink); margin-bottom:0;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);
+  font-weight:400;line-height:1.1;letter-spacing:-.02em;
+  color:var(--black);
+  max-width:800px;margin:0 auto;
 }
 
-/* ─── CLIENTS ─── */
-#clients { padding:52px 0; border-bottom:1px solid var(--border); background:#fff }
-.cl-label {
-  font-size:.62rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--light); text-align:center; margin-bottom:36px;
+/* Carousel Promo20 BCG exact */
+.promo-carousel{
+  display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0 var(--sp-h) 16px;
+  scrollbar-width:none;-ms-overflow-style:none;
 }
-.cl-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap }
-.cl-logo {
-  width:180px; height:72px;
-  display:flex; align-items:center; justify-content:center; padding:10px 20px;
-}
-.cl-logo img {
-  max-width:100%; max-height:44px; object-fit:contain;
-  filter:grayscale(1) opacity(.5); transition:filter .3s;
-}
-.cl-logo:hover img { filter:none; opacity:1 }
+.promo-carousel::-webkit-scrollbar{display:none}
 
-/* ─── STATEMENT — "Beyond Strategy. Real Impact." ─── */
-#statement { background:var(--black); padding:100px 0 }
-.stmt-grid { display:grid; grid-template-columns:1fr 1fr; gap:96px; align-items:center }
-.stmt-h {
+.promo20{
+  flex:0 0 75%;scroll-snap-align:start;
+  /* BCG: 75% mobile, 50% tablet, 33% desktop */
+}
+@media(min-width:600px){.promo20{flex:0 0 50%}}
+@media(min-width:960px){.promo20{flex:0 0 calc(33.333% - 6px)}}
+@media(min-width:1440px){.promo20{flex:0 0 calc(25% - 6px)}}
+
+.promo20-inner{display:flex;flex-direction:column;cursor:pointer;text-decoration:none}
+
+/* Promo-media — border-radius:30px BCG exact */
+.promo20-media{
+  aspect-ratio:3/4;border-radius:var(--r-media);overflow:hidden;
+  margin-bottom:20px;position:relative;
+  transition:transform .3s ease-in-out;
+}
+.promo20-inner:hover .promo20-media{transform:scale(1.02)}
+.promo20-media img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Categorie — "Cost Management" BCG */
+.promo20-cat{
+  font-size:11px;font-weight:400;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--black);opacity:.5;
+  margin-bottom:10px;
+}
+/* Titre */
+.promo20-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(2.2rem,4.5vw,3.8rem);
-  font-weight:400; line-height:1.06; letter-spacing:-.02em;
-  color:#fff;
+  font-size:clamp(15px,1.3vw,20px);font-weight:400;line-height:1.22;
+  color:var(--black);
 }
-.stmt-body {
-  font-size:1rem; line-height:1.85;
-  color:rgba(255,255,255,.48);
-  margin-bottom:36px;
+/* Description révélée au hover */
+.promo20-desc{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .3s ease-in-out .1s,opacity .25s ease-in-out .15s;
+  margin-top:0;
 }
-.stmt-link {
-  display:inline-flex; align-items:center; gap:10px;
-  font-size:.88rem; font-weight:600; color:var(--y);
-  border-bottom:1px solid rgba(232,160,32,.35); padding-bottom:2px;
-  transition:border-color .2s;
+.promo20-inner:hover .promo20-desc{max-height:160px;opacity:1;margin-top:12px}
+.promo20-desc p{font-size:13px;color:var(--black);opacity:.6;line-height:1.6;margin-bottom:14px}
+/* CTA arrow button — primary-button BCG */
+.promo20-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:12px 20px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  transition:background .2s;width:fit-content;
 }
-.stmt-link:hover { border-color:var(--y) }
-.stmt-link svg { width:16px; height:16px; transition:transform .2s }
-.stmt-link:hover svg { transform:translateX(4px) }
+.promo20-cta:hover{background:var(--y-hover)}
 
-/* ─── RÉSULTATS ─── */
-#results { padding:96px 0; background:var(--warm) }
-.rg {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:0; margin-top:48px;
-  border:1px solid var(--border);
+/* ─── SPOTLIGHT STRIP (= BCG List14) ─── */
+#spotlight{
+  background:var(--white);
+  border-top:1px solid var(--gray-300);
+  border-bottom:1px solid var(--gray-300);
+  padding:20px var(--sp-h);
 }
-.rc {
-  padding:40px 32px;
-  border-right:1px solid var(--border);
-  background:#fff;
-  display:flex; flex-direction:column; gap:14px;
+.spotlight-inner{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.spotlight-label{
+  font-size:11px;font-weight:400;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--black);opacity:.45;flex-shrink:0;
+}
+.spotlight-links{display:flex;gap:0;flex-wrap:wrap}
+.spotlight-link{
+  font-size:14px;font-weight:300;color:var(--black);
+  padding:4px 20px;border-right:1px solid var(--gray-300);
+  transition:color .2s;
+}
+.spotlight-link:first-child{padding-left:0}
+.spotlight-link:last-child{border-right:none}
+.spotlight-link:hover{color:var(--y-dark)}
+
+/* ─── TOPIC FILTER (= BCG "How can we assist you today?") ─── */
+#assist{background:var(--y-bg);padding:var(--sp-v) var(--sp-h)}
+.assist-inner{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:1024px){.assist-inner{grid-template-columns:5fr 7fr;align-items:start;gap:80px}}
+.assist-heading h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.6rem,3vw,2.6rem);font-weight:400;line-height:1.1;
+  color:var(--black);margin-bottom:16px;
+}
+.assist-heading p{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.7;margin-bottom:28px}
+.assist-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 18px;font-size:.78rem;font-weight:600;
+  border:1.5px solid rgba(0,0,0,.2);border-radius:var(--nav-radius);
+  color:var(--black);cursor:pointer;transition:all .2s;background:transparent;
+  font-family:'DM Sans',sans-serif;
+}
+.chip:hover,.chip.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.assist-cards{display:flex;flex-direction:column;gap:0;border:1px solid rgba(0,0,0,.12)}
+.assist-card{
+  padding:24px 28px;border-bottom:1px solid rgba(0,0,0,.08);
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--white);cursor:pointer;transition:background .2s;
+}
+.assist-card:last-child{border-bottom:none}
+.assist-card:hover{background:rgba(232,160,32,.08)}
+.assist-card-label{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--y-dark);margin-bottom:6px;
+}
+.assist-card h3{font-size:1rem;font-weight:600;color:var(--black)}
+.assist-card p{font-size:.85rem;color:var(--black);opacity:.5;margin-top:4px;max-width:460px}
+.assist-card-arrow{font-size:1.2rem;color:var(--y);flex-shrink:0;margin-left:16px}
+
+/* ─── MOSAIC 3 CARDS (= BCG List17 / Promo22) ─── */
+#mosaic{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
+.mosaic-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.mosaic-grid{grid-template-columns:repeat(12,1fr)}}
+
+/* Promo22 — image fullbleed + content en bas — BCG exact */
+.promo22{
+  border-radius:var(--r-card);overflow:hidden;
+  position:relative;min-height:400px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  cursor:pointer;
+}
+@media(min-width:768px){
+  .promo22-a{grid-column:1/span 5}
+  .promo22-b{grid-column:6/span 4}
+  .promo22-c{grid-column:10/span 3}
+}
+.promo22-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.promo22-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.promo22-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.1) 60%,transparent 100%);
+}
+.promo22-content{
+  position:relative;z-index:2;
+  padding:32px;color:var(--white);
+}
+@media(min-width:768px){.promo22-content{padding:40px}}
+.promo22-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:rgba(255,255,255,.6);margin-bottom:12px;
+}
+.promo22-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:400;line-height:1.1;
+  margin-bottom:20px;
+}
+.promo22-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:12px 22px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   transition:background .2s;
 }
-.rc:last-child { border-right:none }
-.rc:hover { background:var(--warm) }
-.rc-num {
+.promo22-cta:hover{background:var(--y-hover)}
+
+/* Dark card (no image, solid color) */
+.promo22-dark{background:var(--charcoal)}
+.promo22-beige{background:var(--beige)}
+.promo22-beige .promo22-eyebrow{color:rgba(0,0,0,.4)}
+.promo22-beige .promo22-title{color:var(--black)}
+.promo22-navy{background:var(--navy)}
+
+/* ─── EDITORIAL SECTION (= BCG Promo13) ─── */
+#editorial{background:var(--beige)}
+.editorial-inner{display:grid;grid-template-columns:1fr;min-height:500px}
+@media(min-width:768px){.editorial-inner{grid-template-columns:1fr 1fr}}
+.editorial-media{overflow:hidden;min-height:400px}
+.editorial-media img{width:100%;height:100%;object-fit:cover;display:block}
+.editorial-content{
+  padding:var(--sp-v) var(--sp-h);
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--beige);
+}
+.editorial-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--black);opacity:.4;margin-bottom:16px;
+}
+.editorial-title{
   font-family:'DM Serif Display',serif;
-  font-size:1.8rem; color:var(--border); line-height:1;
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;line-height:1.1;
+  color:var(--black);margin-bottom:20px;
 }
-.rc-kpi {
+.editorial-desc{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.75;margin-bottom:32px;max-width:440px}
+
+/* ─── DARK CONTACT (= BCG Newsletter dark green) ─── */
+#contact{background:var(--navy);padding:var(--sp-v) var(--sp-h)}
+.contact-inner{
+  display:grid;grid-template-columns:1fr;gap:48px;
+}
+@media(min-width:1024px){.contact-inner{grid-template-columns:7fr 5fr;align-items:center}}
+.contact-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:rgba(255,255,255,.4);margin-bottom:16px;
+}
+.contact-title{
   font-family:'DM Serif Display',serif;
-  font-size:2.8rem; color:var(--black); line-height:1;
+  font-size:clamp(1.6rem,3vw,2.8rem);font-weight:400;line-height:1.1;
+  color:var(--white);margin-bottom:20px;
 }
-.rc h3 { font-size:.9rem; font-weight:600; color:var(--black); line-height:1.4 }
-.rc p { font-size:.82rem; color:var(--muted); line-height:1.72; flex:1 }
-
-/* ─── EXPERTISE — BCG Promo20 style ─── */
-#expertise { padding:96px 0; background:#fff }
-
-/* ModuleHeader BCG style */
-.mod-header { margin-bottom:56px }
-.mod-eyebrow {
-  font-size:11px; font-weight:700; text-transform:uppercase;
-  letter-spacing:.12em; color:var(--muted); margin-bottom:14px;
-}
-.mod-title {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);
-  font-weight:400; line-height:1.1; letter-spacing:-.015em;
-  color:var(--ink); max-width:680px; margin-bottom:18px;
-}
-.mod-desc { font-size:.95rem; color:var(--muted); max-width:540px; line-height:1.7 }
-
-/* Grille 4 colonnes + 1 large (2 col) */
-.promo-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:24px;
-}
-
-/* BCG Promo20 — flat, image portrait, no card box */
-.promo {
-  display:flex; flex-direction:column;
-  text-decoration:none; cursor:pointer;
-}
-.promo.feat-promo { grid-column:span 2 }
-
-/* Image avec border-radius:30px — EXACT BCG */
-.promo-media {
-  aspect-ratio:3/4;
-  border-radius:30px;
-  overflow:hidden;
-  margin-bottom:20px;
-  position:relative;
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
-  background:#1a1a1a;
-}
-.promo.feat-promo .promo-media { aspect-ratio:16/10 }
-.promo:hover .promo-media { transform:scale(1.025) }
-
-/* Image qui remplit le container */
-.promo-media img {
-  width:100%; height:100%;
-  object-fit:cover; object-position:center;
-  display:block;
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
-}
-.promo:hover .promo-media img { transform:scale(1.04) }
-
-/* Catégorie — uppercase 11px EXACT BCG */
-.promo-cat {
-  font-size:11px; font-weight:400; text-transform:uppercase;
-  letter-spacing:.1em; color:var(--muted); margin-bottom:10px;
-}
-
-/* Titre card */
-.promo-title {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(16px,1.4vw,20px);
-  line-height:1.22; font-weight:400; color:var(--ink);
-}
-
-/* Description + CTA — slide au hover comme BCG */
-.promo-body {
-  max-height:0; overflow:hidden; opacity:0;
-  transition:max-height .42s ease, opacity .32s ease;
-}
-.promo:hover .promo-body { max-height:200px; opacity:1 }
-.promo-body p {
-  font-size:14px; color:var(--ink2); line-height:1.6;
-  margin:14px 0 16px;
-}
-.promo-cta {
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:13px; font-weight:600; color:var(--black);
-  border-bottom:1px solid var(--black); padding-bottom:1px;
-  transition:gap .2s;
-}
-.promo:hover .promo-cta { gap:10px }
-
-/* ─── APPROCHE ─── */
-#approach { padding:96px 0; background:var(--warm); border-top:1px solid var(--border) }
-.ag { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:52px; border:1px solid var(--border) }
-.ac {
-  background:var(--warm); padding:48px 40px;
-  border-right:1px solid var(--border);
-}
-.ac:last-child { border-right:none }
-.an {
-  font-family:'DM Serif Display',serif;
-  font-size:3.2rem; font-weight:400; color:var(--border);
-  line-height:1; margin-bottom:24px; display:block;
-}
-.ac h3 { font-size:1rem; font-weight:600; color:var(--black); margin-bottom:12px }
-.ac p { font-size:.875rem; color:var(--muted); line-height:1.75 }
-
-/* ─── OFFRES ─── */
-#offres { padding:96px 0; background:#fff; border-top:1px solid var(--border) }
-.off-intro { max-width:520px; margin-top:12px; font-size:.95rem; color:var(--ink2) }
-.ot { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:48px; border:1px solid var(--border) }
-.ob { padding:48px; display:flex; flex-direction:column; gap:22px; border-right:1px solid var(--border) }
-.ob:last-child { border-right:none }
-.ob.dark { background:var(--black) }
-.ob.dark h3 { color:#fff; font-size:1.2rem }
-.ob.dark p { color:rgba(255,255,255,.48) }
-.ob.dark .of-tag { background:rgba(255,255,255,.1); color:rgba(255,255,255,.6); border-color:rgba(255,255,255,.12) }
-.ob.dark hr { border-color:rgba(255,255,255,.1) }
-.ob.dark .of-list li { color:rgba(255,255,255,.46) }
-.ob.dark .of-list li::before { color:var(--y) }
-.of-tag {
-  display:inline-flex; font-size:.62rem; font-weight:700;
-  letter-spacing:.15em; text-transform:uppercase;
-  color:var(--muted); padding:5px 14px;
-  border:1px solid var(--border); border-radius:var(--r70);
-  background:#fff; width:fit-content;
-}
-.ob h3 { font-size:1.1rem; font-weight:600; color:var(--ink) }
-.ob p { font-size:.9rem; color:var(--muted); flex:1; line-height:1.75 }
-.ob hr { border:none; border-top:1px solid var(--border) }
-.of-list { list-style:none; display:flex; flex-direction:column; gap:10px }
-.of-list li { font-size:.83rem; color:var(--muted); display:flex; gap:10px }
-.of-list li::before { content:'–'; color:var(--border); flex-shrink:0 }
-.btn-cta {
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:.85rem; font-weight:600;
-  padding:12px 28px; border-radius:var(--r70);
-  margin-top:4px; transition:all .2s; width:fit-content;
-}
-.btn-cta.solid { background:var(--y); color:var(--black) }
-.btn-cta.solid:hover { background:var(--yl) }
-.btn-cta.outline-w { border:1.5px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8) }
-.btn-cta.outline-w:hover { border-color:var(--y); color:var(--y) }
-.btn-cta.outline { border:1.5px solid var(--black); color:var(--black) }
-.btn-cta.outline:hover { background:var(--black); color:#fff }
-
-/* Solution disponible */
-.osol {
-  margin-top:0; border-top:1px solid var(--border);
-  padding:40px 48px;
-  display:flex; align-items:center; justify-content:space-between; gap:48px;
-  background:var(--warm); transition:background .2s;
-}
-.osol:hover { background:#ece8de }
-.osol-badge {
-  display:inline-flex; align-items:center; gap:7px;
-  font-size:.62rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--y); margin-bottom:12px;
-}
-.osol-badge::before { content:''; width:6px; height:6px; background:var(--y); border-radius:50%; flex-shrink:0 }
-.osol h3 { font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:8px }
-.osol p { font-size:.875rem; color:var(--muted); max-width:500px }
-
-/* ─── FRANCE — "LIU Consulting en France" avec photo ─── */
-#france { background:var(--black); padding:100px 0 }
-.france-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:56px; align-items:start }
-.france-locs { border-top:1px solid rgba(255,255,255,.1) }
-.france-loc {
-  display:flex; justify-content:space-between; align-items:baseline;
-  padding:22px 0; border-bottom:1px solid rgba(255,255,255,.07);
-}
-.fl-type { font-size:.64rem; font-weight:700; letter-spacing:.17em; text-transform:uppercase; color:rgba(255,255,255,.25) }
-.fl-val { font-size:.9rem; color:rgba(255,255,255,.68) }
-.france-note { font-size:.88rem; color:rgba(255,255,255,.38); line-height:1.75; margin-top:32px }
-
-/* Photo France — comme BCG offices photo */
-.france-photo-wrap { position:relative }
-.france-photo {
-  width:100%; aspect-ratio:4/5;
-  border-radius:30px; /* MÊME QUE BCG Promo-media */
-  overflow:hidden;
-  position:relative;
-}
-.france-photo img {
-  width:100%; height:100%;
-  object-fit:cover; object-position:top center;
-  display:block;
-}
-.france-photo-caption {
-  position:absolute; bottom:0; left:0; right:0;
-  padding:32px 28px 28px;
-  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
-  border-radius:0 0 30px 30px;
-}
-.france-photo-name {
-  font-family:'DM Serif Display',serif;
-  font-size:1.1rem; font-weight:400; color:#fff; margin-bottom:4px;
-}
-.france-photo-role {
-  font-size:.72rem; font-weight:700; letter-spacing:.15em;
-  text-transform:uppercase; color:var(--y);
-}
-
-/* ─── ABOUT ─── */
-#about { padding:96px 0; background:#fff; border-top:1px solid var(--border) }
-.abl { display:grid; grid-template-columns:280px 1fr; gap:80px; align-items:start }
-.ab-img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; display:block }
-.ab-cap {
-  padding:12px 0 0; border-top:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:baseline;
-  margin-top:10px;
-}
-.ab-name { font-family:'DM Serif Display',serif; font-size:.95rem; color:var(--ink) }
-.ab-role { font-size:.63rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--y) }
-.abt h2 {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:400;
-  letter-spacing:-.01em; margin-bottom:24px;
-}
-.abt p { margin-bottom:16px; font-size:.925rem; color:var(--ink2); line-height:1.8 }
-.ab-links { display:flex; flex-direction:column; margin-top:40px; border-top:1px solid var(--border) }
-.al { display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--border); transition:all .2s }
-.al:hover .alv { color:var(--y) }
-.alt { font-size:.63rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--light) }
-.alv { font-size:.875rem; color:var(--ink2); transition:color .2s }
-.ab-siret { margin-top:20px; font-size:.75rem; color:var(--light) }
-
-/* ─── TESTIMONIAL ─── */
-#testi { padding:96px 0; background:var(--warm); border-top:1px solid var(--border) }
-.ti { max-width:800px }
-.tq {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(1.3rem,2.5vw,1.9rem); font-weight:400;
-  line-height:1.5; color:var(--ink); font-style:italic; margin-bottom:28px;
-}
-.tq::before { content:'\201C'; color:var(--y); font-size:1.1em; line-height:0; vertical-align:-.2em }
-.tq::after  { content:'\201D'; color:var(--y); font-size:1.1em; line-height:0; vertical-align:-.2em }
-.ts { display:flex; align-items:center; gap:16px }
-.tb { width:28px; height:2px; background:var(--y) }
-.tc { font-size:.82rem; color:var(--muted) }
-
-/* ─── CONTACT ─── */
-#contact { padding:100px 0; background:var(--black) }
-.ctg { display:grid; grid-template-columns:1fr 1fr; gap:96px }
-.ct-h {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(1.6rem,3vw,2.4rem); font-weight:400;
-  color:#fff; margin-bottom:16px;
-}
-.ct-sub { font-size:.97rem; line-height:1.85; color:rgba(255,255,255,.42) }
-.ctl { border-top:1px solid rgba(255,255,255,.1) }
-.ce {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:20px 0; border-bottom:1px solid rgba(255,255,255,.07);
+.contact-desc{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:32px}
+.contact-items{border-top:1px solid rgba(255,255,255,.1)}
+.contact-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);
   transition:all .2s;
 }
-.ce:hover .cev { color:var(--y) }
-.cet { font-size:.63rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.22) }
-.cev { font-size:.875rem; color:rgba(255,255,255,.56); transition:color .2s }
+.contact-item:hover .contact-item-val{color:var(--y)}
+.contact-item-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.contact-item-val{font-size:.88rem;color:rgba(255,255,255,.6);transition:color .2s}
 
-/* ─── FOOTER ─── */
-footer {
-  background:var(--black);
-  border-top:1px solid rgba(255,255,255,.07);
-  padding:24px 48px;
-  display:flex; justify-content:space-between; align-items:center;
-  flex-wrap:wrap; gap:10px;
+/* ─── CLIENTS LOGOS ─── */
+#clients{background:var(--white);padding:44px var(--sp-h);border-bottom:1px solid var(--gray-300)}
+.clients-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--black);opacity:.3;text-align:center;margin-bottom:32px}
+.clients-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.client-logo{width:180px;height:64px;display:flex;align-items:center;justify-content:center;padding:8px 16px}
+.client-logo img{max-width:100%;max-height:40px;object-fit:contain;filter:grayscale(1) opacity(.4);transition:filter .3s}
+.client-logo:hover img{filter:grayscale(0) opacity(1)}
+
+/* ─── FRANCE SECTION ─── */
+#france{background:var(--charcoal);padding:var(--sp-v) var(--sp-h)}
+.france-inner{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.france-inner{grid-template-columns:1fr 1fr;align-items:start;gap:80px}}
+.france-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:16px}
+.france-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:var(--white);margin-bottom:40px}
+.france-locs{border-top:1px solid rgba(255,255,255,.1)}
+.france-loc{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.fl-type{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.fl-val{font-size:.88rem;color:rgba(255,255,255,.65)}
+/* Photo BCG Promo-media style */
+.france-photo{aspect-ratio:4/5;border-radius:var(--r-media);overflow:hidden;position:relative}
+.france-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.france-photo-cap{
+  position:absolute;bottom:0;left:0;right:0;padding:32px 28px 28px;
+  background:linear-gradient(to top,rgba(0,0,0,.65),transparent);
+  border-radius:0 0 var(--r-media) var(--r-media);
 }
-.fl { font-size:.72rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.22) }
-.fr { font-size:.72rem; color:rgba(255,255,255,.12) }
+.france-photo-name{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:var(--white);margin-bottom:4px}
+.france-photo-role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--y)}
+
+/* ─── ABOUT ─── */
+#about{background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)}
+.about-inner{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.about-inner{grid-template-columns:260px 1fr;gap:64px;align-items:start}}
+.about-photo{border-radius:var(--r-media);overflow:hidden}
+.about-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.about-cap{padding:12px 0 0;border-top:1px solid var(--gray-300);display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
+.about-name{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--black)}
+.about-role{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--y-dark)}
+.about-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:16px}
+.about-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--black);margin-bottom:24px}
+.about-body p{font-size:.92rem;color:var(--black);opacity:.6;line-height:1.8;margin-bottom:14px}
+.about-links{border-top:1px solid var(--gray-300);margin-top:36px}
+.about-link{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-300);transition:all .2s}
+.about-link:hover .about-link-val{color:var(--y-dark)}
+.about-link-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--black);opacity:.3}
+.about-link-val{font-size:.88rem;color:var(--black);opacity:.65;transition:color .2s}
+
+/* ─── TESTIMONIAL ─── */
+#testi{background:var(--beige);padding:var(--sp-v) var(--sp-h);border-top:1px solid rgba(0,0,0,.06)}
+.testi-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:36px}
+.testi-quote{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.2rem,2.3vw,1.8rem);font-weight:400;font-style:italic;
+  line-height:1.5;color:var(--black);margin-bottom:28px;max-width:800px;
+}
+.testi-quote::before{content:'\201C';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
+.testi-quote::after{content:'\201D';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
+.testi-source{display:flex;align-items:center;gap:14px}
+.testi-line{width:28px;height:2px;background:var(--y)}
+.testi-from{font-size:.82rem;color:var(--black);opacity:.45}
+
+/* ─── FOOTER (BCG: beige #F1EEEA) ─── */
+footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
+.footer-top{
+  display:grid;grid-template-columns:1fr;gap:48px;
+  margin-bottom:48px;border-bottom:1px solid rgba(0,0,0,.1);padding-bottom:48px;
+}
+@media(min-width:1024px){.footer-top{grid-template-columns:5fr 4fr 3fr;gap:64px}}
+.footer-headline{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;
+  color:var(--black);margin-bottom:24px;
+}
+.footer-links{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(0,0,0,.1)}
+.footer-link{padding:12px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:.9rem;color:var(--black);opacity:.6;transition:opacity .2s}
+.footer-link:hover{opacity:1}
+.footer-cta-block{}
+.footer-cta-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:12px}
+.footer-cta-title{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--black);margin-bottom:10px}
+.footer-cta-desc{font-size:.85rem;color:var(--black);opacity:.5;line-height:1.7;margin-bottom:20px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-logo{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black);opacity:.3}
+.footer-legal{font-size:.72rem;color:var(--black);opacity:.25}
+
+/* ─── PRIMARY BUTTON BCG EXACT ─── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:16px 24px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  transition:background .2s;width:fit-content;cursor:pointer;border:none;font-family:inherit;
+}
+.btn-primary:hover{background:var(--y-hover)}
+@media(min-width:1024px){.btn-primary{font-size:14px}}
 
 /* ─── REVEAL ─── */
-.rv { opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease }
-.rv.in { opacity:1; transform:none }
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1024px) {
-  .stmt-grid,.france-inner,.abl,.ctg { grid-template-columns:1fr; gap:48px }
-  .ot { grid-template-columns:1fr }
-  .rg { grid-template-columns:repeat(2,1fr) }
-  .osol { flex-direction:column; align-items:flex-start }
-  .ag { grid-template-columns:1fr }
-  .ac { border-right:none; border-bottom:1px solid var(--border) }
-  /* promo grid: 2 colonnes */
-  .promo-grid { grid-template-columns:repeat(2,1fr) }
-  .promo.feat-promo { grid-column:span 2 }
-  .promo.feat-promo .promo-media { aspect-ratio:16/9 }
-}
-@media(max-width:768px) {
-  .wrap { padding:0 24px }
-  #nav { width:calc(100% - 32px); padding:0 20px }
-  footer { padding:20px 24px }
-  .rg { grid-template-columns:1fr }
-  .hero-strip { grid-template-columns:1fr 1fr }
-  .nav-links a:not(.nav-cta) { display:none }
-  .ob { padding:36px 28px }
-  .osol { padding:32px 28px }
-  /* promo grid: 1 colonne sur mobile */
-  .promo-grid { grid-template-columns:1fr }
-  .promo.feat-promo { grid-column:span 1 }
-  .promo-media { aspect-ratio:4/3 }
-  .promo.feat-promo .promo-media { aspect-ratio:4/3 }
-  /* hero strip 1 col */
-  .hero-strip { grid-template-columns:1fr 1fr }
+@media(max-width:768px){
+  .nav-link{display:none}
+  .promo22{min-height:320px}
+  .editorial-inner{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr}
+  .spotlight-inner{flex-direction:column;gap:12px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV pill flottante -->
+<!-- ─── NAV BCG DEUX PASTILLES SÉPARÉES ─── -->
 <nav id="nav">
-  <div class="nav-logo"><div class="nav-dot"></div>LIU Consulting</div>
-  <div class="nav-links">
-    <a href="#expertise">Expertise</a>
-    <a href="#offres">Offres</a>
-    <a href="#about">À propos</a>
+  <div class="nav-left rv">
+    <div class="nav-logo-dot"></div>
+    <span class="nav-logo-text">LIU Consulting</span>
+  </div>
+  <div class="nav-right rv d1">
+    <a href="#welcome" class="nav-link">Expertise</a>
+    <a href="#offres" class="nav-link">Offres</a>
+    <a href="#about" class="nav-link">À propos</a>
     <a href="#contact" class="nav-cta">Me contacter</a>
   </div>
 </nav>
 
-<!-- ─── HERO 100vh — fond noir, aurora jaune ─── -->
+<!-- ─── HERO 100vh AURORA ─── -->
 <section id="hero">
   <div class="aurora" aria-hidden="true">
-    <div class="bl bl1"></div>
-    <div class="bl bl2"></div>
-    <div class="bl bl3"></div>
-    <div class="bl bl4"></div>
-    <div class="bl bl5"></div>
-    <div class="bl bl6"></div>
+    <div class="bl bl1"></div><div class="bl bl2"></div><div class="bl bl3"></div>
+    <div class="bl bl4"></div><div class="bl bl5"></div><div class="bl bl6"></div>
   </div>
-
-  <div class="hero-body wrap">
-    <div class="hero-text rv">
-      <div class="hero-welcome">Bienvenue chez LIU Consulting</div>
-      <h1>Là où vos données<br>deviennent un avantage.</h1>
-      <p>Conçu pour les dirigeants qui ont besoin de plus qu'un conseil généraliste — des solutions data livrées clé en main, du cadrage à la mise en production.</p>
-      <div class="hero-ctas">
-        <a href="#expertise" class="btn-y">Nos expertises</a>
-        <a href="#contact" class="btn-ghost">Prendre contact →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll rv">
+  <div class="hero-scroll">
     Découvrir
-    <svg viewBox="0 0 16 16" fill="none">
-      <path d="M8 3v10M3.5 9l4.5 4.5L12.5 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3.5 9l4.5 4.5L12.5 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
+</section>
 
-  <div class="hero-strip">
-    <div class="hs-item"><div class="hs-label">Sur mesure</div><p>Conçu pour votre organisation, vos données, vos équipes.</p></div>
-    <div class="hs-item"><div class="hs-label">Clé en main</div><p>De la collecte à l'outil du quotidien — de bout en bout.</p></div>
-    <div class="hs-item"><div class="hs-label">Forfaitaire</div><p>On cadre le besoin, je livre. Pas de régie, pas de flou.</p></div>
-    <div class="hs-item"><div class="hs-label">Indépendant</div><p>Aucun intérêt à vendre une solution particulière.</p></div>
+<!-- ─── WELCOME (= BCG List12 "Welcome to BCG") ─── -->
+<section id="welcome">
+  <div class="welcome-inner">
+    <div class="module-header rv">
+      <span class="module-eyebrow">Bienvenue chez LIU Consulting</span>
+      <h1 class="module-title">Libérez le potentiel de vos données.</h1>
+    </div>
+
+    <!-- Carousel Promo20 BCG style -->
+    <div class="promo-carousel rv d1">
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Architecture de données"></div>
+          <div class="promo20-cat">Notre approche</div>
+          <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
+          <div class="promo20-desc">
+            <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation — documenté et transmissible.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
+          <div class="promo20-cat">Architecture de données</div>
+          <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
+          <div class="promo20-desc">
+            <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, modélisation — robustes en production.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
+          <div class="promo20-cat">Infrastructure cloud</div>
+          <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
+          <div class="promo20-desc">
+            <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-auto.jpg" alt="Automatisation"></div>
+          <div class="promo20-cat">Automatisation</div>
+          <h3 class="promo20-title">Éliminer les tâches manuelles et les échecs silencieux</h3>
+          <div class="promo20-desc">
+            <p>Workflows planifiés, alertes sur anomalies, rapports automatiques — vos équipes informées sans intervenir.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage"></div>
+          <div class="promo20-cat">Pilotage & visualisation</div>
+          <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+          <div class="promo20-desc">
+            <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <!-- ─── CLIENTS ─── -->
 <section id="clients">
-  <div class="wrap">
-    <div class="cl-label rv">Ils m'ont fait confiance</div>
-    <div class="cl-row rv d1">
-      <div class="cl-logo"><img src="logos/loreal.png" alt="L'Oréal"></div>
-      <div class="cl-logo"><img src="logos/deezer.png" alt="Deezer"></div>
-      <div class="cl-logo"><img src="logos/bureau-vallee.png" alt="Bureau Vallée"></div>
-      <div class="cl-logo"><img src="logos/totalenergies.svg" alt="TotalEnergies"></div>
-      <div class="cl-logo"><img src="logos/servier.png" alt="Servier"></div>
+  <div class="clients-label rv">Ils m'ont fait confiance</div>
+  <div class="clients-row rv d1">
+    <div class="client-logo"><img src="logos/loreal.png" alt="L'Oréal"></div>
+    <div class="client-logo"><img src="logos/deezer.png" alt="Deezer"></div>
+    <div class="client-logo"><img src="logos/bureau-vallee.png" alt="Bureau Vallée"></div>
+    <div class="client-logo"><img src="logos/totalenergies.svg" alt="TotalEnergies"></div>
+    <div class="client-logo"><img src="logos/servier.png" alt="Servier"></div>
+  </div>
+</section>
+
+<!-- ─── SPOTLIGHT STRIP (= BCG List14) ─── -->
+<section id="spotlight">
+  <div class="spotlight-inner rv">
+    <span class="spotlight-label">Domaines</span>
+    <div class="spotlight-links">
+      <a href="#assist" class="spotlight-link">Architecture de données</a>
+      <a href="#assist" class="spotlight-link">Infrastructure cloud</a>
+      <a href="#assist" class="spotlight-link">Automatisation</a>
+      <a href="#assist" class="spotlight-link">Pilotage & Reporting</a>
+      <a href="#assist" class="spotlight-link">IA appliquée</a>
     </div>
   </div>
 </section>
 
-<!-- ─── STATEMENT — "Beyond Strategy. Real Impact." ─── -->
-<section id="statement">
-  <div class="wrap">
-    <div class="stmt-grid rv">
-      <h2 class="stmt-h">Au-delà de la donnée.<br>Un impact mesurable.</h2>
-      <div>
-        <p class="stmt-body">Nous ne livrons pas des tableaux de bord. Nous construisons l'infrastructure qui permet à vos équipes de prendre les bonnes décisions — rapidement, en confiance, sans dépendre de ressources techniques extérieures.</p>
-        <a href="#expertise" class="stmt-link">
-          Découvrir nos expertises
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+<!-- ─── TOPIC FILTER (= BCG "How can we assist you today?") ─── -->
+<section id="assist">
+  <div class="assist-inner rv">
+    <div class="assist-heading">
+      <h2>Comment puis-je vous aider ?</h2>
+      <p>Explorez mes domaines d'intervention en sélectionnant votre besoin.</p>
+      <div class="assist-chips">
+        <button class="chip on">Tout voir</button>
+        <button class="chip">Données</button>
+        <button class="chip">Infrastructure</button>
+        <button class="chip">Automatisation</button>
+        <button class="chip">Visualisation</button>
+      </div>
+    </div>
+    <div class="assist-cards">
+      <div class="assist-card">
+        <div>
+          <div class="assist-card-label">Architecture</div>
+          <h3>Flux de données fiables de la source à l'entrepôt</h3>
+          <p>Connexion multi-sources, transformation, modélisation — robustes en production.</p>
+        </div>
+        <span class="assist-card-arrow">→</span>
+      </div>
+      <div class="assist-card">
+        <div>
+          <div class="assist-card-label">Infrastructure</div>
+          <h3>Déploiements reproductibles, versionnés, automatisés</h3>
+          <p>Infrastructure en code, CI/CD, zéro surprise entre les environnements.</p>
+        </div>
+        <span class="assist-card-arrow">→</span>
+      </div>
+      <div class="assist-card">
+        <div>
+          <div class="assist-card-label">Automatisation</div>
+          <h3>Éliminer les traitements manuels et les échecs silencieux</h3>
+          <p>Orchestration fiable, alertes en temps réel, rapports sans intervention.</p>
+        </div>
+        <span class="assist-card-arrow">→</span>
+      </div>
+      <div class="assist-card">
+        <div>
+          <div class="assist-card-label">Pilotage</div>
+          <h3>Tableaux de bord opérationnels adaptés à vos équipes</h3>
+          <p>Ventes, stocks, clients, indicateurs — actualisés automatiquement chaque matin.</p>
+        </div>
+        <span class="assist-card-arrow">→</span>
+      </div>
+      <div class="assist-card">
+        <div>
+          <div class="assist-card-label">IA appliquée</div>
+          <h3>LLM et automatisation intelligente de vos données</h3>
+          <p>Enrichissement, catégorisation, génération de rapports augmentés.</p>
+        </div>
+        <span class="assist-card-arrow">→</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── RÉSULTATS ─── -->
-<section id="results">
-  <div class="wrap">
-    <div class="rv"><div class="sl">Résultats concrets</div><h2 class="sec-h">Ce que j'ai livré</h2></div>
-    <div class="rg rv d1">
-      <div class="rc">
-        <div class="rc-num">01</div>
-        <div class="rc-kpi">−70%</div>
-        <h3>Temps de traitement réduit</h3>
-        <p>Des traitements qui prenaient des heures réalisés en minutes. Pipelines à fort volume repensés de zéro.</p>
+<!-- ─── MOSAIC 3 CARDS (= BCG List17 / Promo22) ─── -->
+<section id="mosaic">
+  <div class="mosaic-grid rv">
+
+    <!-- Card A : résultat clé -->
+    <div class="promo22 promo22-a promo22-navy">
+      <div class="promo22-content">
+        <div class="promo22-eyebrow">Résultat concret</div>
+        <div class="promo22-title">−70% de temps de traitement sur des pipelines à fort volume</div>
+        <a href="#contact" class="promo22-cta">Discuter →</a>
       </div>
-      <div class="rc">
-        <div class="rc-num">02</div>
-        <h3>Orchestration refondue</h3>
-        <p>Élimination des goulots d'étranglement et des échecs silencieux. Workflows fiables, observables, résistants.</p>
+    </div>
+
+    <!-- Card B : solution retail -->
+    <div class="promo22 promo22-b" style="background:var(--charcoal)">
+      <div class="promo22-bg"><img src="images/card-pilotage.jpg" alt="Retail Dashboard"></div>
+      <div class="promo22-overlay"></div>
+      <div class="promo22-content">
+        <div class="promo22-eyebrow">Solution disponible</div>
+        <div class="promo22-title">Plateforme de pilotage Retail &amp; Multi-sites</div>
+        <a href="https://tliu-lc.github.io/retail-dashboard/" target="_blank" class="promo22-cta">Découvrir →</a>
       </div>
-      <div class="rc">
-        <div class="rc-num">03</div>
-        <h3>Infrastructure bout-en-bout</h3>
-        <p>Architecture complète déployée en code — ingestion, transformation, stockage, livraison continue automatisée.</p>
+    </div>
+
+    <!-- Card C : approche -->
+    <div class="promo22 promo22-c promo22-beige">
+      <div class="promo22-content">
+        <div class="promo22-eyebrow" style="color:rgba(0,0,0,.4)">Notre approche</div>
+        <div class="promo22-title" style="color:var(--black)">Forfait clair. Livraison clé en main. Pas de régie.</div>
+        <a href="#offres" class="promo22-cta">Nos offres →</a>
       </div>
-      <div class="rc">
-        <div class="rc-num">04</div>
-        <h3>Plateforme retail clé en main</h3>
-        <p>Pilotage des ventes, relance automatisée, prospection et dashboarding. Un seul interlocuteur, de A à Z.</p>
-      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── OFFRES (section blanche) ─── -->
+<section id="offres" style="background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)">
+  <div class="rv"><span class="module-eyebrow" style="text-align:left;display:block;margin-bottom:12px">Offres</span>
+  <h2 class="module-title" style="text-align:left;margin:0 0 48px">Comment travailler ensemble</h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gray-300)" class="rv d1">
+    <div style="background:var(--charcoal);padding:48px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:14px">Forfait mission</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:16px">Code source et infrastructure — propriété du client</h3>
+      <p style="font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:28px">Développement complet livré clé en main. Documentation et formation incluses. Indépendance totale.</p>
+      <a href="#contact" class="btn-primary">Discuter d'une mission →</a>
+    </div>
+    <div style="background:var(--white);padding:48px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(0,0,0,.3);margin-bottom:14px">Abonnement</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--black);margin-bottom:16px">Hébergement, maintenance et support inclus</h3>
+      <p style="font-size:.9rem;color:rgba(0,0,0,.45);line-height:1.75;margin-bottom:28px">Solution déployée et maintenue. Vos équipes utilisent, je gère l'infrastructure. Sans compétence technique requise.</p>
+      <a href="#contact" class="btn-primary">Demander un devis →</a>
     </div>
   </div>
 </section>
 
-<!-- ─── EXPERTISE — BCG Promo20 style ─── -->
-<section id="expertise">
-  <div class="wrap">
-
-    <!-- ModuleHeader BCG -->
-    <div class="mod-header rv">
-      <div class="mod-eyebrow">Périmètre d'intervention</div>
-      <h2 class="mod-title">Ce que je construis pour vous</h2>
-      <p class="mod-desc">De l'architecture à la visualisation — l'ensemble de la chaîne data géré par un seul interlocuteur, du cadrage à la formation.</p>
+<!-- ─── EDITORIAL (= BCG Promo13 Careers) ─── -->
+<section id="editorial">
+  <div class="editorial-inner rv">
+    <div class="editorial-media">
+      <img src="images/card-featured.jpg" alt="Data Engineering LIU Consulting">
     </div>
-
-    <!-- Grille BCG Promo20 — image portrait + texte, no box -->
-    <div class="promo-grid rv d1">
-
-      <!-- Card featured (2 colonnes) — aperçu global -->
-      <a class="promo feat-promo" href="#contact">
-        <div class="promo-media">
-          <img src="images/card-featured.jpg" alt="Data Engineering — LIU Consulting">
-        </div>
-        <div class="promo-cat">Notre approche</div>
-        <h3 class="promo-title">De la donnée brute à la décision — sans complexité inutile</h3>
-        <div class="promo-body">
-          <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation. Chaque livrable est documenté et transmissible à vos équipes.</p>
-          <span class="promo-cta">Discuter de votre projet →</span>
-        </div>
-      </a>
-
-      <!-- Card 1 -->
-      <a class="promo" href="#contact">
-        <div class="promo-media">
-          <img src="images/card-architecture.jpg" alt="Architecture de données">
-        </div>
-        <div class="promo-cat">Architecture de données</div>
-        <h3 class="promo-title">Flux fiables, de la source à l'entrepôt</h3>
-        <div class="promo-body">
-          <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, enrichissement, modélisation — robustes en production.</p>
-          <span class="promo-cta">En savoir plus →</span>
-        </div>
-      </a>
-
-      <!-- Card 2 -->
-      <a class="promo" href="#contact">
-        <div class="promo-media">
-          <img src="images/card-infra.jpg" alt="Infrastructure & déploiement">
-        </div>
-        <div class="promo-cat">Infrastructure &amp; déploiement</div>
-        <h3 class="promo-title">Environnements reproductibles et automatisés</h3>
-        <div class="promo-body">
-          <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise entre environnements.</p>
-          <span class="promo-cta">En savoir plus →</span>
-        </div>
-      </a>
-
-      <!-- Card 3 -->
-      <a class="promo" href="#contact">
-        <div class="promo-media">
-          <img src="images/card-auto.jpg" alt="Automatisation & orchestration">
-        </div>
-        <div class="promo-cat">Automatisation &amp; orchestration</div>
-        <h3 class="promo-title">Éliminer les tâches manuelles et les échecs silencieux</h3>
-        <div class="promo-body">
-          <p>Workflows planifiés, alertes sur anomalies, rapports envoyés automatiquement — vos équipes informées sans intervenir.</p>
-          <span class="promo-cta">En savoir plus →</span>
-        </div>
-      </a>
-
-      <!-- Card 4 -->
-      <a class="promo" href="#contact">
-        <div class="promo-media">
-          <img src="images/card-pilotage.jpg" alt="Pilotage & visualisation">
-        </div>
-        <div class="promo-cat">Pilotage &amp; visualisation</div>
-        <h3 class="promo-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
-        <div class="promo-body">
-          <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
-          <span class="promo-cta">En savoir plus →</span>
-        </div>
-      </a>
-
+    <div class="editorial-content">
+      <div class="editorial-eyebrow">Au-delà de la donnée</div>
+      <h2 class="editorial-title">Un impact mesurable.</h2>
+      <p class="editorial-desc">Nous ne livrons pas des tableaux de bord. Nous construisons l'infrastructure qui permet à vos équipes de prendre les bonnes décisions — rapidement, en confiance.</p>
+      <a href="#about" class="btn-primary">À propos de Tim LIU →</a>
     </div>
   </div>
 </section>
 
-<!-- ─── APPROCHE ─── -->
-<section id="approach">
-  <div class="wrap">
-    <div class="rv"><div class="sl">Méthode de travail</div><h2 class="sec-h">Comment je travaille</h2></div>
-    <div class="ag rv d1">
-      <div class="ac"><span class="an">01</span><h3>Cadrage &amp; connexion</h3><p>Je commence par comprendre votre activité, vos sources et vos enjeux. En une semaine, vos données sont connectées et les premières tables chargées.</p></div>
-      <div class="ac"><span class="an">02</span><h3>Construction &amp; itération</h3><p>Architecture, modèles, interface — construits par étapes. Vous voyez la solution évoluer et validez à chaque jalon. Aucune surprise.</p></div>
-      <div class="ac"><span class="an">03</span><h3>Livraison &amp; autonomie</h3><p>Formation, documentation complète, mise en production. L'objectif : vos équipes autonomes sur l'outil livré, pas dépendantes de moi.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── OFFRES ─── -->
-<section id="offres">
-  <div class="wrap">
-    <div class="rv">
-      <div class="sl">Offres</div>
-      <h2 class="sec-h">Comment travailler ensemble</h2>
-      <p class="off-intro">Je travaille en forfait : on cadre ensemble le besoin, je livre, vous avez la main. Pas de régie, pas de flou.</p>
-    </div>
-    <div class="ot rv d1">
-      <div class="ob dark">
-        <div><span class="of-tag">Forfait mission</span></div>
-        <h3>Code source et infrastructure — propriété du client</h3>
-        <p>Développement complet livré clé en main. Documentation et formation incluses. Indépendance totale à l'issue du projet.</p>
-        <hr>
-        <ul class="of-list">
-          <li>Livraison en 4 à 8 semaines</li>
-          <li>Code source intégral — propriété du client</li>
-          <li>Formation équipes incluse</li>
-          <li>3 mois de support post-livraison</li>
-          <li>Maintenance annuelle optionnelle</li>
-        </ul>
-        <a href="#contact" class="btn-cta outline-w">Discuter d'une mission →</a>
-      </div>
-      <div class="ob">
-        <div><span class="of-tag">Abonnement</span></div>
-        <h3>Hébergement, maintenance et support inclus</h3>
-        <p>Solution déployée et maintenue par mes soins. Vos équipes utilisent, je gère l'infrastructure.</p>
-        <hr>
-        <ul class="of-list">
-          <li>Solution opérationnelle en 4 à 6 semaines</li>
-          <li>Hébergement et maintenance inclus</li>
-          <li>Support et évolutions mineures inclus</li>
-          <li>Engagement annuel, résiliable à échéance</li>
-        </ul>
-        <a href="#contact" class="btn-cta outline">Demander un devis →</a>
-      </div>
-    </div>
-    <div class="osol rv d2">
-      <div>
-        <div class="osol-badge">Solution disponible</div>
-        <h3>Plateforme de pilotage — Retail &amp; Multi-sites</h3>
-        <p>Solution complète : ventes, stocks, clients, alertes, relance automatisée. Déployable rapidement sur votre infrastructure.</p>
-      </div>
-      <a href="https://tliu-lc.github.io/retail-dashboard/" target="_blank" class="btn-cta solid" style="white-space:nowrap;flex-shrink:0">Découvrir la solution →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FRANCE — avec photo comme BCG ─── -->
+<!-- ─── FRANCE ─── -->
 <section id="france">
-  <div class="wrap">
-    <div class="rv"><div class="sl sl-w">Présence</div><h2 class="sec-h" style="color:#fff">LIU Consulting en France</h2></div>
-    <div class="france-inner rv d1">
-
-      <!-- Infos localisation -->
-      <div>
-        <div class="france-locs">
-          <div class="france-loc"><span class="fl-type">Siège social</span><span class="fl-val">Île-de-France</span></div>
-          <div class="france-loc"><span class="fl-type">Interventions sur site</span><span class="fl-val">Toute la France</span></div>
-          <div class="france-loc"><span class="fl-type">Missions à distance</span><span class="fl-val">France &amp; Europe</span></div>
-          <div class="france-loc"><span class="fl-type">Langues de travail</span><span class="fl-val">Français · Anglais</span></div>
-          <div class="france-loc"><span class="fl-type">SIRET</span><span class="fl-val">919 293 076 00023</span></div>
-        </div>
-        <p class="france-note">Basé en Île-de-France, j'interviens sur site auprès de vos équipes partout en France, ou à distance selon vos besoins et contraintes organisationnelles.</p>
+  <div class="france-inner rv">
+    <div>
+      <div class="france-eyebrow">Présence</div>
+      <h2 class="france-title">LIU Consulting en France</h2>
+      <div class="france-locs">
+        <div class="france-loc"><span class="fl-type">Siège social</span><span class="fl-val">Île-de-France</span></div>
+        <div class="france-loc"><span class="fl-type">Interventions</span><span class="fl-val">Toute la France</span></div>
+        <div class="france-loc"><span class="fl-type">À distance</span><span class="fl-val">France &amp; Europe</span></div>
+        <div class="france-loc"><span class="fl-type">Langues</span><span class="fl-val">Français · Anglais</span></div>
+        <div class="france-loc"><span class="fl-type">SIRET</span><span class="fl-val">919 293 076 00023</span></div>
       </div>
-
-      <!-- Photo — border-radius:30px comme BCG Promo-media -->
-      <div class="france-photo-wrap rv d2">
-        <div class="france-photo">
-          <img src="images/paris.jpg" alt="Paris — LIU Consulting, Île-de-France">
-          <div class="france-photo-caption">
-            <div class="france-photo-name">Tim LIU</div>
-            <div class="france-photo-role">Fondateur · Île-de-France</div>
-          </div>
-        </div>
+    </div>
+    <div class="france-photo rv d1">
+      <img src="images/paris.jpg" alt="Paris — LIU Consulting">
+      <div class="france-photo-cap">
+        <div class="france-photo-name">Tim LIU</div>
+        <div class="france-photo-role">Fondateur · Île-de-France</div>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- ─── ABOUT ─── -->
 <section id="about">
-  <div class="wrap">
-    <div class="abl">
-      <div class="rv">
-        <div class="sl" style="margin-bottom:16px">À propos</div>
-        <img src="tim.png" alt="Tim LIU — Fondateur LIU Consulting" class="ab-img">
-        <div class="ab-cap">
-          <span class="ab-name">Tim LIU</span>
-          <span class="ab-role">Fondateur</span>
-        </div>
+  <div class="about-inner">
+    <div class="rv">
+      <div class="about-photo">
+        <img src="tim.png" alt="Tim LIU — LIU Consulting">
       </div>
-      <div class="rv d1">
-        <h2>Un interlocuteur unique,<br>de bout en bout.</h2>
+      <div class="about-cap">
+        <span class="about-name">Tim LIU</span>
+        <span class="about-role">Fondateur</span>
+      </div>
+    </div>
+    <div class="rv d1">
+      <div class="about-eyebrow">À propos</div>
+      <h2 class="about-title">Un interlocuteur unique,<br>de bout en bout.</h2>
+      <div class="about-body">
         <p>Après 3 ans chez L'Oréal et des missions chez Deezer et Bureau Vallée, j'ai appris à construire des architectures de données qui tiennent en production : fiables, documentées, maintenues par vos équipes.</p>
-        <p>Je couvre l'ensemble de la chaîne — de la collecte des données brutes jusqu'au tableau de bord utilisé au quotidien. J'ai également intervenu chez TotalEnergies et Servier. Chaque mission est conduite sans sous-traitance.</p>
-        <p>Curieux de l'intelligence artificielle appliquée à la donnée, je suis en veille active sur les nouvelles méthodes d'automatisation et de valorisation des actifs data.</p>
-        <div class="ab-links">
-          <a href="mailto:tim.liu.liuconsulting@gmail.com" class="al"><span class="alt">Email</span><span class="alv">tim.liu.liuconsulting@gmail.com</span></a>
-          <a href="tel:+33603655398" class="al"><span class="alt">Téléphone</span><span class="alv">06 03 65 53 98</span></a>
-          <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="al"><span class="alt">LinkedIn</span><span class="alv">linkedin.com/in/tim-liu-liuconsulting</span></a>
-        </div>
-        <div class="ab-siret">SIRET 91929307600023</div>
+        <p>Je couvre l'ensemble de la chaîne — de la collecte des données brutes jusqu'au tableau de bord utilisé au quotidien. J'ai également intervenu chez TotalEnergies et Servier.</p>
+        <p>Curieux de l'IA appliquée à la donnée, je suis en veille active sur les méthodes d'automatisation et de valorisation des actifs data.</p>
+      </div>
+      <div class="about-links">
+        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="about-link"><span class="about-link-label">Email</span><span class="about-link-val">tim.liu.liuconsulting@gmail.com</span></a>
+        <a href="tel:+33603655398" class="about-link"><span class="about-link-label">Téléphone</span><span class="about-link-val">06 03 65 53 98</span></a>
+        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="about-link"><span class="about-link-label">LinkedIn</span><span class="about-link-val">linkedin.com/in/tim-liu-liuconsulting</span></a>
       </div>
     </div>
   </div>
@@ -973,53 +808,91 @@ footer {
 
 <!-- ─── TESTIMONIAL ─── -->
 <section id="testi">
-  <div class="wrap">
-    <div class="ti rv">
-      <div class="sl" style="margin-bottom:36px">Témoignage client</div>
-      <p class="tq">Pour la première fois, on peut comparer nos quatre boutiques sur un seul écran et réagir le jour même. Ce qu'on faisait en une journée d'Excel prend maintenant trente secondes.</p>
-      <div class="ts"><div class="tb"></div><span class="tc">Direction commerciale — Grossiste textile, 4 boutiques, 28 M€ de CA</span></div>
-    </div>
+  <div class="rv">
+    <div class="testi-eyebrow">Témoignage client</div>
+    <p class="testi-quote">Pour la première fois, on peut comparer nos quatre boutiques sur un seul écran et réagir le jour même. Ce qu'on faisait en une journée d'Excel prend maintenant trente secondes.</p>
+    <div class="testi-source"><div class="testi-line"></div><span class="testi-from">Direction commerciale — Grossiste textile, 4 boutiques, 28 M€ de CA</span></div>
   </div>
 </section>
 
-<!-- ─── CONTACT ─── -->
+<!-- ─── CONTACT (= BCG Newsletter dark) ─── -->
 <section id="contact">
-  <div class="wrap">
-    <div class="ctg rv">
-      <div>
-        <div class="sl sl-w" style="margin-bottom:20px">Contact</div>
-        <h2 class="ct-h">Parlons de votre projet.</h2>
-        <p class="ct-sub">Un échange de trente minutes pour évaluer si mon approche correspond à votre situation — sans engagement.</p>
-      </div>
-      <div class="ctl">
-        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="ce"><span class="cet">Email</span><span class="cev">tim.liu.liuconsulting@gmail.com</span></a>
-        <a href="tel:+33603655398" class="ce"><span class="cet">Téléphone</span><span class="cev">06 03 65 53 98</span></a>
-        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="ce"><span class="cet">LinkedIn</span><span class="cev">Tim LIU — LIU Consulting</span></a>
-      </div>
+  <div class="contact-inner rv">
+    <div>
+      <div class="contact-eyebrow">Contact</div>
+      <h2 class="contact-title">Prêt à transformer vos données ?</h2>
+      <p class="contact-desc">Un échange de trente minutes pour évaluer si mon approche correspond à votre situation — sans engagement de votre part.</p>
+      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="btn-primary">Prendre contact →</a>
+    </div>
+    <div class="contact-items rv d1">
+      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">tim.liu.liuconsulting@gmail.com</span></a>
+      <a href="tel:+33603655398" class="contact-item"><span class="contact-item-label">Téléphone</span><span class="contact-item-val">06 03 65 53 98</span></a>
+      <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item"><span class="contact-item-label">LinkedIn</span><span class="contact-item-val">Tim LIU — LIU Consulting</span></a>
     </div>
   </div>
 </section>
 
+<!-- ─── FOOTER BCG BEIGE #F1EEEA ─── -->
 <footer>
-  <span class="fl">LIU Consulting</span>
-  <span class="fr">© 2026 Tim LIU · SIRET 91929307600023</span>
+  <div class="footer-top rv">
+    <div>
+      <h2 class="footer-headline">Libérez le potentiel de vos données.</h2>
+      <a href="#contact" class="btn-primary">Me contacter →</a>
+    </div>
+    <div>
+      <div class="footer-links">
+        <a href="#welcome" class="footer-link">Expertise</a>
+        <a href="#offres" class="footer-link">Offres</a>
+        <a href="#assist" class="footer-link">Comment puis-je vous aider ?</a>
+        <a href="#france" class="footer-link">LIU Consulting en France</a>
+        <a href="#about" class="footer-link">À propos de Tim LIU</a>
+      </div>
+    </div>
+    <div class="footer-cta-block">
+      <div class="footer-cta-eyebrow">Comment puis-je vous assister ?</div>
+      <h3 class="footer-cta-title">Parlons de votre projet.</h3>
+      <p class="footer-cta-desc">Soumettez vos questions et nous vous répondrons dans les 24h.</p>
+      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="btn-primary">Envoyer un message →</a>
+    </div>
+  </div>
+  <div class="footer-bottom rv d1">
+    <span class="footer-logo">LIU Consulting</span>
+    <span class="footer-legal">© 2026 Tim LIU · SIRET 91929307600023</span>
+  </div>
 </footer>
 
 <script>
-/* Reveal */
+/* Reveal on scroll */
 const obs = new IntersectionObserver(
   e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in') }),
   { threshold:.07 }
 );
 document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-/* Nav : transparent → pill solide au scroll */
+/* Nav scroll behavior */
 const navEl = document.getElementById('nav');
 const heroEl = document.getElementById('hero');
-new IntersectionObserver(
-  ([e]) => navEl.classList.toggle('solid', !e.isIntersecting),
-  { threshold:0.05 }
-).observe(heroEl);
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > heroEl.offsetHeight * 0.8) {
+    navEl.style.background = 'none';
+    navEl.querySelectorAll('.nav-left,.nav-right').forEach(p => {
+      p.style.background = 'rgba(255,255,255,.97)';
+    });
+  } else {
+    navEl.querySelectorAll('.nav-left,.nav-right').forEach(p => {
+      p.style.background = 'hsla(0,0%,100%,.7)';
+    });
+  }
+  lastY = y;
+}, { passive:true });
+
+/* Chips filter (assist section) */
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+  c.classList.add('on');
+}));
 </script>
 </body>
 </html>
