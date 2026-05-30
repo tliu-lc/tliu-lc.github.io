@@ -383,26 +383,19 @@ img { max-width:100%; display:block }
   margin-bottom:20px;
   position:relative;
   transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+  background:#1a1a1a;
 }
 .promo.feat-promo .promo-media { aspect-ratio:16/10 }
 .promo:hover .promo-media { transform:scale(1.025) }
 
-/* Backgrounds colorés (sans photo) */
-.pm-bg { position:absolute; inset:0 }
-.pm-dark-amber { background:linear-gradient(145deg,#1a0e00 0%,#6b3800 55%,#b05a00 100%) }
-.pm-navy      { background:linear-gradient(145deg,#00183a 0%,#003f88 55%,#006ac8 100%) }
-.pm-amber     { background:linear-gradient(145deg,#3a2000 0%,#e8a020 60%,#f5c14a 100%) }
-.pm-warm-dark { background:linear-gradient(145deg,#100900 0%,#3d2000 55%,#7a4400 100%) }
-.pm-deep-blue { background:linear-gradient(145deg,#00112a 0%,#00296b 55%,#00509d 100%) }
-.pm-feat      { background:linear-gradient(135deg,#0a0600 0%,#2d1800 35%,#6b3800 65%,#e8a020 100%) }
-
-/* Motif grille subtil dans le background */
-.pm-grid {
-  position:absolute; inset:0; opacity:.15;
-  background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);
-  background-size:32px 32px;
+/* Image qui remplit le container */
+.promo-media img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
 }
+.promo:hover .promo-media img { transform:scale(1.04) }
 
 /* Catégorie — uppercase 11px EXACT BCG */
 .promo-cat {
@@ -780,8 +773,7 @@ footer {
       <!-- Card featured (2 colonnes) — aperçu global -->
       <a class="promo feat-promo" href="#contact">
         <div class="promo-media">
-          <div class="pm-bg pm-feat"></div>
-          <div class="pm-grid"></div>
+          <img src="images/card-featured.jpg" alt="Data Engineering — LIU Consulting">
         </div>
         <div class="promo-cat">Notre approche</div>
         <h3 class="promo-title">De la donnée brute à la décision — sans complexité inutile</h3>
@@ -794,8 +786,7 @@ footer {
       <!-- Card 1 -->
       <a class="promo" href="#contact">
         <div class="promo-media">
-          <div class="pm-bg pm-dark-amber"></div>
-          <div class="pm-grid"></div>
+          <img src="images/card-architecture.jpg" alt="Architecture de données">
         </div>
         <div class="promo-cat">Architecture de données</div>
         <h3 class="promo-title">Flux fiables, de la source à l'entrepôt</h3>
@@ -808,8 +799,7 @@ footer {
       <!-- Card 2 -->
       <a class="promo" href="#contact">
         <div class="promo-media">
-          <div class="pm-bg pm-navy"></div>
-          <div class="pm-grid"></div>
+          <img src="images/card-infra.jpg" alt="Infrastructure & déploiement">
         </div>
         <div class="promo-cat">Infrastructure &amp; déploiement</div>
         <h3 class="promo-title">Environnements reproductibles et automatisés</h3>
@@ -822,8 +812,7 @@ footer {
       <!-- Card 3 -->
       <a class="promo" href="#contact">
         <div class="promo-media">
-          <div class="pm-bg pm-amber"></div>
-          <div class="pm-grid"></div>
+          <img src="images/card-auto.jpg" alt="Automatisation & orchestration">
         </div>
         <div class="promo-cat">Automatisation &amp; orchestration</div>
         <h3 class="promo-title">Éliminer les tâches manuelles et les échecs silencieux</h3>
@@ -836,8 +825,7 @@ footer {
       <!-- Card 4 -->
       <a class="promo" href="#contact">
         <div class="promo-media">
-          <div class="pm-bg pm-deep-blue"></div>
-          <div class="pm-grid"></div>
+          <img src="images/card-pilotage.jpg" alt="Pilotage & visualisation">
         </div>
         <div class="promo-cat">Pilotage &amp; visualisation</div>
         <h3 class="promo-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
