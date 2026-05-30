@@ -39,7 +39,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(12,26,53,.97);ba
 /* HERO */
 #hero{background:var(--navy);padding:140px 0 0;overflow:hidden;position:relative;}
 #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(176,141,87,.05),transparent);pointer-events:none;}
-.hl{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:end;}
+.hl{display:grid;grid-template-columns:1fr;max-width:720px;}
 .hl-t{padding-bottom:72px;}
 .hl-t h1{margin-bottom:28px;}
 .hl-t p{color:rgba(255,255,255,.58);font-size:1.05rem;max-width:440px;margin-bottom:44px;line-height:1.8;}
@@ -132,7 +132,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
 .rv.in{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
 /* RESPONSIVE */
-@media(max-width:1024px){.hl{grid-template-columns:1fr}.hv{display:none}.hl-t{padding-bottom:80px}.abg{grid-template-columns:1fr}.apc{aspect-ratio:unset;height:260px}.ofg{grid-template-columns:1fr}.ofc{border-right:none;border-bottom:1px solid var(--border)}.ofc:last-child{border-bottom:none}.ctg{grid-template-columns:1fr;gap:56px}}
+@media(max-width:1024px){.hl{grid-template-columns:1fr}.hl-t{padding-bottom:80px}.abg{grid-template-columns:1fr}.apc{aspect-ratio:unset;height:260px}.ofg{grid-template-columns:1fr}.ofc{border-right:none;border-bottom:1px solid var(--border)}.ofc:last-child{border-bottom:none}.ctg{grid-template-columns:1fr;gap:56px}}
 @media(max-width:768px){.wrap{padding:0 24px}nav{padding:0 24px}footer{padding:24px}section{padding:64px 0}.exg{grid-template-columns:1fr}.exc{border-right:none;border-top:1px solid var(--border);padding:36px 0}.exc:not(:first-child){padding-left:0}.prg{grid-template-columns:1fr 1fr}.pri{border-bottom:1px solid var(--border)}.ofh{flex-direction:column;align-items:flex-start}.ofh p{text-align:left;max-width:100%}.nl a:not(.nc){display:none}}
 @media(max-width:480px){.prg{grid-template-columns:1fr}.hb{flex-direction:column;align-items:flex-start}}
 </style>
@@ -161,9 +161,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding
           <a href="#ct" class="bg"><span>Prendre contact</span> →</a>
         </div>
       </div>
-      <div class="hv rv d2">
-        <img src="dashboard.png" alt="Exemple de tableau de bord opérationnel">
-      </div>
+
     </div>
   </div>
 </section>
