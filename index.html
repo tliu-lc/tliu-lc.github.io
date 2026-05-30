@@ -109,131 +109,82 @@ img{max-width:100%;display:block}
   display:flex;flex-direction:column;
 }
 
-/* ─── GALETS — grandes formes organiques morphantes (style BCG) ─── */
-.aurora{position:absolute;inset:-5%;pointer-events:none;overflow:hidden}
-.galet{position:absolute;will-change:transform}
+/* ─── AURORA PROFESSIONNELLE ─── */
+.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.g{position:absolute;will-change:transform}
 
-/* Galet A — grand ambre 3D avec facettes */
-.ga{
-  width:75vw; height:65vw;
-  top:-15%; right:-18%;
-  background:
-    /* Reflet spéculaire blanc — facette la plus éclairée */
-    radial-gradient(ellipse 22% 16% at 26% 24%, rgba(255,255,230,.92) 0%, transparent 100%),
-    /* Facette claire haut-gauche */
-    linear-gradient(140deg, rgba(255,242,160,.72) 0%, transparent 38%),
-    /* Facette secondaire centre */
-    radial-gradient(ellipse 35% 28% at 48% 40%, rgba(255,215,80,.65) 0%, transparent 100%),
-    /* Arête lumineuse diagonale */
-    linear-gradient(125deg, transparent 30%, rgba(255,235,120,.45) 48%, transparent 62%),
-    /* Facette sombre bas-droit */
-    linear-gradient(318deg, rgba(110,55,0,.6) 0%, transparent 42%),
-    /* Ombre droite */
-    linear-gradient(240deg, rgba(145,75,0,.4) 0%, transparent 32%),
-    /* Base ambre */
-    radial-gradient(ellipse at 38% 42%,rgba(232,160,32,.96) 0%,rgba(215,140,18,.82) 40%,rgba(160,90,4,.5) 68%,transparent 86%);
-  filter:blur(18px);
-  border-radius:62% 38% 28% 72% / 55% 68% 32% 45%;
-  animation:morph-a 7s ease-in-out infinite alternate,
-            drift-a 11s ease-in-out infinite alternate;
+/* G1 — grande nappe ambre, haut-droit (= vert lime BCG) */
+.g1{
+  width:80vw; height:72vw;
+  top:-18%; right:-22%;
+  background:radial-gradient(ellipse at 42% 44%,
+    rgba(232,160,32,.78) 0%,
+    rgba(238,172,40,.55) 30%,
+    rgba(218,148,20,.28) 58%,
+    transparent 78%);
+  filter:blur(52px);
+  border-radius:58% 42% 35% 65% / 52% 60% 40% 48%;
+  animation:g1-move 18s ease-in-out infinite alternate;
 }
 
-/* Galet B — crème lumineux 3D */
-.gb{
-  width:68vw; height:72vw;
-  top:0%; left:-15%;
-  background:
-    /* Reflet spéculaire */
-    radial-gradient(ellipse 20% 14% at 38% 28%, rgba(255,255,255,.88) 0%, transparent 100%),
-    /* Facette claire */
-    linear-gradient(150deg, rgba(255,252,240,.7) 0%, transparent 40%),
-    /* Arête lumineuse */
-    linear-gradient(130deg, transparent 35%, rgba(255,248,220,.5) 50%, transparent 62%),
-    /* Facette sombre */
-    linear-gradient(310deg, rgba(200,165,80,.35) 0%, transparent 35%),
-    /* Base crème */
-    radial-gradient(ellipse at 52% 48%,rgba(255,253,240,1) 0%,rgba(255,246,210,.88) 28%,rgba(252,238,188,.55) 52%,transparent 76%);
-  filter:blur(22px);
-  border-radius:48% 52% 62% 38% / 42% 58% 38% 62%;
-  animation:morph-b 9s ease-in-out infinite alternate,
-            drift-b 13s ease-in-out infinite alternate;
+/* G2 — cœur lumineux crème, centre-gauche (= white heart BCG) */
+.g2{
+  width:72vw; height:78vw;
+  top:2%; left:-18%;
+  background:radial-gradient(ellipse at 50% 46%,
+    rgba(255,252,238,.98) 0%,
+    rgba(255,246,215,.82) 22%,
+    rgba(253,240,195,.48) 46%,
+    transparent 68%);
+  filter:blur(48px);
+  border-radius:45% 55% 62% 38% / 40% 55% 45% 60%;
+  animation:g2-move 22s ease-in-out infinite alternate;
 }
 
-/* Galet C — bande bleue 3D */
-.gc{
-  width:28vw; height:130vh;
-  top:-20%; right:20%;
-  background:
-    /* Reflet blanc sur l'arête */
-    linear-gradient(to right, rgba(200,230,255,.65) 0%, transparent 30%),
-    /* Facette lumineuse gauche */
-    linear-gradient(to right, rgba(140,200,255,.45) 0%, transparent 45%),
-    /* Facette sombre droite */
-    linear-gradient(to left, rgba(0,40,130,.5) 0%, transparent 38%),
-    /* Base bleue */
-    linear-gradient(to bottom,transparent 0%,rgba(0,105,210,.32) 18%,rgba(0,135,230,.56) 40%,rgba(0,105,210,.32) 65%,transparent 90%);
-  filter:blur(12px);
-  border-radius:45% 55% 60% 40% / 55% 45% 50% 50%;
-  transform:rotate(-14deg);
-  animation:morph-c 6s ease-in-out infinite alternate,
-            drift-c 16s ease-in-out infinite alternate;
+/* G3 — bande bleue diagonale fine (= teal streak BCG) */
+.g3{
+  width:22vw; height:125vh;
+  top:-18%; right:22%;
+  background:linear-gradient(to bottom,
+    transparent      0%,
+    rgba(0,102,208,.22) 18%,
+    rgba(0,132,225,.40) 42%,
+    rgba(0,102,208,.22) 68%,
+    transparent      92%);
+  filter:blur(32px);
+  transform:rotate(-13deg);
+  animation:g3-move 14s ease-in-out infinite alternate;
 }
 
-/* Galet D — accent or haut-gauche (= yellow-green top-left BCG) */
-.gd{
-  width:50vw; height:50vw;
-  top:-18%; left:-8%;
-  background:
-    radial-gradient(ellipse 18% 14% at 32% 28%, rgba(255,255,210,.88) 0%, transparent 100%),
-    linear-gradient(145deg, rgba(255,238,140,.65) 0%, transparent 35%),
-    linear-gradient(128deg, transparent 38%, rgba(255,228,100,.42) 52%, transparent 64%),
-    linear-gradient(312deg, rgba(130,65,0,.5) 0%, transparent 38%),
-    radial-gradient(ellipse at 55% 58%,rgba(252,210,55,.9) 0%,rgba(238,182,28,.65) 35%,rgba(180,105,5,.35) 62%,transparent 80%);
-  filter:blur(16px);
-  border-radius:55% 45% 38% 62% / 62% 38% 55% 45%;
-  animation:morph-d 8s ease-in-out infinite alternate,
-            drift-d 12s ease-in-out infinite alternate;
+/* G4 — accent or haut-gauche (= yellow-green BCG) */
+.g4{
+  width:50vw; height:48vw;
+  top:-16%; left:-6%;
+  background:radial-gradient(ellipse at 54% 56%,
+    rgba(250,206,48,.72) 0%,
+    rgba(242,186,32,.48) 32%,
+    transparent 60%);
+  filter:blur(46px);
+  border-radius:52% 48% 42% 58% / 58% 42% 52% 48%;
+  animation:g4-move 16s ease-in-out infinite alternate;
 }
 
-/* Morphing border-radius = galets qui changent de forme (irrégulier) */
-@keyframes morph-a{
-  0%  {border-radius:62% 38% 28% 72% / 55% 68% 32% 45%}
-  33% {border-radius:38% 62% 55% 45% / 42% 55% 60% 38%}
-  66% {border-radius:72% 28% 42% 58% / 65% 35% 48% 52%}
-  100%{border-radius:45% 55% 68% 32% / 38% 62% 42% 58%}
+/* Mouvements lents et fluides */
+@keyframes g1-move{
+  0%  {transform:translate(0,0) rotate(-2deg)}
+  100%{transform:translate(-7%,-5%) rotate(3deg) scale(1.04)}
 }
-@keyframes morph-b{
-  0%  {border-radius:48% 52% 62% 38% / 42% 58% 38% 62%}
-  33% {border-radius:65% 35% 38% 62% / 55% 45% 62% 38%}
-  66% {border-radius:35% 65% 55% 45% / 68% 32% 45% 55%}
-  100%{border-radius:58% 42% 45% 55% / 35% 65% 52% 48%}
-}
-@keyframes morph-c{
-  0%  {border-radius:45% 55% 60% 40% / 55% 45% 50% 50%;transform:rotate(-14deg)}
-  50% {border-radius:60% 40% 45% 55% / 40% 60% 55% 45%;transform:rotate(-8deg)}
-  100%{border-radius:38% 62% 52% 48% / 62% 38% 45% 55%;transform:rotate(-18deg)}
-}
-@keyframes morph-d{
-  0%  {border-radius:55% 45% 38% 62% / 62% 38% 55% 45%}
-  50% {border-radius:38% 62% 62% 38% / 45% 55% 38% 62%}
-  100%{border-radius:68% 32% 45% 55% / 38% 62% 60% 40%}
-}
-
-/* Dérives lentes (translation + légère rotation) */
-@keyframes drift-a{
-  0%  {transform:translate(0,0) rotate(-3deg)}
-  100%{transform:translate(-8%,-6%) rotate(5deg)}
-}
-@keyframes drift-b{
+@keyframes g2-move{
   0%  {transform:translate(0,0)}
-  100%{transform:translate(7%,8%)}
+  100%{transform:translate(6%,7%) scale(1.03)}
 }
-@keyframes drift-c{
-  /* morph-c gère déjà la rotation */
+@keyframes g3-move{
+  0%  {transform:rotate(-13deg) translate(0,0)}
+  100%{transform:rotate(-8deg)  translate(-4%,3%)}
 }
-@keyframes drift-d{
+@keyframes g4-move{
   0%  {transform:translate(0,0)}
-  100%{transform:translate(10%,7%) scale(.95)}
+  100%{transform:translate(8%,6%) scale(.97)}
 }
 
 /* Hero content — texte overlaid sur aurora comme BCG */
@@ -704,10 +655,10 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <!-- ─── HERO 100vh — texte sur aurora comme BCG ─── -->
 <section id="hero">
   <div class="aurora" aria-hidden="true">
-    <div class="galet ga"></div>
-    <div class="galet gb"></div>
-    <div class="galet gc"></div>
-    <div class="galet gd"></div>
+    <div class="g g1"></div>
+    <div class="g g2"></div>
+    <div class="g g3"></div>
+    <div class="g g4"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
