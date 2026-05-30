@@ -279,60 +279,36 @@ img{max-width:100%;display:block}
   color:#fff;
 }
 
-/* Panel semi-transparent — visible en bas (38%), s'agrandit au hover */
+/* Panel caché — BCG exact : top:62%, opacity:0 au repos → top:0, opacity:1 au hover */
 .promo20-hid{
   position:absolute;
-  bottom:0;left:0;right:0;
-  height:38%;                           /* déjà visible en bas */
-  display:flex;flex-direction:column;
-  justify-content:flex-end;             /* texte collé en bas par défaut */
+  top:62%; left:0; right:0;
+  height:100%;
+  display:flex; flex-direction:column;
   overflow:hidden;
-  padding:20px;
-  background:rgba(241,238,234,.82);     /* beige semi-transparent */
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  padding:24px;
+  background:var(--beige);
   z-index:3;
-  border-radius:0 0 var(--r-media) var(--r-media);
-  transition:height .42s cubic-bezier(.25,.46,.45,.94),
-             border-radius .42s ease,
-             justify-content 0s .2s;
+  transition:top .3s ease-in-out .1s, opacity .3s ease-in-out .1s;
 }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid{
-    height:100%;
-    border-radius:var(--r-media);
-    justify-content:flex-start;
+    top:0;
+    opacity:1;
   }
 }
-.promo20-hid .promo20-cat{
-  color:var(--black);opacity:.45;
-  font-size:11px;margin-bottom:8px;
-}
+.promo20-hid .promo20-cat{ color:var(--black); opacity:.45; font-size:11px; margin-bottom:10px }
 .promo20-hid .promo20-title{
   color:var(--black);
-  font-size:clamp(15px,1.3vw,17px);
-  margin-bottom:0;
-  transition:font-size .35s ease;
+  font-size:clamp(15px,1.3vw,18px);
+  margin-bottom:14px;
+  transition:font-size .3s ease;
 }
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid .promo20-title{
-    font-size:clamp(17px,1.5vw,20px);   /* s'agrandit au hover */
-    margin-bottom:14px;
-  }
+  .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(17px,1.5vw,20px) }
 }
-/* Description + CTA : invisibles au repos, apparaissent à l'expansion */
-.promo20-hid p,.promo20-hid .promo20-cta{
-  opacity:0;
-  transform:translateY(10px);
-  transition:opacity .25s ease .2s,transform .25s ease .2s;
-}
-@media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid p,
-  .promo20-inner:hover .promo20-hid .promo20-cta{
-    opacity:1;transform:none;
-  }
-}
-.promo20-hid p{font-size:13px;color:var(--black);opacity:0;line-height:1.6;flex:1}
+.promo20-hid p{ font-size:13px; color:var(--black); opacity:.6; line-height:1.6; flex:1 }
 
 /* CTA arrow button */
 .promo20-cta{
