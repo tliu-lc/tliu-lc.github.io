@@ -549,17 +549,25 @@ img{max-width:100%;display:block}
   border-radius:0 !important;
   clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
-/* Panel dans hexagone — texte dans la zone LARGE du hex (pas le bas pointu) */
+/* Panel dans hexagone — centré horizontalement */
 .promo20-inner.hex .promo20-hid{
   height:40%;
   border-radius:0;
-  padding:14px 22% 14px 22%; /* marges latérales larges pour éviter le tronquage */
-  justify-content:flex-start; /* texte en haut du panel = zone hex la plus large */
+  padding:14px 3% 14px 3%;
+  justify-content:flex-start;
+  align-items:center;
+  text-align:center;
+}
+.promo20-inner.hex .promo20-hid .promo20-cta{
+  padding:5px 12px;
+  font-size:10px;
+  letter-spacing:.06em;
+  align-self:center;
 }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner.hex:hover .promo20-hid{
     height:100%; border-radius:0;
-    padding:20px 20% 20px 20%;
+    padding:50px 3% 20px 3%;
   }
 }
 @media(max-width:1024px){
@@ -834,7 +842,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 </nav>
 
 <!-- ─── HERO 100vh — vidéo background ─── -->
-<section id="hero">
+<section id="hero" class="css-gold">
   <!-- Vidéo dorée -->
   <!-- Option A : vidéo (défaut) -->
   <video class="hero-video" autoplay muted loop playsinline>
