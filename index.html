@@ -169,6 +169,33 @@ img{max-width:100%;display:block}
   animation:g4-move 9s ease-in-out infinite alternate;
 }
 
+/* ── OPTION 1 : texture dots (actif par défaut) ── */
+.aurora-dots{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:radial-gradient(rgba(0,41,107,.055) 1.2px, transparent 1.2px);
+  background-size:26px 26px;
+}
+
+/* ── OPTION 3 : grain noise animé ── */
+.aurora-grain{
+  position:absolute;inset:-50%;z-index:2;pointer-events:none;
+  width:200%;height:200%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  animation:grain-shift .5s steps(2) infinite;
+}
+@keyframes grain-shift{
+  0%  {transform:translate(0,0)}
+  25% {transform:translate(-2%,-1%)}
+  50% {transform:translate(1%,2%)}
+  75% {transform:translate(-1%,-2%)}
+}
+/* Pour activer: ajoute class "show-grain" sur #hero, enlève "show-dots" */
+#hero .aurora-dots{ display:block }
+#hero .aurora-grain{ display:none }
+#hero.show-grain .aurora-grain{ display:block }
+#hero.show-grain .aurora-dots{ display:none }
+
 /* Mouvements lents et fluides */
 @keyframes g1-move{
   0%  {transform:translate(0,0) rotate(-2deg)}
@@ -330,42 +357,62 @@ img{max-width:100%;display:block}
   color:#fff;
 }
 
-/* Panel caché — BCG exact : top:62%, opacity:0 au repos → top:0, opacity:1 au hover */
+/* ── Panel visible en bas, s'agrandit au hover (BCG exact) ── */
 .promo20-hid{
   position:absolute;
-  top:62%; left:0; right:0;
-  height:100%;
+  bottom:0; left:0; right:0;
+  height:38%;                    /* Déjà visible — titre lisible */
   display:flex; flex-direction:column;
+  justify-content:flex-end;      /* Contenu en bas par défaut */
   overflow:hidden;
-  opacity:0;
-  padding:24px;
-  background:var(--beige);
+  padding:20px 22px 22px;
+  background:rgba(241,238,234,.9);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-radius:0 0 var(--r-media) var(--r-media);
   z-index:3;
-  transition:top .3s ease-in-out .1s, opacity .3s ease-in-out .1s;
+  transition:height .4s cubic-bezier(.25,.46,.45,.94),
+             border-radius .4s ease;
 }
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid{
-    top:0;
-    opacity:1;
+  .promo20-inner:hover .promo20-hid,
+  .promo22:hover .promo20-hid{
+    height:100%;
+    border-radius:var(--r-media);
+    justify-content:flex-start;  /* Contenu en haut quand déplié */
   }
 }
-.promo20-hid .promo20-cat{ color:var(--black); opacity:.45; font-size:12px; margin-bottom:12px }
+.promo20-hid .promo20-cat{
+  color:var(--black);opacity:.45;font-size:11px;margin-bottom:8px;
+}
 .promo20-hid .promo20-title{
   color:var(--black);
-  font-size:clamp(18px,1.8vw,24px);
-  margin-bottom:18px;
-  line-height:1.18;
-  transition:font-size .3s ease;
+  font-size:clamp(15px,1.4vw,19px);
+  line-height:1.2;margin-bottom:0;
+  transition:font-size .35s ease,margin-bottom .3s ease;
 }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid .promo20-title,
-  .promo22:hover .promo20-hid .promo20-title{ font-size:clamp(20px,2vw,26px) }
+  .promo22:hover .promo20-hid .promo20-title{
+    font-size:clamp(18px,1.8vw,23px);
+    margin-bottom:14px;
+  }
 }
-.promo20-hid p{ font-size:15px; color:var(--black); opacity:.65; line-height:1.65; flex:1 }
-
-/* Promo22 — même mécanisme panel que promo20 */
+/* Description + CTA cachés, apparaissent sur hover */
+.promo20-hid p,.promo20-hid .promo20-cta{
+  opacity:0; transform:translateY(8px);
+  transition:opacity .25s ease .15s, transform .25s ease .15s;
+}
+.promo20-hid p{ font-size:14px;color:var(--black);opacity:0;line-height:1.62;flex:1 }
 @media(hover:hover) and (pointer:fine){
-  .promo22:hover .promo20-hid{ top:0; opacity:1 }
+  .promo20-inner:hover .promo20-hid p,
+  .promo20-inner:hover .promo20-hid .promo20-cta,
+  .promo22:hover .promo20-hid p,
+  .promo22:hover .promo20-hid .promo20-cta{
+    opacity:.65; transform:none;
+  }
+  .promo20-inner:hover .promo20-hid .promo20-cta,
+  .promo22:hover .promo20-hid .promo20-cta{ opacity:1 }
 }
 
 /* CTA arrow button */
@@ -400,8 +447,26 @@ img{max-width:100%;display:block}
 .spotlight-link:last-child{border-right:none}
 .spotlight-link:hover{color:var(--y-dark)}
 
-/* ─── TOPIC FILTER (= BCG "How can we assist you today?") ─── */
+/* ─── SECTION ASSIST — BCG "From Insights to Action" grid ─── */
 #assist{background:var(--y-bg);padding:var(--sp-v) var(--sp-h)}
+.assist-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:16px;
+  margin-top:36px;
+}
+.assist-feat{ grid-column:span 2; aspect-ratio:16/9 }
+.assist-card-wrap{ aspect-ratio:4/5 }
+@media(max-width:1024px){
+  .assist-grid{ grid-template-columns:repeat(2,1fr) }
+  .assist-feat{ grid-column:span 2; aspect-ratio:16/9 }
+}
+@media(max-width:600px){
+  .assist-grid{ grid-template-columns:1fr }
+  .assist-feat{ grid-column:span 1; aspect-ratio:4/3 }
+  .assist-card-wrap{ aspect-ratio:4/3 }
+}
 .assist-inner{display:grid;grid-template-columns:1fr;gap:40px}
 @media(min-width:1024px){.assist-inner{grid-template-columns:5fr 7fr;align-items:start;gap:80px}}
 .assist-heading h2{
@@ -666,6 +731,8 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
     <div class="g g2"></div>
     <div class="g g3"></div>
     <div class="g g4"></div>
+    <div class="aurora-dots"></div>
+    <div class="aurora-grain"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
@@ -819,78 +886,120 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </section>
 
-<!-- ─── TOPIC FILTER (= BCG "How can we assist you today?") ─── -->
+<!-- ─── ASSIST — BCG "From Insights to Action" image grid ─── -->
 <section id="assist">
-  <div class="assist-inner rv">
-    <div class="assist-heading">
-      <h2>Comment puis-je vous aider ?</h2>
-      <p>Explorez mes domaines d'intervention en sélectionnant votre besoin.</p>
-      <div class="assist-chips">
-        <button class="chip on">Tout voir</button>
-        <button class="chip">Conseil</button>
-        <button class="chip">Engineering</button>
-        <button class="chip">Infrastructure</button>
-        <button class="chip">Visualisation</button>
+  <div style="padding:0 var(--sp-h)" class="rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Comment puis-je vous aider ?</span>
+    <h2 class="module-title" style="text-align:left;margin:0">De l'audit stratégique à la mise en production</h2>
+  </div>
+
+  <div style="padding:0 var(--sp-h)" class="assist-grid rv d1">
+
+    <!-- Featured 2 cols — Conseil & Audit -->
+    <a class="promo20-inner assist-feat" href="#contact">
+      <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit data"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Conseil &amp; Audit data</div>
+        <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
       </div>
-    </div>
-    <div class="assist-cards">
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Conseil & Audit</div>
-          <h3>Cartographier votre patrimoine data et définir les priorités</h3>
-          <p>Audit des sources existantes, diagnostic des risques et opportunités, roadmap data chiffrée — livré en 2 semaines, sans engagement.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Conseil &amp; Audit data</div>
+        <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+        <p>Audit des sources existantes, diagnostic des risques, roadmap data chiffrée. Livré en 2 semaines, sans engagement préalable.</p>
+        <span class="promo20-cta">En savoir plus →</span>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Architecture de données</div>
-          <h3>Concevoir des flux fiables de la source à l'entrepôt</h3>
-          <p>Modélisation de l'entrepôt analytique, choix des technologies, schéma de données adapté à vos usages.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+    </a>
+
+    <!-- Card 2 — Architecture -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Architecture de données</div>
+        <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Data Engineering</div>
-          <h3>Pipelines d'ingestion, transformation et orchestration</h3>
-          <p>Connexion multi-sources, modélisation dbt, orchestration fiable — robustes en production, documentés et maintenables.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Architecture de données</div>
+        <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
+        <p>Modélisation de l'entrepôt analytique, choix des technologies, schéma adapté à vos usages.</p>
+        <span class="promo20-cta">En savoir plus →</span>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Infrastructure cloud</div>
-          <h3>Déploiements reproductibles, versionnés, automatisés</h3>
-          <p>Infrastructure en code (Terraform), CI/CD sur Google Cloud — zéro configuration manuelle, zéro surprise entre environnements.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+    </a>
+
+    <!-- Card 3 — Data Engineering -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-featured.jpg" alt="Data Engineering"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Data Engineering</div>
+        <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Automatisation</div>
-          <h3>Éliminer les traitements manuels et les échecs silencieux</h3>
-          <p>Workflows planifiés, alertes sur anomalies, reportings envoyés automatiquement — vos équipes informées sans intervenir.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Data Engineering</div>
+        <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
+        <p>Connexion multi-sources, transformation fiable, orchestration robuste — documentés et maintenables en production.</p>
+        <span class="promo20-cta">En savoir plus →</span>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">Pilotage & Visualisation</div>
-          <h3>Tableaux de bord opérationnels que vos équipes utilisent vraiment</h3>
-          <p>Power BI connecté à BigQuery, dashboards web interactifs — KPIs ventes, stocks, clients, actualisés chaque matin.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+    </a>
+
+    <!-- Card 4 — Infrastructure -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Infrastructure cloud</div>
+        <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
       </div>
-      <div class="assist-card">
-        <div>
-          <div class="assist-card-label">IA appliquée</div>
-          <h3>Valoriser vos données avec l'intelligence artificielle</h3>
-          <p>Enrichissement automatique, catégorisation, génération de rapports augmentés — intégrable dans un pipeline existant.</p>
-        </div>
-        <span class="assist-card-arrow">→</span>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Infrastructure cloud</div>
+        <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
+        <p>Infrastructure en code, CI/CD automatisé — zéro configuration manuelle, zéro surprise entre environnements.</p>
+        <span class="promo20-cta">En savoir plus →</span>
       </div>
-    </div>
+    </a>
+
+    <!-- Card 5 — Automatisation -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-auto.jpg" alt="Automatisation"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Automatisation</div>
+        <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Automatisation</div>
+        <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
+        <p>Workflows planifiés, alertes sur anomalies, reportings automatiques — vos équipes informées sans intervenir.</p>
+        <span class="promo20-cta">En savoir plus →</span>
+      </div>
+    </a>
+
+    <!-- Card 6 — Pilotage -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Pilotage &amp; Visualisation</div>
+        <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Pilotage &amp; Visualisation</div>
+        <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+        <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
+        <span class="promo20-cta">En savoir plus →</span>
+      </div>
+    </a>
+
+    <!-- Card 7 — IA -->
+    <a class="promo20-inner assist-card-wrap" href="#contact">
+      <div class="promo20-media"><img src="images/card-ia.jpg" alt="IA appliquée"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">IA appliquée</div>
+        <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">IA appliquée</div>
+        <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
+        <p>Enrichissement automatique, catégorisation, génération de rapports augmentés — intégrable dans un pipeline existant.</p>
+        <span class="promo20-cta">En savoir plus →</span>
+      </div>
+    </a>
+
   </div>
 </section>
 
