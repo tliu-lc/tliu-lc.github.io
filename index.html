@@ -156,12 +156,22 @@ img{max-width:100%;display:block}
   100%{ transform:rotate(360deg) rotateX(0deg)   rotateY(0deg)   }
 }
 
-/* Points sur la nappe */
-.hg-dots{
-  position:absolute;inset:-15%;
-  background-image:radial-gradient(circle, rgba(255,240,150,.7) 1.5px, transparent 1.5px);
-  background-size:28px 28px;
-  opacity:.45;
+/* Trou de lumière — reflet vif qui glisse sur la nappe */
+.hg-light{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 22% 18% at 38% 36%,
+    rgba(255,255,255,1)   0%,
+    rgba(255,252,210,.85) 18%,
+    rgba(255,235,120,.45) 40%,
+    transparent           65%);
+  animation:light-drift 9s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+}
+@keyframes light-drift{
+  0%  { transform:translate(0,0)     scale(1)    }
+  33% { transform:translate(18%,-8%) scale(1.15) }
+  66% { transform:translate(-8%,12%) scale(.9)   }
+  100%{ transform:translate(10%,5%)  scale(1.1)  }
 }
 
 /* Zone BLANCHE pour profondeur (luminosité au lieu d'ombre) */
@@ -860,7 +870,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   <!-- Option B : animation CSS (ajouter class "css-gold" sur #hero pour activer) -->
   <div class="hero-gold-bg" aria-hidden="true">
     <div class="hg-base"></div>
-    <div class="hg-dots"></div>
+    <div class="hg-light"></div>
     <div class="hg-shadow"></div>
   </div>
 
