@@ -125,6 +125,58 @@ img{max-width:100%;display:block}
   );
 }
 
+/* ── ANIMATION CSS DORÉE (alternative à la vidéo) ──
+   Pour activer : ajouter class "css-gold" sur #hero
+   Pour désactiver : retirer "css-gold" et garder la vidéo
+*/
+#hero.css-gold .hero-video{ display:none }
+.hero-gold-bg{
+  display:none;
+  position:absolute;inset:0;z-index:0;
+}
+#hero.css-gold .hero-gold-bg{ display:block }
+
+/* Fond doré en dégradé conique tournant */
+.hg-base{
+  position:absolute;inset:0;
+  background:conic-gradient(from 220deg at 42% 48%,
+    #5C2E00 0deg, #A05200 40deg, #D4880A 80deg,
+    #F5B020 120deg, #FFD055 160deg, #F0A000 200deg,
+    #C07010 240deg, #8B4800 280deg, #5C2E00 360deg);
+  animation:gold-spin 28s linear infinite;
+}
+@keyframes gold-spin{ to{ transform:rotate(360deg) } }
+
+/* Reflet blanc qui balaie */
+.hg-shine{
+  position:absolute;inset:-50%;width:200%;height:200%;
+  background:linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(255,255,230,.55) 46%,
+    rgba(255,255,255,.85) 50%,
+    rgba(255,255,230,.55) 54%,
+    transparent 70%
+  );
+  animation:gold-sweep 6s ease-in-out infinite alternate;
+}
+@keyframes gold-sweep{
+  0%  { transform:translate(-30%,-30%) rotate(0deg) }
+  100%{ transform:translate(30%,30%)  rotate(15deg) }
+}
+
+/* Zone sombre pour profondeur */
+.hg-shadow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 62% 58%,
+    rgba(30,10,0,.65) 0%, transparent 65%);
+  animation:gold-shadow 14s ease-in-out infinite alternate;
+}
+@keyframes gold-shadow{
+  0%  { transform:translate(0,0) scale(1) }
+  100%{ transform:translate(-8%,6%) scale(1.15) }
+}
+
 /* (aurora gardée en fallback si vidéo ne charge pas) */
 .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .g{position:absolute;will-change:transform}
@@ -475,8 +527,8 @@ img{max-width:100%;display:block}
 }
 .honey-row:nth-child(1){ z-index:1 }
 .honey-row:nth-child(2){
-  margin-top:16px;               /* gap normal, pas d'overlap */
-  padding-left:calc(12.5% + 5px);
+  margin-top:-70px;
+  /* padding-left:calc(12.5% + 5px); */
   z-index:2;
 }
 
@@ -497,14 +549,18 @@ img{max-width:100%;display:block}
   border-radius:0 !important;
   clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
-/* Panel dans hexagone — positionné dans la zone basse du hex */
+/* Panel dans hexagone — texte dans la zone LARGE du hex (pas le bas pointu) */
 .promo20-inner.hex .promo20-hid{
-  height:42%;
+  height:40%;
   border-radius:0;
-  padding:16px 18px 18px;
+  padding:14px 22% 14px 22%; /* marges latérales larges pour éviter le tronquage */
+  justify-content:flex-start; /* texte en haut du panel = zone hex la plus large */
 }
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner.hex:hover .promo20-hid{ height:100%; border-radius:0 }
+  .promo20-inner.hex:hover .promo20-hid{
+    height:100%; border-radius:0;
+    padding:20px 20% 20px 20%;
+  }
 }
 @media(max-width:1024px){
   .hex-wrap{ flex:0 0 calc(33.333% - 7px) }
@@ -780,10 +836,17 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <!-- ─── HERO 100vh — vidéo background ─── -->
 <section id="hero">
   <!-- Vidéo dorée -->
+  <!-- Option A : vidéo (défaut) -->
   <video class="hero-video" autoplay muted loop playsinline>
     <source src="hero.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
+  <!-- Option B : animation CSS (ajouter class "css-gold" sur #hero pour activer) -->
+  <div class="hero-gold-bg" aria-hidden="true">
+    <div class="hg-base"></div>
+    <div class="hg-shine"></div>
+    <div class="hg-shadow"></div>
+  </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
   <div class="hero-content">
