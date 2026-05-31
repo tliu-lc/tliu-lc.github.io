@@ -147,31 +147,21 @@ img{max-width:100%;display:block}
     #C07010 240deg, #8B4800 280deg, #5C2E00 360deg);
   animation:gold-spin-3d 28s linear infinite;
 }
-/* Rotation sur 2 axes : spin principal + basculement X et Y */
+/* Rotation sur 2 axes — basculement amplifié */
 @keyframes gold-spin-3d{
   0%  { transform:rotate(0deg)   rotateX(0deg)   rotateY(0deg)   }
-  25% { transform:rotate(90deg)  rotateX(14deg)  rotateY(0deg)   }
-  50% { transform:rotate(180deg) rotateX(0deg)   rotateY(-18deg) }
-  75% { transform:rotate(270deg) rotateX(-14deg) rotateY(0deg)   }
+  25% { transform:rotate(90deg)  rotateX(22deg)  rotateY(0deg)   }
+  50% { transform:rotate(180deg) rotateX(0deg)   rotateY(-42deg) }
+  75% { transform:rotate(270deg) rotateX(-22deg) rotateY(0deg)   }
   100%{ transform:rotate(360deg) rotateX(0deg)   rotateY(0deg)   }
 }
 
-/* Reflet blanc qui balaie */
-.hg-shine{
-  position:absolute;inset:-50%;width:200%;height:200%;
-  background:linear-gradient(
-    135deg,
-    transparent 30%,
-    rgba(255,255,230,.55) 46%,
-    rgba(255,255,255,.85) 50%,
-    rgba(255,255,230,.55) 54%,
-    transparent 70%
-  );
-  animation:gold-sweep 6s ease-in-out infinite alternate;
-}
-@keyframes gold-sweep{
-  0%  { transform:translate(-30%,-30%) rotate(0deg) }
-  100%{ transform:translate(30%,30%)  rotate(15deg) }
+/* Points sur la nappe */
+.hg-dots{
+  position:absolute;inset:-15%;
+  background-image:radial-gradient(circle, rgba(255,240,150,.7) 1.5px, transparent 1.5px);
+  background-size:28px 28px;
+  opacity:.45;
 }
 
 /* Zone BLANCHE pour profondeur (luminosité au lieu d'ombre) */
@@ -569,21 +559,24 @@ img{max-width:100%;display:block}
   align-items:center;
   text-align:center;
 }
-/* Texte légèrement réduit au repos */
+/* Texte réduit au repos */
 .promo20-inner.hex .promo20-hid .promo20-cat{ font-size:10px }
 .promo20-inner.hex .promo20-hid .promo20-title{ font-size:clamp(12px,1vw,15px) }
-/* Bouton encore plus petit */
+/* Bouton petit */
 .promo20-inner.hex .promo20-hid .promo20-cta{
-  padding:4px 10px;
-  font-size:9px;
-  letter-spacing:.05em;
-  align-self:center;
+  padding:4px 10px; font-size:9px;
+  letter-spacing:.05em; align-self:center;
 }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner.hex:hover .promo20-hid{
     height:100%; border-radius:0;
     padding:50px 3% 20px 3%;
   }
+  /* Texte plus grand au hover */
+  .promo20-inner.hex:hover .promo20-hid .promo20-cat{ font-size:12px }
+  .promo20-inner.hex:hover .promo20-hid .promo20-title{ font-size:clamp(17px,1.6vw,22px) }
+  .promo20-inner.hex:hover .promo20-hid p{ font-size:15px }
+  .promo20-inner.hex:hover .promo20-hid .promo20-cta{ padding:6px 14px; font-size:11px }
 }
 @media(max-width:1024px){
   .hex-wrap{ flex:0 0 calc(33.333% - 7px) }
@@ -867,7 +860,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   <!-- Option B : animation CSS (ajouter class "css-gold" sur #hero pour activer) -->
   <div class="hero-gold-bg" aria-hidden="true">
     <div class="hg-base"></div>
-    <div class="hg-shine"></div>
+    <div class="hg-dots"></div>
     <div class="hg-shadow"></div>
   </div>
 
