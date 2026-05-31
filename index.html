@@ -105,7 +105,7 @@ img{max-width:100%;display:block}
 /* ─── HERO — multi-cubes ─── */
 #hero{
   position:relative;height:100vh;overflow:hidden;
-  background:#9A5E0A;
+  background:#E8A020;
   display:flex;flex-direction:column;
 }
 /* Overlay pour lisibilité du texte */
@@ -132,14 +132,25 @@ img{max-width:100%;display:block}
 /* Faces — couleur très proche du fond, arêtes quasi invisibles */
 .cube3 div{
   position:absolute;width:100%;height:100%;
-  border:1px solid rgba(255,220,100,.05);
+  border:1px solid rgba(255,240,160,.08);
 }
-.face-f { background:rgba(195,125,25,.30); transform:rotateY(0deg)   translateZ(var(--h)) }
-.face-b { background:rgba(160, 95,10,.20); transform:rotateX(180deg) translateZ(var(--h)) }
-.face-r { background:rgba(215,142,38,.26); transform:rotateY( 90deg) translateZ(var(--h)) }
-.face-l { background:rgba(170,105,15,.18); transform:rotateY(-90deg) translateZ(var(--h)) }
-.face-t { background:rgba(228,158,42,.32); transform:rotateX( 90deg) translateZ(var(--h)) }
-.face-bo{ background:rgba(140, 85, 5,.14); transform:rotateX(-90deg) translateZ(var(--h)) }
+/* Faces — gold clair, proches du fond */
+.face-f { background:rgba(240,178,45,.38); transform:rotateY(0deg)   translateZ(var(--h)) }
+.face-b { background:rgba(210,150,20,.25); transform:rotateX(180deg) translateZ(var(--h)) }
+.face-r { background:rgba(248,192,55,.32); transform:rotateY( 90deg) translateZ(var(--h)) }
+.face-l { background:rgba(215,155,28,.22); transform:rotateY(-90deg) translateZ(var(--h)) }
+.face-t { background:rgba(255,205,65,.40); transform:rotateX( 90deg) translateZ(var(--h)) }
+.face-bo{ background:rgba(190,130,15,.18); transform:rotateX(-90deg) translateZ(var(--h)) }
+/* Reflet blanc SUR les cubes — positionné juste devant la face avant */
+.face-hl{
+  background:radial-gradient(ellipse 50% 45% at 35% 30%,
+    rgba(255,255,255,.72) 0%,
+    rgba(255,255,255,.22) 38%,
+    transparent 68%);
+  transform:rotateY(0deg) translateZ(calc(var(--h) + 0.5px));
+  border:none !important;
+  pointer-events:none;
+}
 
 /* Rotations calmes — quasi planétaires */
 @keyframes calm-a{
@@ -161,22 +172,7 @@ img{max-width:100%;display:block}
 .cw2{ --s:200vmin;--h:100vmin;width:var(--s);height:var(--s);left:20%;top:10% }
 .cw2 .cube3{ animation:calm-b 34s linear infinite }
 
-/* Reflet blanc glissant */
-.cube-shine{
-  position:absolute;inset:-20%;width:140%;height:140%;
-  background:radial-gradient(ellipse 28% 22% at 42% 38%,
-    rgba(255,255,255,.42) 0%,
-    rgba(255,255,255,.18) 28%,
-    transparent 62%);
-  mix-blend-mode:screen;
-  pointer-events:none;z-index:3;
-  animation:shine-drift 18s ease-in-out infinite alternate;
-}
-@keyframes shine-drift{
-  0%  { transform:translate(0,0) scale(1) }
-  50% { transform:translate(12%,-8%) scale(1.1) }
-  100%{ transform:translate(-6%,10%) scale(.95) }
-}
+
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
@@ -750,9 +746,9 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <section id="hero">
   <!-- 8 cubes 3D -->
   <div class="cubes-bg" aria-hidden="true">
-    <div class="cw cw1"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div></div></div>
-    <div class="cw cw2"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div></div></div>
-    <div class="cube-shine"></div>
+    <div class="cw cw1"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div><div class="face-hl"></div></div></div>
+    <div class="cw cw2"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div><div class="face-hl"></div></div></div>
+    
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-content">
