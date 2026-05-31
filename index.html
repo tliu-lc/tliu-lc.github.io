@@ -176,7 +176,7 @@ img{max-width:100%;display:block}
 
 /* Hero content — texte overlaid sur aurora comme BCG */
 .hero-content{
-  position:relative;z-index:1;
+  position:relative;z-index:10; /* au-dessus des cubes et de l'overlay */
   flex:1;display:flex;align-items:center;
   padding:calc(var(--header-h) + 40px) var(--sp-h) 40px;
 }
@@ -193,13 +193,18 @@ img{max-width:100%;display:block}
   font-weight:400;line-height:1.06;letter-spacing:-.025em;
   color:#fff;
   margin-bottom:24px;
+  text-shadow:0 2px 24px rgba(0,0,0,.45), 0 1px 6px rgba(0,0,0,.35);
+}
+.hero-welcome{
+  text-shadow:0 1px 10px rgba(0,0,0,.4);
 }
 .hero-desc{
   font-size:clamp(.9rem,1.4vw,1.1rem);
   font-weight:300;line-height:1.75;
-  color:rgba(255,255,255,.65);
+  color:rgba(255,255,255,.9);
   max-width:520px;
   margin-bottom:40px;
+  text-shadow:0 1px 10px rgba(0,0,0,.4);
 }
 .hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .btn-hero-y{
