@@ -150,29 +150,12 @@ img{max-width:100%;display:block}
 /* Rotation sur 2 axes — basculement amplifié */
 @keyframes gold-spin-3d{
   0%  { transform:rotate(0deg)   rotateX(0deg)   rotateY(0deg)   }
-  25% { transform:rotate(90deg)  rotateX(22deg)  rotateY(0deg)   }
+  25% { transform:rotate(90deg)  rotateX(82deg)  rotateY(0deg)   }
   50% { transform:rotate(180deg) rotateX(0deg)   rotateY(-42deg) }
-  75% { transform:rotate(270deg) rotateX(-22deg) rotateY(0deg)   }
+  75% { transform:rotate(270deg) rotateX(-82deg) rotateY(0deg)   }
   100%{ transform:rotate(360deg) rotateX(0deg)   rotateY(0deg)   }
 }
 
-/* Trou de lumière — reflet vif qui glisse sur la nappe */
-.hg-light{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse 22% 18% at 38% 36%,
-    rgba(255,255,255,1)   0%,
-    rgba(255,252,210,.85) 18%,
-    rgba(255,235,120,.45) 40%,
-    transparent           65%);
-  animation:light-drift 9s ease-in-out infinite alternate;
-  mix-blend-mode:screen;
-}
-@keyframes light-drift{
-  0%  { transform:translate(0,0)     scale(1)    }
-  33% { transform:translate(18%,-8%) scale(1.15) }
-  66% { transform:translate(-8%,12%) scale(.9)   }
-  100%{ transform:translate(10%,5%)  scale(1.1)  }
-}
 
 /* Zone BLANCHE pour profondeur (luminosité au lieu d'ombre) */
 .hg-shadow{
@@ -870,7 +853,6 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   <!-- Option B : animation CSS (ajouter class "css-gold" sur #hero pour activer) -->
   <div class="hero-gold-bg" aria-hidden="true">
     <div class="hg-base"></div>
-    <div class="hg-light"></div>
     <div class="hg-shadow"></div>
   </div>
 
