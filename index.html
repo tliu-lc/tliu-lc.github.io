@@ -124,7 +124,7 @@ img{max-width:100%;display:block}
     transparent 78%);
   filter:blur(52px);
   border-radius:58% 42% 35% 65% / 52% 60% 40% 48%;
-  animation:g1-move 18s ease-in-out infinite alternate;
+  animation:g1-move 10s ease-in-out infinite alternate;
 }
 
 /* G2 — cœur lumineux crème, centre-gauche (= white heart BCG) */
@@ -138,7 +138,7 @@ img{max-width:100%;display:block}
     transparent 68%);
   filter:blur(48px);
   border-radius:45% 55% 62% 38% / 40% 55% 45% 60%;
-  animation:g2-move 22s ease-in-out infinite alternate;
+  animation:g2-move 13s ease-in-out infinite alternate;
 }
 
 /* G3 — bande bleue diagonale fine (= teal streak BCG) */
@@ -153,7 +153,7 @@ img{max-width:100%;display:block}
     transparent      92%);
   filter:blur(32px);
   transform:rotate(-13deg);
-  animation:g3-move 14s ease-in-out infinite alternate;
+  animation:g3-move 8s ease-in-out infinite alternate;
 }
 
 /* G4 — accent or haut-gauche (= yellow-green BCG) */
@@ -166,7 +166,7 @@ img{max-width:100%;display:block}
     transparent 60%);
   filter:blur(46px);
   border-radius:52% 48% 42% 58% / 58% 42% 52% 48%;
-  animation:g4-move 16s ease-in-out infinite alternate;
+  animation:g4-move 9s ease-in-out infinite alternate;
 }
 
 /* Mouvements lents et fluides */
@@ -349,17 +349,24 @@ img{max-width:100%;display:block}
     opacity:1;
   }
 }
-.promo20-hid .promo20-cat{ color:var(--black); opacity:.45; font-size:11px; margin-bottom:10px }
+.promo20-hid .promo20-cat{ color:var(--black); opacity:.45; font-size:12px; margin-bottom:12px }
 .promo20-hid .promo20-title{
   color:var(--black);
-  font-size:clamp(15px,1.3vw,18px);
-  margin-bottom:14px;
+  font-size:clamp(18px,1.8vw,24px);
+  margin-bottom:18px;
+  line-height:1.18;
   transition:font-size .3s ease;
 }
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(17px,1.5vw,20px) }
+  .promo20-inner:hover .promo20-hid .promo20-title,
+  .promo22:hover .promo20-hid .promo20-title{ font-size:clamp(20px,2vw,26px) }
 }
-.promo20-hid p{ font-size:13px; color:var(--black); opacity:.6; line-height:1.6; flex:1 }
+.promo20-hid p{ font-size:15px; color:var(--black); opacity:.65; line-height:1.65; flex:1 }
+
+/* Promo22 — même mécanisme panel que promo20 */
+@media(hover:hover) and (pointer:fine){
+  .promo22:hover .promo20-hid{ top:0; opacity:1 }
+}
 
 /* CTA arrow button */
 .promo20-cta{
@@ -792,6 +799,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
     <div class="client-logo"><img src="logos/bureau-vallee.png" alt="Bureau Vallée"></div>
     <div class="client-logo"><img src="logos/totalenergies.svg" alt="TotalEnergies"></div>
     <div class="client-logo"><img src="logos/servier.png" alt="Servier"></div>
+    <div class="client-logo"><img src="logos/hippocampe.png" alt="Hippocampe Paris"></div>
   </div>
 </section>
 
@@ -886,35 +894,54 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </section>
 
-<!-- ─── MOSAIC 3 CARDS (= BCG List17 / Promo22) ─── -->
+<!-- ─── MOSAIC 3 CARDS ─── -->
 <section id="mosaic">
-  <div class="mosaic-grid rv">
+  <div style="padding:var(--sp-v) var(--sp-h) 0" class="rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Réalisations</span>
+    <h2 class="module-title" style="text-align:left;margin:0 0 36px">Ce que j'ai livré concrètement</h2>
+  </div>
+  <div class="mosaic-grid rv d1">
 
-    <!-- Card A : audit & conseil -->
+    <!-- Card A : audit & conseil — avec panel -->
     <div class="promo22 promo22-a promo22-navy">
-      <div class="promo22-content">
-        <div class="promo22-eyebrow">Conseil & Audit data</div>
+      <div class="promo20-vis" style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
+        <div class="promo22-eyebrow">Conseil &amp; Audit data</div>
         <div class="promo22-title">Diagnostic de votre maturité data en 2 semaines</div>
+      </div>
+      <div class="promo20-hid" style="background:var(--navy)">
+        <div class="promo20-cat" style="color:rgba(255,255,255,.5)">Conseil &amp; Audit data</div>
+        <h3 class="promo20-title" style="color:#fff">Diagnostic de votre maturité data en 2 semaines</h3>
+        <p style="color:rgba(255,255,255,.62)">Cartographie des sources, diagnostic des risques, roadmap technique chiffrée — sans engagement préalable.</p>
         <a href="#contact" class="promo22-cta">En savoir plus →</a>
       </div>
     </div>
 
-    <!-- Card B : solution retail + résultat −70% -->
+    <!-- Card B : retail + −70% — avec panel -->
     <div class="promo22 promo22-b" style="background:var(--charcoal)">
       <div class="promo22-bg"><img src="images/card-pilotage.jpg" alt="Retail Dashboard"></div>
       <div class="promo22-overlay"></div>
-      <div class="promo22-content">
+      <div class="promo20-vis" style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
         <div class="promo22-eyebrow">Résultat concret · −70% temps de traitement</div>
         <div class="promo22-title">Plateforme de pilotage Retail &amp; Multi-sites livrée clé en main</div>
+      </div>
+      <div class="promo20-hid" style="background:rgba(30,20,10,.92)">
+        <div class="promo20-cat" style="color:rgba(255,255,255,.5)">Solution livrée</div>
+        <h3 class="promo20-title" style="color:#fff">Plateforme de pilotage Retail &amp; Multi-sites</h3>
+        <p style="color:rgba(255,255,255,.62)">Monitoring des ventes, relance client automatisée, prospection et dashboarding — un seul interlocuteur, de A à Z.</p>
         <a href="https://tliu-lc.github.io/retail-dashboard/" target="_blank" class="promo22-cta">Découvrir →</a>
       </div>
     </div>
 
-    <!-- Card C : approche forfaitaire -->
+    <!-- Card C : approche — avec panel -->
     <div class="promo22 promo22-c promo22-beige">
-      <div class="promo22-content">
+      <div class="promo20-vis" style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
         <div class="promo22-eyebrow" style="color:rgba(0,0,0,.4)">Comment je travaille</div>
         <div class="promo22-title" style="color:var(--black)">Forfait clair, livraison complète, vous restez propriétaire.</div>
+      </div>
+      <div class="promo20-hid" style="background:var(--beige)">
+        <div class="promo20-cat">Comment je travaille</div>
+        <h3 class="promo20-title">Forfait clair, livraison complète, vous restez propriétaire.</h3>
+        <p>Pas de régie, pas de flou. On cadre le besoin, je livre, vous avez la main — code source et infrastructure inclus.</p>
         <a href="#offres" class="promo22-cta">Nos offres →</a>
       </div>
     </div>
