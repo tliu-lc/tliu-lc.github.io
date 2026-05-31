@@ -136,16 +136,25 @@ img{max-width:100%;display:block}
 }
 #hero.css-gold .hero-gold-bg{ display:block }
 
-/* Fond doré en dégradé conique tournant */
+/* Fond doré — perspective 3D pour la rotation 2 axes */
+.hero-gold-bg{ perspective:1400px; perspective-origin:50% 50% }
+
 .hg-base{
-  position:absolute;inset:0;
+  position:absolute;inset:-15%; /* légèrement plus grand pour éviter les bords visibles */
   background:conic-gradient(from 220deg at 42% 48%,
     #5C2E00 0deg, #A05200 40deg, #D4880A 80deg,
     #F5B020 120deg, #FFD055 160deg, #F0A000 200deg,
     #C07010 240deg, #8B4800 280deg, #5C2E00 360deg);
-  animation:gold-spin 28s linear infinite;
+  animation:gold-spin-3d 28s linear infinite;
 }
-@keyframes gold-spin{ to{ transform:rotate(360deg) } }
+/* Rotation sur 2 axes : spin principal + basculement X et Y */
+@keyframes gold-spin-3d{
+  0%  { transform:rotate(0deg)   rotateX(0deg)   rotateY(0deg)   }
+  25% { transform:rotate(90deg)  rotateX(14deg)  rotateY(0deg)   }
+  50% { transform:rotate(180deg) rotateX(0deg)   rotateY(-18deg) }
+  75% { transform:rotate(270deg) rotateX(-14deg) rotateY(0deg)   }
+  100%{ transform:rotate(360deg) rotateX(0deg)   rotateY(0deg)   }
+}
 
 /* Reflet blanc qui balaie */
 .hg-shine{
@@ -165,11 +174,11 @@ img{max-width:100%;display:block}
   100%{ transform:translate(30%,30%)  rotate(15deg) }
 }
 
-/* Zone sombre pour profondeur */
+/* Zone BLANCHE pour profondeur (luminosité au lieu d'ombre) */
 .hg-shadow{
   position:absolute;inset:0;
   background:radial-gradient(ellipse at 62% 58%,
-    rgba(30,10,0,.65) 0%, transparent 65%);
+    rgba(255,255,255,.38) 0%, transparent 62%);
   animation:gold-shadow 14s ease-in-out infinite alternate;
 }
 @keyframes gold-shadow{
