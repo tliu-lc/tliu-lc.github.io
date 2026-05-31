@@ -102,15 +102,31 @@ img{max-width:100%;display:block}
 }
 .nav-cta:hover{background:var(--y-hover)}
 
-/* ─── HERO — fond clair comme BCG ─── */
+/* ─── HERO — vidéo background ─── */
 #hero{
   position:relative;height:100vh;overflow:hidden;
-  background:#FFF8E8;          /* crème chaud clair, comme BCG */
+  background:#1a0e00;
   display:flex;flex-direction:column;
 }
+/* Vidéo fond */
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  pointer-events:none;z-index:0;
+}
+/* Overlay sombre pour lisibilité du texte */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(
+    120deg,
+    rgba(0,0,0,.42) 0%,
+    rgba(0,0,0,.22) 50%,
+    transparent 100%
+  );
+}
 
-/* ─── AURORA PROFESSIONNELLE ─── */
-.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+/* (aurora gardée en fallback si vidéo ne charge pas) */
+.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .g{position:absolute;will-change:transform}
 
 /* G1 — grande nappe ambre, haut-droit (= vert lime BCG) */
@@ -224,38 +240,38 @@ img{max-width:100%;display:block}
 .hero-welcome{
   display:block;
   font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(0,41,107,.5);
+  color:rgba(255,255,255,.55);
   margin-bottom:20px;
 }
 .hero-h1{
   font-family:'DM Serif Display',serif;
   font-size:clamp(2.2rem,5vw,60px);
   font-weight:400;line-height:1.06;letter-spacing:-.025em;
-  color:var(--navy);
+  color:#fff;
   margin-bottom:24px;
 }
 .hero-desc{
   font-size:clamp(.9rem,1.4vw,1.1rem);
   font-weight:300;line-height:1.75;
-  color:rgba(0,41,107,.62);
+  color:rgba(255,255,255,.65);
   max-width:520px;
   margin-bottom:40px;
 }
 .hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .btn-hero-y{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--navy);color:#fff;
+  background:var(--y);color:var(--black);
   padding:14px 28px;border-radius:var(--r-btn);
   font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   transition:background .2s;
 }
-.btn-hero-y:hover{background:var(--navy-2)}
+.btn-hero-y:hover{background:var(--y-hover)}
 .btn-hero-ghost{
-  font-size:.88rem;font-weight:300;color:rgba(0,41,107,.6);
-  border-bottom:1px solid rgba(0,41,107,.25);padding-bottom:1px;
+  font-size:.88rem;font-weight:300;color:rgba(255,255,255,.65);
+  border-bottom:1px solid rgba(255,255,255,.28);padding-bottom:1px;
   transition:all .2s;
 }
-.btn-hero-ghost:hover{color:var(--navy);border-color:rgba(0,41,107,.7)}
+.btn-hero-ghost:hover{color:#fff;border-color:rgba(255,255,255,.7)}
 
 /* Scroll indicator */
 .hero-scroll{
@@ -398,21 +414,14 @@ img{max-width:100%;display:block}
     margin-bottom:14px;
   }
 }
-/* Description + CTA cachés, apparaissent sur hover */
-.promo20-hid p,.promo20-hid .promo20-cta{
-  opacity:0; transform:translateY(8px);
-  transition:opacity .25s ease .15s, transform .25s ease .15s;
-}
-.promo20-hid p{ font-size:14px;color:var(--black);opacity:0;line-height:1.62;flex:1 }
+/* Description + CTA : hors layout au repos, apparaissent sur hover */
+.promo20-hid p{ font-size:14px;color:var(--black);opacity:.72;line-height:1.62;display:none }
+.promo20-hid .promo20-cta{ display:none }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid p,
+  .promo22:hover .promo20-hid p{ display:block;margin-top:4px }
   .promo20-inner:hover .promo20-hid .promo20-cta,
-  .promo22:hover .promo20-hid p,
-  .promo22:hover .promo20-hid .promo20-cta{
-    opacity:.65; transform:none;
-  }
-  .promo20-inner:hover .promo20-hid .promo20-cta,
-  .promo22:hover .promo20-hid .promo20-cta{ opacity:1 }
+  .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:14px }
 }
 
 /* CTA arrow button */
@@ -447,25 +456,62 @@ img{max-width:100%;display:block}
 .spotlight-link:last-child{border-right:none}
 .spotlight-link:hover{color:var(--y-dark)}
 
-/* ─── SECTION ASSIST — BCG "From Insights to Action" grid ─── */
-#assist{background:var(--y-bg);padding:var(--sp-v) var(--sp-h)}
-.assist-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:auto;
-  gap:16px;
-  margin-top:36px;
+/* ─── SECTION ASSIST — Honeycomb layout ─── */
+#assist{background:var(--y-bg);padding:var(--sp-v) 0}
+.honey-header{padding:0 var(--sp-h);margin-bottom:28px}
+
+/* Grille honeycomb : 2 rangées décalées */
+.honey-grid{
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;padding:0 var(--sp-h);
 }
-.assist-feat{ grid-column:span 2; aspect-ratio:16/9 }
-.assist-card-wrap{ aspect-ratio:4/5 }
+.honey-row{
+  display:flex;gap:10px;justify-content:center;width:100%;
+}
+.honey-row:nth-child(2){
+  margin-top:calc(-11% - 5px); /* chevauchement vertical honeycomb */
+  padding-left:calc(12.5% + 5px); /* décalage horizontal */
+}
+
+/* Cellule hexagonale */
+.hex-wrap{
+  flex:0 0 calc(25% - 7.5px);
+  position:relative;
+}
+.hex-wrap::before{
+  content:''; display:block;
+  padding-top:115.47%; /* hauteur hex = largeur × 2/√3 */
+}
+/* Card hex */
+.promo20-inner.hex{
+  position:absolute !important;
+  inset:0 !important;
+  aspect-ratio:unset !important;
+  border-radius:0 !important;
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+/* Panel dans hexagone — positionné dans la zone basse du hex */
+.promo20-inner.hex .promo20-hid{
+  height:42%;
+  border-radius:0;
+  padding:16px 18px 18px;
+}
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner.hex:hover .promo20-hid{ height:100%; border-radius:0 }
+}
 @media(max-width:1024px){
-  .assist-grid{ grid-template-columns:repeat(2,1fr) }
-  .assist-feat{ grid-column:span 2; aspect-ratio:16/9 }
+  .hex-wrap{ flex:0 0 calc(33.333% - 7px) }
+  .honey-row:nth-child(2){ padding-left:calc(16.666% + 5px) }
 }
 @media(max-width:600px){
-  .assist-grid{ grid-template-columns:1fr }
-  .assist-feat{ grid-column:span 1; aspect-ratio:4/3 }
-  .assist-card-wrap{ aspect-ratio:4/3 }
+  .honey-row{ flex-direction:column; align-items:center }
+  .honey-row:nth-child(2){ margin-top:10px; padding-left:0 }
+  .hex-wrap{ flex:0 0 80%; max-width:300px }
+  .promo20-inner.hex{ clip-path:none; border-radius:var(--r-media)!important }
+  .promo20-inner.hex .promo20-hid{ border-radius:0 0 var(--r-media) var(--r-media) }
+  @media(hover:hover) and (pointer:fine){
+    .promo20-inner.hex:hover .promo20-hid{ border-radius:var(--r-media)!important }
+  }
 }
 .assist-inner{display:grid;grid-template-columns:1fr;gap:40px}
 @media(min-width:1024px){.assist-inner{grid-template-columns:5fr 7fr;align-items:start;gap:80px}}
@@ -724,16 +770,13 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </nav>
 
-<!-- ─── HERO 100vh — texte sur aurora comme BCG ─── -->
+<!-- ─── HERO 100vh — vidéo background ─── -->
 <section id="hero">
-  <div class="aurora" aria-hidden="true">
-    <div class="g g1"></div>
-    <div class="g g2"></div>
-    <div class="g g3"></div>
-    <div class="g g4"></div>
-    <div class="aurora-dots"></div>
-    <div class="aurora-grain"></div>
-  </div>
+  <!-- Vidéo dorée -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
   <div class="hero-content">
@@ -775,7 +818,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
-          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Notre approche"></div>
+          <div class="promo20-media"><img src="images/card-approche.jpg" alt="Notre approche"></div>
           <div class="promo20-vis">
             <div class="promo20-cat">Notre approche</div>
             <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
@@ -823,7 +866,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 
       <div class="promo20">
         <a class="promo20-inner" href="#assist">
-          <div class="promo20-media"><img src="images/card-auto.jpg" alt="Conseil & Audit data"></div>
+          <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit data"></div>
           <div class="promo20-vis">
             <div class="promo20-cat">Conseil &amp; Audit data</div>
             <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
@@ -886,119 +929,108 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </section>
 
-<!-- ─── ASSIST — BCG "From Insights to Action" image grid ─── -->
+<!-- ─── ASSIST — Honeycomb layout ─── -->
 <section id="assist">
-  <div style="padding:0 var(--sp-h)" class="rv">
+  <div class="honey-header rv">
     <span class="module-eyebrow" style="display:block;margin-bottom:12px">Comment puis-je vous aider ?</span>
     <h2 class="module-title" style="text-align:left;margin:0">De l'audit stratégique à la mise en production</h2>
   </div>
 
-  <div style="padding:0 var(--sp-h)" class="assist-grid rv d1">
+  <div class="honey-grid rv d1">
 
-    <!-- Featured 2 cols — Conseil & Audit -->
-    <a class="promo20-inner assist-feat" href="#contact">
-      <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit data"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Conseil &amp; Audit data</div>
-        <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
-      </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Conseil &amp; Audit data</div>
-        <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
-        <p>Audit des sources existantes, diagnostic des risques, roadmap data chiffrée. Livré en 2 semaines, sans engagement préalable.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
+    <!-- Rangée 1 : 4 hexagones -->
+    <div class="honey-row">
 
-    <!-- Card 2 — Architecture -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Architecture de données</div>
-        <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Conseil &amp; Audit</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+            <p>Audit des sources, diagnostic des risques, roadmap chiffrée. 2 semaines, sans engagement.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Architecture de données</div>
-        <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
-        <p>Modélisation de l'entrepôt analytique, choix des technologies, schéma adapté à vos usages.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
 
-    <!-- Card 3 — Data Engineering -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-featured.jpg" alt="Data Engineering"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Data Engineering</div>
-        <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
+            <p>Modélisation analytique, choix technologiques, schéma adapté à vos usages.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Data Engineering</div>
-        <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
-        <p>Connexion multi-sources, transformation fiable, orchestration robuste — documentés et maintenables en production.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
 
-    <!-- Card 4 — Infrastructure -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Infrastructure cloud</div>
-        <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Data Engineering"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Data Engineering</div>
+            <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
+            <p>Multi-sources, transformation fiable, orchestration robuste — documentés en production.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Infrastructure cloud</div>
-        <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
-        <p>Infrastructure en code, CI/CD automatisé — zéro configuration manuelle, zéro surprise entre environnements.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
 
-    <!-- Card 5 — Automatisation -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-auto.jpg" alt="Automatisation"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Automatisation</div>
-        <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
+            <p>Infrastructure en code, CI/CD — zéro configuration manuelle, zéro surprise.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Automatisation</div>
-        <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
-        <p>Workflows planifiés, alertes sur anomalies, reportings automatiques — vos équipes informées sans intervenir.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
 
-    <!-- Card 6 — Pilotage -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">Pilotage &amp; Visualisation</div>
-        <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
-      </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">Pilotage &amp; Visualisation</div>
-        <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
-        <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
-        <span class="promo20-cta">En savoir plus →</span>
-      </div>
-    </a>
+    </div><!-- fin row 1 -->
 
-    <!-- Card 7 — IA -->
-    <a class="promo20-inner assist-card-wrap" href="#contact">
-      <div class="promo20-media"><img src="images/card-ia.jpg" alt="IA appliquée"></div>
-      <div class="promo20-vis">
-        <div class="promo20-cat">IA appliquée</div>
-        <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
+    <!-- Rangée 2 : 3 hexagones décalés -->
+    <div class="honey-row">
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-auto.jpg" alt="Automatisation"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Automatisation</div>
+            <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
+            <p>Workflows planifiés, alertes sur anomalies, reportings sans intervention.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-      <div class="promo20-hid">
-        <div class="promo20-cat">IA appliquée</div>
-        <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
-        <p>Enrichissement automatique, catégorisation, génération de rapports augmentés — intégrable dans un pipeline existant.</p>
-        <span class="promo20-cta">En savoir plus →</span>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage & Visualisation"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Pilotage &amp; Visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+            <p>Ventes, stocks, clients, indicateurs — actualisés automatiquement chaque matin.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
       </div>
-    </a>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-ia.jpg" alt="IA appliquée"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">IA appliquée</div>
+            <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
+            <p>Enrichissement, catégorisation, rapports augmentés — intégrable dans un pipeline existant.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- fin row 2 -->
 
   </div>
 </section>
@@ -1118,7 +1150,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 <section id="editorial">
   <div class="editorial-inner rv">
     <div class="editorial-media">
-      <img src="images/card-featured.jpg" alt="Data Engineering LIU Consulting">
+      <img src="images/offre-mission.jpg" alt="LIU Consulting — Livraison technique">
     </div>
     <div class="editorial-content">
       <div class="editorial-eyebrow">Ce qui nous distingue</div>
