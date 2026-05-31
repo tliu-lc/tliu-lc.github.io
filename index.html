@@ -157,17 +157,6 @@ img{max-width:100%;display:block}
 }
 
 
-/* Zone BLANCHE pour profondeur (luminosité au lieu d'ombre) */
-.hg-shadow{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 62% 58%,
-    rgba(255,255,255,.38) 0%, transparent 62%);
-  animation:gold-shadow 14s ease-in-out infinite alternate;
-}
-@keyframes gold-shadow{
-  0%  { transform:translate(0,0) scale(1) }
-  100%{ transform:translate(-8%,6%) scale(1.15) }
-}
 
 /* (aurora gardée en fallback si vidéo ne charge pas) */
 .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
@@ -853,7 +842,6 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   <!-- Option B : animation CSS (ajouter class "css-gold" sur #hero pour activer) -->
   <div class="hero-gold-bg" aria-hidden="true">
     <div class="hg-base"></div>
-    <div class="hg-shadow"></div>
   </div>
 
   <!-- Texte overlaid sur aurora — BCG style -->
