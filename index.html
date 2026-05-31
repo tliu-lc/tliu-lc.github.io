@@ -424,6 +424,14 @@ img{max-width:100%;display:block}
   .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:14px }
 }
 
+/* Offres — texte agrandi pour remplir la card */
+#offres .promo20-hid{ height:50% }
+#offres .promo20-hid .promo20-title{ font-size:clamp(20px,2.2vw,28px); line-height:1.15; margin-bottom:0 }
+#offres .promo20-hid p{ font-size:16px; line-height:1.72 }
+@media(hover:hover) and (pointer:fine){
+  #offres .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(22px,2.5vw,30px); margin-bottom:16px }
+}
+
 /* CTA arrow button */
 .promo20-cta{
   display:inline-flex;align-items:center;gap:8px;
@@ -467,10 +475,13 @@ img{max-width:100%;display:block}
 }
 .honey-row{
   display:flex;gap:10px;justify-content:center;width:100%;
+  position:relative;
 }
+.honey-row:nth-child(1){ z-index:1 }
 .honey-row:nth-child(2){
-  margin-top:calc(-11% - 5px); /* chevauchement vertical honeycomb */
-  padding-left:calc(12.5% + 5px); /* décalage horizontal */
+  margin-top:calc(-7.2% - 4px); /* honeycomb : 1/4 hauteur hex */
+  padding-left:calc(12.5% + 5px);
+  z-index:2;                     /* row 2 par-dessus row 1 */
 }
 
 /* Cellule hexagonale */
@@ -1310,6 +1321,10 @@ if (carousel && prevBtn && nextBtn) {
   }, { passive: true });
   prevBtn.disabled = true;
 }
+
+/* Vidéo — ralentie */
+const vid = document.querySelector('.hero-video');
+if (vid) { vid.addEventListener('loadedmetadata', () => { vid.playbackRate = 0.55; }); }
 
 /* Chips filter (assist section) */
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
