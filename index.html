@@ -542,12 +542,14 @@ img{max-width:100%;display:block}
   padding-top:115.47%; /* hauteur hex = largeur × 2/√3 */
 }
 /* Card hex */
+.hex-wrap{ pointer-events:none }          /* fix hover : désactive la zone transparente */
 .promo20-inner.hex{
   position:absolute !important;
   inset:0 !important;
   aspect-ratio:unset !important;
   border-radius:0 !important;
   clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  pointer-events:all;                      /* réactivé uniquement dans la zone hex */
 }
 /* Panel dans hexagone — centré horizontalement */
 .promo20-inner.hex .promo20-hid{
@@ -558,10 +560,14 @@ img{max-width:100%;display:block}
   align-items:center;
   text-align:center;
 }
+/* Texte légèrement réduit au repos */
+.promo20-inner.hex .promo20-hid .promo20-cat{ font-size:10px }
+.promo20-inner.hex .promo20-hid .promo20-title{ font-size:clamp(12px,1vw,15px) }
+/* Bouton encore plus petit */
 .promo20-inner.hex .promo20-hid .promo20-cta{
-  padding:5px 12px;
-  font-size:10px;
-  letter-spacing:.06em;
+  padding:4px 10px;
+  font-size:9px;
+  letter-spacing:.05em;
   align-self:center;
 }
 @media(hover:hover) and (pointer:fine){
