@@ -344,7 +344,13 @@ img{max-width:100%;display:block}
   }
 }
 
-/* Hover promo20-inner : panel absolu couvre l'image */
+/* Animation slide-up pour le panel */
+@keyframes panel-slide-up{
+  from{ clip-path:inset(100% 0 0 0 round var(--r-media)) }
+  to  { clip-path:inset(0 0 0 0 round var(--r-media)) }
+}
+
+/* Hover promo20-inner : panel absolu couvre l'image avec animation */
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid{
     position:absolute !important;
@@ -354,8 +360,19 @@ img{max-width:100%;display:block}
     border-radius:var(--r-media);
     z-index:5;
     justify-content:flex-start;
+    animation:panel-slide-up .42s cubic-bezier(.25,.46,.45,.94) forwards;
   }
 }
+
+/* Bouton CTA des panels */
+.promo20-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:12px 20px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  transition:background .2s;width:fit-content;
+}
+.promo20-cta:hover{background:var(--y-hover)}
 
 /* ─── SPOTLIGHT STRIP (= BCG List14) ─── */
 #spotlight{
