@@ -296,19 +296,19 @@ img{max-width:100%;display:block}
   cursor:pointer;text-decoration:none;
 }
 
-/* Image — 62% de la hauteur, pas absolu */
+/* Image — 62% de la hauteur uniquement */
 .promo20-media{
   position:relative;
   height:62%;flex-shrink:0;
   overflow:hidden;
 }
 .promo20-media img{width:100%;height:100%;object-fit:cover;display:block}
-.promo20-media::after{display:none}
+.promo20-media::after{display:none} /* pas de gradient — image propre */
 
-/* promo20-vis inutile (panel toujours visible) */
+/* promo20-vis inutile — panel toujours visible dessous */
 .promo20-inner .promo20-vis{display:none}
 
-/* Panel global — absolu pour promo22 (mosaic) */
+/* Panel global — absolu pour .promo22 (mosaic) */
 .promo20-hid{
   position:absolute;
   bottom:0;left:0;right:0;
@@ -324,7 +324,7 @@ img{max-width:100%;display:block}
   transition:height .42s cubic-bezier(.25,.46,.45,.94),border-radius .42s ease;
 }
 
-/* Panel dans promo20-inner — flex, en dessous de l'image */
+/* Panel dans promo20-inner — flex, sous l'image */
 .promo20-inner .promo20-hid{
   position:relative;
   bottom:auto;left:auto;right:auto;
@@ -344,11 +344,11 @@ img{max-width:100%;display:block}
   }
 }
 
-/* Hover promo20-inner : panel devient absolu et couvre l'image */
+/* Hover promo20-inner : panel absolu couvre l'image */
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid{
     position:absolute !important;
-    top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;
+    inset:0 !important;
     height:100% !important;
     flex:none;
     border-radius:var(--r-media);
@@ -357,4 +357,945 @@ img{max-width:100%;display:block}
   }
 }
 
+/* ─── SPOTLIGHT STRIP (= BCG List14) ─── */
+#spotlight{
+  background:var(--white);
+  border-top:1px solid var(--gray-300);
+  border-bottom:1px solid var(--gray-300);
+  padding:20px var(--sp-h);
+}
+.spotlight-inner{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.spotlight-label{
+  font-size:11px;font-weight:400;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--black);opacity:.45;flex-shrink:0;
+}
+.spotlight-links{display:flex;gap:0;flex-wrap:wrap}
+.spotlight-link{
+  font-size:14px;font-weight:300;color:var(--black);
+  padding:4px 20px;border-right:1px solid var(--gray-300);
+  transition:color .2s;
+}
+.spotlight-link:first-child{padding-left:0}
+.spotlight-link:last-child{border-right:none}
+.spotlight-link:hover{color:var(--y-dark)}
 
+/* ─── SECTION ASSIST — Honeycomb layout ─── */
+#assist{background:var(--y-bg);padding:var(--sp-v) 0}
+.honey-header{padding:0 var(--sp-h);margin-bottom:28px}
+
+/* Grille honeycomb : 2 rangées décalées */
+.honey-grid{
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;padding:0 var(--sp-h);
+}
+.honey-row{
+  display:flex;gap:10px;justify-content:center;width:100%;
+  position:relative;
+}
+.honey-row:nth-child(1){ z-index:1 }
+.honey-row:nth-child(2){
+  margin-top:-70px;
+  /* padding-left:calc(12.5% + 5px); */
+  z-index:2;
+}
+
+/* Cellule hexagonale */
+.hex-wrap{
+  flex:0 0 calc(25% - 7.5px);
+  position:relative;
+}
+.hex-wrap::before{
+  content:''; display:block;
+  padding-top:115.47%; /* hauteur hex = largeur × 2/√3 */
+}
+/* Card hex */
+.hex-wrap{ pointer-events:none }          /* fix hover : désactive la zone transparente */
+.promo20-inner.hex{
+  position:absolute !important;
+  inset:0 !important;
+  aspect-ratio:unset !important;
+  border-radius:0 !important;
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  pointer-events:all;                      /* réactivé uniquement dans la zone hex */
+}
+/* Panel dans hexagone — centré horizontalement */
+.promo20-inner.hex .promo20-hid{
+  height:40%;
+  border-radius:0;
+  padding:14px 3% 14px 3%;
+  justify-content:flex-start;
+  align-items:center;
+  text-align:center;
+}
+/* Texte réduit au repos */
+.promo20-inner.hex .promo20-hid .promo20-cat{ font-size:10px }
+.promo20-inner.hex .promo20-hid .promo20-title{ font-size:clamp(12px,1vw,15px) }
+/* Bouton petit */
+.promo20-inner.hex .promo20-hid .promo20-cta{
+  padding:4px 10px; font-size:9px;
+  letter-spacing:.05em; align-self:center;
+}
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner.hex:hover .promo20-hid{
+    height:100%; border-radius:0;
+    padding:60px 3% 20px 3%;
+  }
+  /* Texte plus grand au hover */
+  .promo20-inner.hex:hover .promo20-hid .promo20-cat{ font-size:12px }
+  .promo20-inner.hex:hover .promo20-hid .promo20-title{ font-size:clamp(17px,1.6vw,22px) }
+  .promo20-inner.hex:hover .promo20-hid p{ font-size:15px }
+  .promo20-inner.hex:hover .promo20-hid .promo20-cta{ padding:6px 14px; font-size:11px }
+}
+@media(max-width:1024px){
+  .hex-wrap{ flex:0 0 calc(33.333% - 7px) }
+  .honey-row:nth-child(2){ padding-left:calc(16.666% + 5px) }
+}
+@media(max-width:600px){
+  .honey-row{ flex-direction:column; align-items:center }
+  .honey-row:nth-child(2){ margin-top:10px; padding-left:0 }
+  .hex-wrap{ flex:0 0 80%; max-width:300px }
+  .promo20-inner.hex{ clip-path:none; border-radius:var(--r-media)!important }
+  .promo20-inner.hex .promo20-hid{ border-radius:0 0 var(--r-media) var(--r-media) }
+  @media(hover:hover) and (pointer:fine){
+    .promo20-inner.hex:hover .promo20-hid{ border-radius:var(--r-media)!important }
+  }
+}
+.assist-inner{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:1024px){.assist-inner{grid-template-columns:5fr 7fr;align-items:start;gap:80px}}
+.assist-heading h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.6rem,3vw,2.6rem);font-weight:400;line-height:1.1;
+  color:var(--black);margin-bottom:16px;
+}
+.assist-heading p{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.7;margin-bottom:28px}
+.assist-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:8px 18px;font-size:.78rem;font-weight:600;
+  border:1.5px solid rgba(0,0,0,.2);border-radius:var(--nav-radius);
+  color:var(--black);cursor:pointer;transition:all .2s;background:transparent;
+  font-family:'DM Sans',sans-serif;
+}
+.chip:hover,.chip.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.assist-cards{display:flex;flex-direction:column;gap:0;border:1px solid rgba(0,0,0,.12)}
+.assist-card{
+  padding:24px 28px;border-bottom:1px solid rgba(0,0,0,.08);
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--white);cursor:pointer;transition:background .2s;
+}
+.assist-card:last-child{border-bottom:none}
+.assist-card:hover{background:rgba(232,160,32,.08)}
+.assist-card-label{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--y-dark);margin-bottom:6px;
+}
+.assist-card h3{font-size:1rem;font-weight:600;color:var(--black)}
+.assist-card p{font-size:.85rem;color:var(--black);opacity:.5;margin-top:4px;max-width:460px}
+.assist-card-arrow{font-size:1.2rem;color:var(--y);flex-shrink:0;margin-left:16px}
+
+/* ─── MOSAIC 3 CARDS (= BCG List17 / Promo22) ─── */
+#mosaic{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
+.mosaic-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.mosaic-grid{grid-template-columns:repeat(12,1fr)}}
+
+/* Promo22 — image fullbleed + content en bas — BCG exact */
+.promo22{
+  border-radius:var(--r-card);overflow:hidden;
+  position:relative;min-height:400px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  cursor:pointer;
+}
+@media(min-width:768px){
+  .promo22-a{grid-column:1/span 5}
+  .promo22-b{grid-column:6/span 4}
+  .promo22-c{grid-column:10/span 3}
+}
+.promo22-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.promo22-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.promo22-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.1) 60%,transparent 100%);
+}
+.promo22-content{
+  position:relative;z-index:2;
+  padding:32px;color:var(--white);
+}
+@media(min-width:768px){.promo22-content{padding:40px}}
+.promo22-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:rgba(255,255,255,.6);margin-bottom:12px;
+}
+.promo22-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:400;line-height:1.1;
+  margin-bottom:20px;
+}
+.promo22-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:12px 22px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  transition:background .2s,opacity .3s;
+  opacity:0; /* caché par défaut */
+  width:fit-content;align-self:flex-start; /* pas de stretch horizontal */
+}
+.promo22:hover .promo22-cta{opacity:1}
+.promo22-cta:hover{background:var(--y-hover)}
+
+/* Card statique (C) — pas d'animation, bouton toujours visible */
+.promo22-static{ cursor:default }
+.promo22-static .promo20-hid{ display:none !important }
+.promo22-static .promo22-cta{ opacity:1 !important }
+.promo22-static .promo20-vis{ position:static;padding:28px;z-index:1 }
+
+/* Titre plus grand sur cards A et B (état repos) */
+.promo22:not(.promo22-static) .promo22-title{
+  font-size:clamp(2rem,3.5vw,3rem);
+}
+/* Titre panel mosaic (promo20-hid) plus grand au repos */
+#mosaic .promo20-hid .promo20-title{
+  font-size:clamp(1.3rem,2vw,1.8rem);
+}
+/* Tout le texte du panel encore plus grand au hover */
+@media(hover:hover) and (pointer:fine){
+  /* Bouton mosaic descendu */
+  #mosaic .promo22:hover .promo22-cta{ margin-top:24px }
+}
+
+/* Dark card (no image, solid color) */
+.promo22-dark{background:var(--charcoal)}
+.promo22-beige{background:var(--beige)}
+.promo22-beige .promo22-eyebrow{color:rgba(0,0,0,.4)}
+.promo22-beige .promo22-title{color:var(--black)}
+.promo22-navy{background:var(--navy)}
+
+/* Nav active */
+.nav-link.nav-active{
+  opacity:1;color:var(--y-dark);
+  border-bottom:2px solid var(--y);
+  padding-bottom:2px;
+}
+
+/* ─── EDITORIAL SECTION (= BCG Promo13) ─── */
+#editorial{background:var(--beige)}
+.editorial-inner{display:grid;grid-template-columns:1fr}
+@media(min-width:768px){.editorial-inner{grid-template-columns:1fr 1fr;align-items:stretch}}
+/* Image tronquée — prend toute la hauteur de la section */
+.editorial-media{overflow:hidden;align-self:stretch}
+.editorial-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.editorial-content{
+  padding:var(--sp-v) var(--sp-h);
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--beige);
+}
+.editorial-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--black);opacity:.4;margin-bottom:16px;
+}
+.editorial-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;line-height:1.1;
+  color:var(--black);margin-bottom:20px;
+}
+.editorial-desc{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.75;margin-bottom:32px;max-width:440px}
+
+/* ─── DARK CONTACT (= BCG Newsletter dark green) ─── */
+#contact{background:var(--navy);padding:var(--sp-v) var(--sp-h)}
+.contact-inner{
+  display:grid;grid-template-columns:1fr;gap:48px;
+}
+@media(min-width:1024px){.contact-inner{grid-template-columns:7fr 5fr;align-items:center}}
+.contact-eyebrow{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:rgba(255,255,255,.4);margin-bottom:16px;
+}
+.contact-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.6rem,3vw,2.8rem);font-weight:400;line-height:1.1;
+  color:var(--white);margin-bottom:20px;
+}
+.contact-desc{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:32px}
+.contact-items{border-top:1px solid rgba(255,255,255,.1)}
+.contact-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  transition:all .2s;
+}
+.contact-item:hover .contact-item-val{color:var(--y)}
+.contact-item-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.contact-item-val{font-size:.88rem;color:rgba(255,255,255,.6);transition:color .2s}
+
+/* ─── CLIENTS LOGOS ─── */
+#clients{background:var(--white);padding:44px var(--sp-h);border-bottom:1px solid var(--gray-300)}
+.clients-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--black);opacity:.3;text-align:center;margin-bottom:32px}
+.clients-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.client-logo{width:180px;height:64px;display:flex;align-items:center;justify-content:center;padding:8px 16px}
+.client-logo img{max-width:100%;max-height:40px;object-fit:contain;filter:grayscale(1) opacity(.4);transition:filter .3s}
+.client-logo:hover img{filter:grayscale(0) opacity(1)}
+
+/* ─── FRANCE SECTION ─── */
+#france{background:var(--charcoal);padding:calc(var(--sp-v)*.55) var(--sp-h)}
+.france-inner{display:grid;grid-template-columns:1fr;gap:28px}
+@media(min-width:768px){.france-inner{grid-template-columns:1fr 2fr;align-items:center;gap:40px}}
+.france-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:16px}
+.france-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:var(--white);margin-bottom:40px}
+.france-locs{border-top:1px solid rgba(255,255,255,.1)}
+.france-loc{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.fl-type{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.fl-val{font-size:.88rem;color:rgba(255,255,255,.65)}
+/* Photo BCG Promo-media style */
+.france-photo{aspect-ratio:16/9;border-radius:var(--r-media);overflow:hidden;position:relative}
+.france-photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.france-photo-cap{
+  position:absolute;bottom:0;left:0;right:0;padding:32px 28px 28px;
+  background:linear-gradient(to top,rgba(0,0,0,.65),transparent);
+  border-radius:0 0 var(--r-media) var(--r-media);
+}
+.france-photo-name{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:var(--white);margin-bottom:4px}
+.france-photo-role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--y)}
+
+/* ─── ABOUT ─── */
+#about{background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)}
+.about-inner{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:768px){.about-inner{grid-template-columns:180px 1fr 380px;gap:48px;align-items:start}}
+.about-photo{border-radius:var(--r-media);overflow:hidden}
+.about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.about-cap{padding:12px 0 0;border-top:1px solid var(--gray-300);display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
+.about-name{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--black)}
+.about-role{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--y-dark)}
+.about-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:16px}
+.about-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--black);margin-bottom:24px}
+.about-body p{font-size:.92rem;color:var(--black);opacity:.6;line-height:1.8;margin-bottom:14px}
+.about-links{border-top:1px solid var(--gray-300);margin-top:36px}
+.about-link{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-300);transition:all .2s}
+.about-link:hover .about-link-val{color:var(--y-dark)}
+.about-link-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--black);opacity:.3}
+.about-link-val{font-size:.88rem;color:var(--black);opacity:.65;transition:color .2s}
+
+/* ─── TESTIMONIAL ─── */
+#testi{background:var(--beige);padding:var(--sp-v) var(--sp-h);border-top:1px solid rgba(0,0,0,.06)}
+.testi-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:36px}
+.testi-quote{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.2rem,2.3vw,1.8rem);font-weight:400;font-style:italic;
+  line-height:1.5;color:var(--black);margin-bottom:28px;max-width:800px;
+}
+.testi-quote::before{content:'\201C';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
+.testi-quote::after{content:'\201D';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
+.testi-source{display:flex;align-items:center;gap:14px}
+.testi-line{width:28px;height:2px;background:var(--y)}
+.testi-from{font-size:.82rem;color:var(--black);opacity:.45}
+
+/* ─── FOOTER (BCG: beige #F1EEEA) ─── */
+footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
+.footer-top{
+  display:grid;grid-template-columns:1fr;gap:48px;
+  margin-bottom:48px;border-bottom:1px solid rgba(0,0,0,.1);padding-bottom:48px;
+}
+@media(min-width:1024px){.footer-top{grid-template-columns:5fr 4fr 3fr;gap:64px}}
+.footer-headline{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;
+  color:var(--black);margin-bottom:24px;
+}
+.footer-links{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(0,0,0,.1)}
+.footer-link{padding:12px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:.9rem;color:var(--black);opacity:.6;transition:opacity .2s}
+.footer-link:hover{opacity:1}
+.footer-cta-block{}
+.footer-cta-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:12px}
+.footer-cta-title{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--black);margin-bottom:10px}
+.footer-cta-desc{font-size:.85rem;color:var(--black);opacity:.5;line-height:1.7;margin-bottom:20px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-logo{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black);opacity:.3}
+.footer-legal{font-size:.72rem;color:var(--black);opacity:.25}
+
+/* ─── PRIMARY BUTTON BCG EXACT ─── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--y);color:var(--black);
+  padding:16px 24px;border-radius:var(--r-btn);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  transition:background .2s;width:fit-content;cursor:pointer;border:none;font-family:inherit;
+}
+.btn-primary:hover{background:var(--y-hover)}
+@media(min-width:1024px){.btn-primary{font-size:14px}}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .nav-link{display:none}
+  .promo22{min-height:320px}
+  .editorial-inner{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr}
+  .spotlight-inner{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV BCG DEUX PASTILLES SÉPARÉES ─── -->
+<nav id="nav">
+  <div class="nav-right rv">
+    <a href="#welcome" class="nav-link">Expertise</a>
+    <a href="#offres" class="nav-link">Offres</a>
+    <a href="#about" class="nav-link">À propos</a>
+    <a href="#about" class="nav-cta">Me contacter</a>
+  </div>
+</nav>
+
+<!-- ─── HERO 100vh — vidéo background ─── -->
+<section id="hero">
+  <!-- 8 cubes 3D -->
+  <div class="cubes-bg" aria-hidden="true">
+    <div class="cw cw1"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div><div class="face-hl"></div></div></div>
+    <div class="cw cw2"><div class="cube3"><div class="face-f"></div><div class="face-b"></div><div class="face-r"></div><div class="face-l"></div><div class="face-t"></div><div class="face-bo"></div><div class="face-hl"></div></div></div>
+    
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-text rv">
+      <span class="hero-welcome">Bienvenue chez LIU Consulting</span>
+      <h1 class="hero-h1">Libérez le potentiel<br>de vos données.</h1>
+      <p class="hero-desc">Du conseil stratégique à la mise en production — j'audite, conçois et livre des solutions data qui transforment vos opérations.</p>
+      <div class="hero-ctas">
+        <a href="#welcome" class="btn-hero-y">Nos expertises</a>
+        <a href="#about" class="btn-hero-ghost">Prendre contact →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    Découvrir
+    <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3.5 9l4.5 4.5L12.5 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ─── WELCOME (= BCG List12 "Welcome to BCG") ─── -->
+<section id="welcome">
+  <div class="welcome-inner">
+
+    <!-- Titre + flèches de navigation -->
+    <div class="carousel-head rv">
+      <div>
+        <span class="module-eyebrow">Expertises</span>
+        <h2 class="module-title" style="text-align:left;margin:0">Ce que je peux faire pour vous</h2>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="prev-btn" aria-label="Précédent">←</button>
+        <button class="carousel-btn" id="next-btn" aria-label="Suivant">→</button>
+      </div>
+    </div>
+
+    <!-- Carousel Promo20 BCG style -->
+    <div class="promo-carousel rv d1" id="promo-carousel">
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-approche.jpg" alt="Notre approche"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Notre approche</div>
+            <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Notre approche</div>
+            <h3 class="promo20-title">De la donnée brute à la décision, clé en main</h3>
+            <p>Je prends en charge l'ensemble : collecte, structuration, stockage, automatisation, visualisation — documenté et transmissible.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Flux fiables, de la source à l'entrepôt</h3>
+            <p>Connexion de vos sources vers un entrepôt centralisé. Transformation, modélisation — robustes en production.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Environnements reproductibles et automatisés</h3>
+            <p>Infrastructure décrite en code, déployable en minutes. Zéro configuration manuelle, zéro surprise entre les environnements.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit data"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Conseil &amp; Audit data</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Conseil &amp; Audit data</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+            <p>Audit des sources existantes, diagnostic des risques, roadmap chiffrée. Livré en 2 semaines, sans engagement.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="promo20">
+        <a class="promo20-inner" href="#assist">
+          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage & visualisation"></div>
+          <div class="promo20-vis">
+            <div class="promo20-cat">Pilotage &amp; visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+          </div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Pilotage &amp; visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+            <p>Interfaces adaptées à vos processus — ventes, stocks, clients, indicateurs. Actualisées automatiquement chaque matin.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLIENTS ─── -->
+<section id="clients">
+  <div class="clients-label rv">Ils m'ont fait confiance</div>
+  <div class="clients-row rv d1">
+    <div class="client-logo"><img src="logos/loreal.png" alt="L'Oréal"></div>
+    <div class="client-logo"><img src="logos/deezer.png" alt="Deezer"></div>
+    <div class="client-logo"><img src="logos/bureau-vallee.png" alt="Bureau Vallée"></div>
+    <div class="client-logo"><img src="logos/totalenergies.svg" alt="TotalEnergies"></div>
+    <div class="client-logo"><img src="logos/servier.png" alt="Servier"></div>
+    <div class="client-logo"><img src="logos/hippocampe.png" alt="Hippocampe Paris"></div>
+  </div>
+</section>
+
+<!-- ─── SPOTLIGHT STRIP (= BCG List14) ─── -->
+<section id="spotlight">
+  <div class="spotlight-inner rv">
+    <span class="spotlight-label">Domaines</span>
+    <div class="spotlight-links">
+      <a href="#assist" class="spotlight-link">Conseil & Audit data</a>
+      <a href="#assist" class="spotlight-link">Architecture de données</a>
+      <a href="#assist" class="spotlight-link">Data Engineering</a>
+      <a href="#assist" class="spotlight-link">Infrastructure cloud</a>
+      <a href="#assist" class="spotlight-link">Automatisation</a>
+      <a href="#assist" class="spotlight-link">Pilotage & Reporting</a>
+      <a href="#assist" class="spotlight-link">IA appliquée</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ASSIST — Honeycomb layout ─── -->
+<section id="assist">
+  <div class="honey-header rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Comment puis-je vous aider ?</span>
+    <h2 class="module-title" style="text-align:left;margin:0">De l'audit stratégique à la mise en production</h2>
+  </div>
+
+  <div class="honey-grid rv d1">
+
+    <!-- Rangée 1 : 4 hexagones -->
+    <div class="honey-row">
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Conseil & Audit"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Conseil &amp; Audit</div>
+            <h3 class="promo20-title">Cartographier votre patrimoine data et poser les priorités</h3>
+            <p>Audit des sources, diagnostic des risques, roadmap chiffrée. 2 semaines, sans engagement.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-architecture.jpg" alt="Architecture de données"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Architecture de données</div>
+            <h3 class="promo20-title">Concevoir des flux fiables de la source à l'entrepôt</h3>
+            <p>Modélisation analytique, choix technologiques, schéma adapté à vos usages.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-featured.jpg" alt="Data Engineering"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Data Engineering</div>
+            <h3 class="promo20-title">Pipelines d'ingestion, transformation et orchestration</h3>
+            <p>Multi-sources, transformation fiable, orchestration robuste — documentés en production.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-infra.jpg" alt="Infrastructure cloud"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Infrastructure cloud</div>
+            <h3 class="promo20-title">Déploiements reproductibles, versionnés, automatisés</h3>
+            <p>Infrastructure en code, CI/CD — zéro configuration manuelle, zéro surprise.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- fin row 1 -->
+
+    <!-- Rangée 2 : 3 hexagones décalés -->
+    <div class="honey-row">
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-auto.jpg" alt="Automatisation"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Automatisation</div>
+            <h3 class="promo20-title">Éliminer les traitements manuels et les échecs silencieux</h3>
+            <p>Workflows planifiés, alertes sur anomalies, reportings sans intervention.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-pilotage.jpg" alt="Pilotage & Visualisation"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">Pilotage &amp; Visualisation</div>
+            <h3 class="promo20-title">Des tableaux de bord que vos équipes utilisent vraiment</h3>
+            <p>Ventes, stocks, clients, indicateurs — actualisés automatiquement chaque matin.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hex-wrap">
+        <a class="promo20-inner hex" href="#contact">
+          <div class="promo20-media"><img src="images/card-ia.jpg" alt="IA appliquée"></div>
+          <div class="promo20-hid">
+            <div class="promo20-cat">IA appliquée</div>
+            <h3 class="promo20-title">Valoriser vos données avec l'intelligence artificielle</h3>
+            <p>Enrichissement, catégorisation, rapports augmentés — intégrable dans un pipeline existant.</p>
+            <span class="promo20-cta">En savoir plus →</span>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- fin row 2 -->
+
+  </div>
+</section>
+
+<!-- ─── MOSAIC 3 CARDS ─── -->
+<section id="mosaic">
+  <div style="padding:var(--sp-v) var(--sp-h) 0" class="rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Réalisations</span>
+    <h2 class="module-title" style="text-align:left;margin:0 0 36px">Ce que j'ai livré concrètement</h2>
+  </div>
+  <div class="mosaic-grid rv d1">
+
+    <!-- Card A : audit & conseil — avec image + panel -->
+    <div class="promo22 promo22-a" style="background:var(--navy)">
+      <div class="promo22-bg"><img src="images/offre-audit.jpg" alt="Audit & Diagnostic data"></div>
+      <div class="promo22-overlay"></div>
+
+      <div class="promo20-hid" style="background:rgba(30,20,5,.92)">
+        <div class="promo20-cat" style="color:rgba(255,255,255,.5)">Conseil &amp; Audit data</div>
+        <h3 class="promo20-title" style="color:#fff">Diagnostic de votre maturité data en 2 semaines</h3>
+        <p style="color:rgba(255,255,255,.62)">Cartographie des sources, diagnostic des risques, roadmap technique chiffrée — sans engagement préalable.</p>
+        <a href="#about" class="promo22-cta">En savoir plus →</a>
+      </div>
+    </div>
+
+    <!-- Card B : retail + −70% — avec panel -->
+    <div class="promo22 promo22-b" style="background:var(--charcoal)">
+      <div class="promo22-bg"><img src="images/card-pilotage.jpg" alt="Retail Dashboard"></div>
+      <div class="promo22-overlay"></div>
+
+      <div class="promo20-hid" style="background:rgba(30,20,10,.92)">
+        <div class="promo20-cat" style="color:rgba(255,255,255,.5)">Solution livrée</div>
+        <h3 class="promo20-title" style="color:#fff">Plateforme de pilotage Retail &amp; Multi-sites</h3>
+        <p style="color:rgba(255,255,255,.62)">Monitoring des ventes, relance client automatisée, prospection et dashboarding — un seul interlocuteur, de A à Z.</p>
+        <a href="https://tliu-lc.github.io/retail-dashboard/" target="_blank" class="promo22-cta">Découvrir →</a>
+      </div>
+    </div>
+
+    <!-- Card C : approche — statique, pas d'animation -->
+    <div class="promo22 promo22-c promo22-beige promo22-static">
+      <div class="promo20-vis" style="position:static;padding:32px;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%">
+        <div>
+          <div class="promo22-eyebrow" style="color:rgba(0,0,0,.4);margin-bottom:12px">Comment je travaille</div>
+          <div class="promo22-title" style="color:var(--black);margin-bottom:16px">Forfait clair, livraison complète, vous restez propriétaire.</div>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:24px">Pas de régie, pas de flou. On cadre le besoin, je livre, vous avez la main — code source et infrastructure inclus.</p>
+        </div>
+        <a href="#offres" class="promo22-cta">Nos offres →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── OFFRES — même style Promo20 avec images ─── -->
+<section id="offres" style="background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)">
+  <div class="rv">
+    <span class="module-eyebrow" style="display:block;margin-bottom:12px">Offres</span>
+    <h2 class="module-title" style="text-align:left;margin:0 0 36px">Comment travailler ensemble</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="rv d1">
+
+    <!-- Card Audit — même structure que promo20 -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-audit.jpg" alt="Audit & Diagnostic"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Audit &amp; Diagnostic</div>
+        <h3 class="promo20-title">Cartographier l'existant, poser les priorités</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Audit &amp; Diagnostic</div>
+        <h3 class="promo20-title">Cartographier l'existant, poser les priorités</h3>
+        <p>Audit des sources de données, diagnostic des risques, roadmap technique chiffrée. Livré en 2 semaines, sans engagement préalable.</p>
+        <span class="promo20-cta">Prendre contact →</span>
+      </div>
+    </a>
+
+    <!-- Card Mission -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-mission.jpg" alt="Forfait mission"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Forfait mission</div>
+        <h3 class="promo20-title">Code source et infrastructure — propriété du client</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Forfait mission</div>
+        <h3 class="promo20-title">Code source et infrastructure — propriété du client</h3>
+        <p>Développement complet livré clé en main. Documentation et formation incluses. Indépendance totale à l'issue du projet.</p>
+        <span class="promo20-cta">Discuter d'une mission →</span>
+      </div>
+    </a>
+
+    <!-- Card Abonnement -->
+    <a class="promo20-inner" href="#contact" style="aspect-ratio:4/5">
+      <div class="promo20-media"><img src="images/offre-abonnement.jpg" alt="Abonnement"></div>
+      <div class="promo20-vis">
+        <div class="promo20-cat">Abonnement</div>
+        <h3 class="promo20-title">Hébergement, maintenance et support inclus</h3>
+      </div>
+      <div class="promo20-hid">
+        <div class="promo20-cat">Abonnement</div>
+        <h3 class="promo20-title">Hébergement, maintenance et support inclus</h3>
+        <p>Solution déployée et maintenue. Vos équipes utilisent, je gère l'infrastructure. Aucune compétence technique requise.</p>
+        <span class="promo20-cta">Demander un devis →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── EDITORIAL (= BCG Promo13 Careers) ─── -->
+<section id="editorial">
+  <div class="editorial-inner rv">
+    <div class="editorial-media">
+      <img src="images/offre-mission.jpg" alt="LIU Consulting — Livraison technique">
+    </div>
+    <div class="editorial-content">
+      <div class="editorial-eyebrow">Ce qui nous distingue</div>
+      <h2 class="editorial-title">Un seul interlocuteur. Du conseil à la livraison.</h2>
+      <p class="editorial-desc">Pas de chef de projet qui sous-traite, pas d'audit sans suite. J'audite votre situation, je conçois l'architecture, je construis les pipelines, je livre les dashboards — et je forme vos équipes pour qu'elles soient autonomes.</p>
+      <a href="#about" class="btn-primary">À propos de Tim LIU →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FRANCE ─── -->
+<section id="france">
+  <div class="france-inner rv">
+    <div>
+      <div class="france-eyebrow">Présence</div>
+      <h2 class="france-title">LIU Consulting en France</h2>
+      <div class="france-locs">
+        <div class="france-loc"><span class="fl-type">Siège social</span><span class="fl-val">Île-de-France</span></div>
+        <div class="france-loc"><span class="fl-type">Interventions</span><span class="fl-val">Toute la France</span></div>
+        <div class="france-loc"><span class="fl-type">À distance</span><span class="fl-val">France &amp; Europe</span></div>
+        <div class="france-loc"><span class="fl-type">Langues</span><span class="fl-val">Français · Anglais</span></div>
+        <div class="france-loc"><span class="fl-type">SIRET</span><span class="fl-val">919 293 076 00023</span></div>
+      </div>
+    </div>
+    <div class="france-photo rv d1">
+      <img src="images/paris.jpg" alt="Paris — LIU Consulting">
+      <div class="france-photo-cap">
+        <div class="france-photo-name">Tim LIU</div>
+        <div class="france-photo-role">Fondateur · Île-de-France</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── À PROPOS & CONTACT — fusionnés ─── -->
+<section id="about">
+  <div class="about-inner">
+    <!-- Photo + nom -->
+    <div class="rv" style="text-align:center">
+      <div class="about-photo">
+        <img src="tim.png" alt="Tim LIU — LIU Consulting">
+      </div>
+      <div class="about-cap" style="justify-content:center;gap:12px">
+        <span class="about-name">Tim LIU</span>
+        <span class="about-role">Fondateur</span>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:8px">SIRET 91929307600023</p>
+    </div>
+    <!-- Bio — milieu -->
+    <div class="rv d1">
+      <div class="about-eyebrow">À propos</div>
+      <h2 class="about-title">Conseil, conception, livraison — un seul interlocuteur.</h2>
+      <div class="about-body">
+        <p>Après 3 ans chez L'Oréal et des missions chez Deezer, Bureau Vallée, TotalEnergies et Servier, j'ai appris à couvrir l'ensemble du spectre data : de l'audit stratégique au pipeline en production.</p>
+        <p>J'interviens aussi bien en amont — cadrage, diagnostic, recommandations d'architecture — qu'en exécution directe : pipelines, infrastructure cloud, automatisation, dashboards. Sans sous-traitance, sans couche intermédiaire.</p>
+        <p>Curieux de l'IA appliquée à la donnée, je suis en veille active sur les usages LLM pour l'automatisation et la valorisation des actifs data.</p>
+      </div>
+    </div>
+    <!-- Coordonnées — droite -->
+    <div class="rv d2" style="background:var(--navy);border-radius:var(--r-card);padding:36px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px">Contact</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:12px">Parlons de votre projet.</h3>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:24px">Un échange de 30 minutes pour évaluer si mon approche correspond à votre situation.</p>
+      <div style="border-top:1px solid rgba(255,255,255,.1);margin-bottom:20px">
+        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">tim.liu.liuconsulting@gmail.com</span></a>
+        <a href="tel:+33603655398" class="contact-item"><span class="contact-item-label">Téléphone</span><span class="contact-item-val">06 03 65 53 98</span></a>
+        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item"><span class="contact-item-label">LinkedIn</span><span class="contact-item-val">Tim LIU — LIU Consulting</span></a>
+      </div>
+      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="btn-primary">Prendre contact →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER BCG BEIGE #F1EEEA ─── -->
+<footer>
+  <div class="footer-top rv">
+    <div>
+      <h2 class="footer-headline">Libérez le potentiel de vos données.</h2>
+      <a href="#contact" class="btn-primary">Me contacter →</a>
+    </div>
+    <div>
+      <div class="footer-links">
+        <a href="#welcome" class="footer-link">Expertise</a>
+        <a href="#offres" class="footer-link">Offres</a>
+        <a href="#assist" class="footer-link">Comment puis-je vous aider ?</a>
+        <a href="#france" class="footer-link">LIU Consulting en France</a>
+        <a href="#about" class="footer-link">À propos de Tim LIU</a>
+      </div>
+    </div>
+    <div class="footer-cta-block">
+      <div class="footer-cta-eyebrow">Comment puis-je vous assister ?</div>
+      <h3 class="footer-cta-title">Parlons de votre projet.</h3>
+      <p class="footer-cta-desc">Soumettez vos questions et nous vous répondrons dans les 24h.</p>
+      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="btn-primary">Envoyer un message →</a>
+    </div>
+  </div>
+  <div class="footer-bottom rv d1">
+    <span class="footer-logo">LIU Consulting</span>
+    <span class="footer-legal">© 2026 Tim LIU · SIRET 91929307600023</span>
+  </div>
+</footer>
+
+<script>
+/* Reveal on scroll */
+const obs = new IntersectionObserver(
+  e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in') }),
+  { threshold:.07 }
+);
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+/* Nav scroll behavior */
+const navEl = document.getElementById('nav');
+const heroEl = document.getElementById('hero');
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > heroEl.offsetHeight * 0.8) {
+    navEl.style.background = 'none';
+    navEl.querySelectorAll('.nav-left,.nav-right').forEach(p => {
+      p.style.background = 'rgba(255,255,255,.97)';
+    });
+  } else {
+    navEl.querySelectorAll('.nav-left,.nav-right').forEach(p => {
+      p.style.background = 'hsla(0,0%,100%,.7)';
+    });
+  }
+  lastY = y;
+}, { passive:true });
+
+/* Carousel prev/next */
+const carousel = document.getElementById('promo-carousel');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+if (carousel && prevBtn && nextBtn) {
+  const scrollAmt = () => carousel.querySelector('.promo20')?.offsetWidth + 8 || 320;
+  nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmt(), behavior: 'smooth' }));
+  prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmt(), behavior: 'smooth' }));
+  carousel.addEventListener('scroll', () => {
+    prevBtn.disabled = carousel.scrollLeft < 10;
+    nextBtn.disabled = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth - 10;
+  }, { passive: true });
+  prevBtn.disabled = true;
+}
+
+/* Vidéo — ralentie */
+const vid = document.querySelector('.hero-video');
+if (vid) { vid.addEventListener('loadedmetadata', () => { vid.playbackRate = 0.55; }); }
+
+/* Chips filter (assist section) */
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+  c.classList.add('on');
+}));
+
+/* Navbar — section active en cours */
+const navLinks = document.querySelectorAll('.nav-link[href]');
+const navMap = {
+  'welcome':  ['welcome','clients','spotlight'],
+  'offres':   ['offres','mosaic','editorial','assist'],
+  'about':    ['about','france','testi'],
+};
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const id = e.target.id;
+    navLinks.forEach(link => {
+      const key = link.getAttribute('href').replace('#','');
+      const targets = navMap[key] || [key];
+      link.classList.toggle('nav-active', targets.includes(id));
+    });
+  });
+}, { rootMargin:'-35% 0px -35% 0px', threshold:0 });
+document.querySelectorAll('section[id]').forEach(el => sectionObs.observe(el));
+</script>
+</body>
+</html>
