@@ -624,9 +624,9 @@ img{max-width:100%;display:block}
 #editorial{background:var(--beige)}
 .editorial-inner{display:grid;grid-template-columns:1fr}
 @media(min-width:768px){.editorial-inner{grid-template-columns:1fr 1fr;align-items:stretch}}
-/* Seule l'image est tronquée à hauteur fixe */
-.editorial-media{overflow:hidden;max-height:320px}
-.editorial-media img{width:100%;height:320px;object-fit:cover;object-position:center;display:block}
+/* Image tronquée — prend toute la hauteur de la section */
+.editorial-media{overflow:hidden;align-self:stretch}
+.editorial-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .editorial-content{
   padding:var(--sp-v) var(--sp-h);
   display:flex;flex-direction:column;justify-content:center;
