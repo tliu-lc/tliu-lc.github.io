@@ -38,9 +38,41 @@
   --sp-h: 16px;    /* section padding horizontal mobile */
 
   /* BCG card/button radius */
-  --r-card: 20px;   /* Promo22 */
-  --r-media: 30px;  /* Promo-media images */
-  --r-btn: 15px;    /* primary-button */
+  --r-card: 20px;
+  --r-media: 30px;
+  --r-btn: 15px;
+
+  /* ── Système typographique ── */
+  --font-sans:  'DM Sans', Arial, 'Helvetica Neue', sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+
+  /* Tailles */
+  --t-label:  11px;   /* eyebrows, catégories, metadata */
+  --t-sm:     13px;   /* petits textes, captions */
+  --t-body:   15px;   /* corps standard */
+  --t-md:     17px;   /* texte accentué */
+
+  /* Headings — responsive */
+  --t-h3: clamp(1.1rem, 1.6vw, 1.5rem);
+  --t-h2: clamp(1.5rem, 2.5vw, 2.2rem);
+  --t-h1: clamp(1.8rem, 3.2vw, 2.8rem);
+  --t-display: clamp(2.2rem, 5vw, 3.8rem);
+
+  /* Poids */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  600;
+  --fw-bold:    700;
+
+  /* Interlignes */
+  --lh-tight:   1.1;
+  --lh-snug:    1.25;
+  --lh-normal:  1.6;
+  --lh-relaxed: 1.75;
+
+  /* Espacement lettres */
+  --ls-label: .14em;  /* labels uppercase */
+  --ls-tight: -.02em; /* display headings */
 }
 
 @media(min-width:768px){
@@ -56,7 +88,7 @@
 /* ─── RESET ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:'DM Sans',Arial,'Helvetica Neue',sans-serif;color:var(--black);background:var(--white);overflow-x:hidden;font-size:16px;font-weight:300;line-height:1.6}
+body{font-family:var(--font-sans);color:var(--black);background:var(--white);overflow-x:hidden;font-size:var(--t-body);font-weight:var(--fw-light);line-height:var(--lh-normal)}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 
@@ -89,13 +121,13 @@ img{max-width:100%;display:block}
 .nav-left{padding:0 20px;gap:10px}
 .nav-right{padding:0 6px 0 20px;gap:28px}
 .nav-logo-dot{width:7px;height:7px;background:var(--y);border-radius:50%;flex-shrink:0}
-.nav-logo-text{font-size:.8rem;font-weight:600;color:var(--black);letter-spacing:.05em}
-.nav-link{font-size:.82rem;font-weight:400;color:var(--black);opacity:.65;transition:opacity .2s}
+.nav-logo-text{font-size:var(--t-sm);font-weight:var(--fw-medium);color:var(--black);letter-spacing:.04em}
+.nav-link{font-size:var(--t-sm);font-weight:var(--fw-light);color:var(--black);opacity:.65;transition:opacity .2s}
 .nav-link:hover{opacity:1}
 .nav-cta{
   background:var(--y);color:var(--black);
   padding:10px 20px;
-  font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  font-size:var(--t-label);font-weight:var(--fw-bold);letter-spacing:var(--ls-label);text-transform:uppercase;
   border-radius:var(--nav-radius);
   transition:background .2s;
   margin:6px;
@@ -183,14 +215,14 @@ img{max-width:100%;display:block}
 .hero-text{max-width:760px}
 .hero-welcome{
   display:block;
-  font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  font-size:var(--t-label);font-weight:var(--fw-bold);letter-spacing:var(--ls-label);text-transform:uppercase;
   color:rgba(255,255,255,.55);
   margin-bottom:20px;
 }
 .hero-h1{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(2.2rem,5vw,60px);
-  font-weight:400;line-height:1.06;letter-spacing:-.025em;
+  font-size:var(--t-display);
+  font-weight:var(--fw-regular);line-height:var(--lh-tight);letter-spacing:var(--ls-tight);
   color:#fff;
   margin-bottom:24px;
   text-shadow:0 2px 24px rgba(0,0,0,.45), 0 1px 6px rgba(0,0,0,.35);
@@ -199,8 +231,8 @@ img{max-width:100%;display:block}
   text-shadow:0 1px 10px rgba(0,0,0,.4);
 }
 .hero-desc{
-  font-size:clamp(.9rem,1.4vw,1.1rem);
-  font-weight:300;line-height:1.75;
+  font-size:var(--t-body);
+  font-weight:var(--fw-light);line-height:var(--lh-relaxed);
   color:rgba(255,255,255,.9);
   max-width:520px;
   margin-bottom:40px;
@@ -257,15 +289,15 @@ img{max-width:100%;display:block}
 .module-header{text-align:center;margin-bottom:48px}
 .module-eyebrow{
   display:block;
-  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  font-size:var(--t-label);font-weight:var(--fw-bold);letter-spacing:var(--ls-label);text-transform:uppercase;
   color:var(--black);opacity:.45;
   margin-bottom:14px;
 }
-@media(min-width:1440px){.module-eyebrow{font-size:14px}}
+@media(min-width:1440px){.module-eyebrow{font-size:13px}}
 .module-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.6rem,3.5vw,2.8rem);
-  font-weight:400;line-height:1.1;letter-spacing:-.02em;
+  font-size:var(--t-h1);
+  font-weight:var(--fw-regular);line-height:var(--lh-snug);letter-spacing:var(--ls-tight);
   color:var(--black);
   max-width:800px;margin:0 auto;
 }
@@ -359,7 +391,7 @@ img{max-width:100%;display:block}
   display:inline-flex;align-items:center;gap:8px;
   background:var(--y);color:var(--black);
   padding:12px 20px;border-radius:var(--r-btn);
-  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  font-size:var(--t-label);font-weight:var(--fw-bold);text-transform:uppercase;letter-spacing:var(--ls-label);
   transition:background .2s;width:fit-content;
 }
 .promo20-cta:hover{background:var(--y-hover)}
@@ -389,11 +421,11 @@ img{max-width:100%;display:block}
 .spotlight-inner{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
 .spotlight-label{
   font-size:11px;font-weight:400;text-transform:uppercase;
-  letter-spacing:.12em;color:var(--black);opacity:.45;flex-shrink:0;
+  font-size:var(--t-label);font-weight:var(--fw-bold);letter-spacing:var(--ls-label);color:var(--black);opacity:.45;flex-shrink:0;
 }
 .spotlight-links{display:flex;gap:0;flex-wrap:wrap}
 .spotlight-link{
-  font-size:14px;font-weight:300;color:var(--black);
+  font-size:var(--t-body);font-weight:var(--fw-light);color:var(--black);
   padding:4px 20px;border-right:1px solid var(--gray-300);
   transition:color .2s;
 }
@@ -486,10 +518,10 @@ img{max-width:100%;display:block}
 @media(min-width:1024px){.assist-inner{grid-template-columns:5fr 7fr;align-items:start;gap:80px}}
 .assist-heading h2{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.6rem,3vw,2.6rem);font-weight:400;line-height:1.1;
+  font-size:var(--t-h1);font-weight:var(--fw-regular);line-height:var(--lh-snug);
   color:var(--black);margin-bottom:16px;
 }
-.assist-heading p{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.7;margin-bottom:28px}
+.assist-heading p{font-size:var(--t-body);color:var(--black);opacity:.55;line-height:var(--lh-relaxed);margin-bottom:28px}
 .assist-chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{
   padding:8px 18px;font-size:.78rem;font-weight:600;
@@ -510,8 +542,8 @@ img{max-width:100%;display:block}
   font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
   color:var(--y-dark);margin-bottom:6px;
 }
-.assist-card h3{font-size:1rem;font-weight:600;color:var(--black)}
-.assist-card p{font-size:.85rem;color:var(--black);opacity:.5;margin-top:4px;max-width:460px}
+.assist-card h3{font-size:var(--t-body);font-weight:var(--fw-medium);color:var(--black)}
+.assist-card p{font-size:var(--t-sm);color:var(--black);opacity:.5;margin-top:4px;max-width:460px}
 .assist-card-arrow{font-size:1.2rem;color:var(--y);flex-shrink:0;margin-left:16px}
 
 /* ─── MOSAIC 3 CARDS (= BCG List17 / Promo22) ─── */
@@ -617,10 +649,10 @@ img{max-width:100%;display:block}
 }
 .editorial-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;line-height:1.1;
+  font-size:var(--t-h1);font-weight:var(--fw-regular);line-height:var(--lh-snug);
   color:var(--black);margin-bottom:20px;
 }
-.editorial-desc{font-size:.95rem;color:var(--black);opacity:.55;line-height:1.75;margin-bottom:32px;max-width:440px}
+.editorial-desc{font-size:var(--t-body);color:var(--black);opacity:.55;line-height:var(--lh-relaxed);margin-bottom:32px;max-width:440px}
 
 /* ─── DARK CONTACT (= BCG Newsletter dark green) ─── */
 #contact{background:var(--navy);padding:var(--sp-v) var(--sp-h)}
@@ -634,10 +666,10 @@ img{max-width:100%;display:block}
 }
 .contact-title{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.6rem,3vw,2.8rem);font-weight:400;line-height:1.1;
+  font-size:var(--t-h1);font-weight:var(--fw-regular);line-height:var(--lh-snug);
   color:var(--white);margin-bottom:20px;
 }
-.contact-desc{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:32px}
+.contact-desc{font-size:var(--t-body);color:rgba(255,255,255,.45);line-height:var(--lh-relaxed);margin-bottom:32px}
 .contact-items{border-top:1px solid rgba(255,255,255,.1)}
 .contact-item{
   display:flex;justify-content:space-between;align-items:center;
@@ -661,11 +693,11 @@ img{max-width:100%;display:block}
 .france-inner{display:grid;grid-template-columns:1fr;gap:28px}
 @media(min-width:768px){.france-inner{grid-template-columns:1fr 2fr;align-items:center;gap:40px}}
 .france-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:16px}
-.france-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:var(--white);margin-bottom:40px}
+.france-title{font-family:'DM Serif Display',serif;font-size:var(--t-h1);font-weight:var(--fw-regular);color:var(--white);margin-bottom:40px}
 .france-locs{border-top:1px solid rgba(255,255,255,.1)}
 .france-loc{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .fl-type{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25)}
-.fl-val{font-size:.88rem;color:rgba(255,255,255,.65)}
+.fl-val{font-size:var(--t-body);color:rgba(255,255,255,.65)}
 /* Photo BCG Promo-media style */
 .france-photo{aspect-ratio:16/9;border-radius:var(--r-media);overflow:hidden;position:relative}
 .france-photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
@@ -687,8 +719,8 @@ img{max-width:100%;display:block}
 .about-name{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--black)}
 .about-role{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--y-dark)}
 .about-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:16px}
-.about-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--black);margin-bottom:24px}
-.about-body p{font-size:.92rem;color:var(--black);opacity:.6;line-height:1.8;margin-bottom:14px}
+.about-title{font-family:var(--font-serif);font-size:var(--t-h1);font-weight:var(--fw-regular);color:var(--black);margin-bottom:24px}
+.about-body p{font-size:var(--t-body);color:var(--black);opacity:.6;line-height:var(--lh-relaxed);margin-bottom:14px}
 .about-links{border-top:1px solid var(--gray-300);margin-top:36px}
 .about-link{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-300);transition:all .2s}
 .about-link:hover .about-link-val{color:var(--y-dark)}
@@ -700,14 +732,14 @@ img{max-width:100%;display:block}
 .testi-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:36px}
 .testi-quote{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.2rem,2.3vw,1.8rem);font-weight:400;font-style:italic;
+  font-size:var(--t-h2);font-weight:var(--fw-regular);font-style:italic;
   line-height:1.5;color:var(--black);margin-bottom:28px;max-width:800px;
 }
 .testi-quote::before{content:'\201C';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
 .testi-quote::after{content:'\201D';color:var(--y);font-size:1.1em;line-height:0;vertical-align:-.2em}
 .testi-source{display:flex;align-items:center;gap:14px}
 .testi-line{width:28px;height:2px;background:var(--y)}
-.testi-from{font-size:.82rem;color:var(--black);opacity:.45}
+.testi-from{font-size:var(--t-sm);color:var(--black);opacity:.45}
 
 /* ─── FOOTER (BCG: beige #F1EEEA) ─── */
 footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
@@ -718,7 +750,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 @media(min-width:1024px){.footer-top{grid-template-columns:5fr 4fr 3fr;gap:64px}}
 .footer-headline{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;
+  font-size:var(--t-h1);font-weight:var(--fw-regular);
   color:var(--black);margin-bottom:24px;
 }
 .footer-links{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(0,0,0,.1)}
@@ -726,18 +758,18 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
 .footer-link:hover{opacity:1}
 .footer-cta-block{}
 .footer-cta-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--black);opacity:.35;margin-bottom:12px}
-.footer-cta-title{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--black);margin-bottom:10px}
-.footer-cta-desc{font-size:.85rem;color:var(--black);opacity:.5;line-height:1.7;margin-bottom:20px}
+.footer-cta-title{font-family:var(--font-serif);font-size:var(--t-h3);font-weight:var(--fw-regular);color:var(--black);margin-bottom:10px}
+.footer-cta-desc{font-size:var(--t-sm);color:var(--black);opacity:.5;line-height:1.7;margin-bottom:20px}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-logo{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black);opacity:.3}
-.footer-legal{font-size:.72rem;color:var(--black);opacity:.25}
+.footer-legal{font-size:var(--t-label);color:var(--black);opacity:.25}
 
 /* ─── PRIMARY BUTTON BCG EXACT ─── */
 .btn-primary{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--y);color:var(--black);
   padding:16px 24px;border-radius:var(--r-btn);
-  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  font-size:var(--t-label);font-weight:var(--fw-bold);text-transform:uppercase;letter-spacing:var(--ls-label);
   transition:background .2s;width:fit-content;cursor:pointer;border:none;font-family:inherit;
 }
 .btn-primary:hover{background:var(--y-hover)}
