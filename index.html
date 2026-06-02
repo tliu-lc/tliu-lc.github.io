@@ -386,6 +386,18 @@ img{max-width:100%;display:block}
   }
 }
 
+/* Offres — titre plus grand au repos ET au hover */
+#offres .promo20-hid .promo20-title{
+  font-size:clamp(22px,2.4vw,34px);
+  font-weight:var(--fw-medium);
+  line-height:var(--lh-snug);
+}
+#offres .promo20-hid p{ font-size:var(--t-md); line-height:var(--lh-relaxed) }
+@media(hover:hover) and (pointer:fine){
+  #offres .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(30px,3.5vw,48px) }
+  #offres .promo20-inner:hover .promo20-hid p{ font-size:18px }
+}
+
 /* Bouton CTA des panels */
 .promo20-cta{
   display:inline-flex;align-items:center;gap:8px;
