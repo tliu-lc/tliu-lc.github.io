@@ -287,64 +287,71 @@ img{max-width:100%;display:block}
 @media(min-width:1440px){.promo20{flex:0 0 calc(25% - 6px)}}
 
 /* ── Promo20 BCG exact : image fills card, text overlaid, panel slides up ── */
+/* ── Promo20 : image haut / panel bas (dissociés) ── */
 .promo20-inner{
-  position:relative;display:block;
+  position:relative;
+  display:grid;
+  grid-template-rows:62% 38%;
+  grid-template-columns:1fr;
   aspect-ratio:3/4;
   border-radius:var(--r-media);overflow:hidden;
   cursor:pointer;text-decoration:none;
 }
 
-/* Image — remplit tout le card */
+/* Image — ligne 1 du grid */
 .promo20-media{
-  position:absolute;inset:0;
+  grid-row:1;grid-column:1;
+  position:relative;overflow:hidden;
 }
 .promo20-media img{width:100%;height:100%;object-fit:cover;display:block}
+/* Pas de gradient sombre — image propre */
+.promo20-media::after{display:none}
 
-/* Gradient sombre pour lisibilité du texte */
-.promo20-media::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,.08) 55%,transparent 100%);
-}
+/* promo20-vis inutile — panel toujours visible en bas */
+.promo20-inner .promo20-vis{display:none}
 
-/* Texte visible en bas de l'image (défaut) */
-.promo20-vis{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:20px 20px 24px;z-index:2;
-}
-.promo20-cat{
-  font-size:11px;font-weight:400;text-transform:uppercase;
-  letter-spacing:.1em;color:rgba(255,255,255,.65);
-  margin-bottom:8px;
-}
-.promo20-title{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(15px,1.3vw,18px);font-weight:400;line-height:1.22;
-  color:#fff;
-}
-
-/* ── Panel visible en bas, s'agrandit au hover (BCG exact) ── */
+/* Panel global — garde absolu pour promo22 (mosaic) */
 .promo20-hid{
   position:absolute;
-  bottom:0; left:0; right:0;
-  height:38%;                    /* Déjà visible — titre lisible */
-  display:flex; flex-direction:column;
-  justify-content:flex-end;      /* Contenu en bas par défaut */
+  bottom:0;left:0;right:0;
+  height:38%;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
   overflow:hidden;
   padding:20px 22px 22px;
   background:rgba(241,238,234,.9);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border-radius:0 0 var(--r-media) var(--r-media);
   z-index:3;
-  transition:height .4s cubic-bezier(.25,.46,.45,.94),
-             border-radius .4s ease;
+  transition:height .4s cubic-bezier(.25,.46,.45,.94),border-radius .4s ease;
 }
+
+/* Panel dans promo20-inner — ligne 2 du grid, TOUJOURS visible */
+.promo20-inner .promo20-hid{
+  grid-row:2;grid-column:1;
+  position:relative;
+  bottom:auto;left:auto;right:auto;
+  height:auto;
+  opacity:1;
+  border-radius:0;
+  justify-content:flex-start;
+  transition:none;
+  z-index:1;
+}
+
+/* Hover promo22 (mosaic) — panel monte */
 @media(hover:hover) and (pointer:fine){
-  .promo20-inner:hover .promo20-hid,
   .promo22:hover .promo20-hid{
-    height:100%;
-    border-radius:var(--r-media);
-    justify-content:flex-start;  /* Contenu en haut quand déplié */
+    height:100%;border-radius:var(--r-media);justify-content:flex-start;
+  }
+}
+
+/* Hover promo20-inner — panel sort du grid et couvre l'image */
+@media(hover:hover) and (pointer:fine){
+  .promo20-inner:hover .promo20-hid{
+    position:absolute;inset:0;height:100%;
+    border-radius:var(--r-media);z-index:3;
+    justify-content:flex-start;
   }
 }
 .promo20-hid .promo20-cat{
