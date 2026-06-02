@@ -566,9 +566,22 @@ img{max-width:100%;display:block}
   background:var(--y);color:var(--black);
   padding:12px 22px;border-radius:var(--r-btn);
   font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  transition:background .2s;
+  transition:background .2s,opacity .3s;
+  opacity:0; /* caché par défaut */
 }
+.promo22:hover .promo22-cta{opacity:1}
 .promo22-cta:hover{background:var(--y-hover)}
+
+/* Card statique (C) — pas d'animation, bouton toujours visible */
+.promo22-static{ cursor:default }
+.promo22-static .promo20-hid{ display:none !important }
+.promo22-static .promo22-cta{ opacity:1 !important }
+.promo22-static .promo20-vis{ position:static;padding:28px;z-index:1 }
+
+/* Titre plus grand sur cards A et B (état repos) */
+.promo22:not(.promo22-static) .promo22-title{
+  font-size:clamp(1.6rem,2.8vw,2.4rem);
+}
 
 /* Dark card (no image, solid color) */
 .promo22-dark{background:var(--charcoal)}
@@ -576,6 +589,13 @@ img{max-width:100%;display:block}
 .promo22-beige .promo22-eyebrow{color:rgba(0,0,0,.4)}
 .promo22-beige .promo22-title{color:var(--black)}
 .promo22-navy{background:var(--navy)}
+
+/* Nav active */
+.nav-link.nav-active{
+  opacity:1;color:var(--y-dark);
+  border-bottom:2px solid var(--y);
+  padding-bottom:2px;
+}
 
 /* ─── EDITORIAL SECTION (= BCG Promo13) ─── */
 #editorial{background:var(--beige)}
@@ -634,9 +654,9 @@ img{max-width:100%;display:block}
 .client-logo:hover img{filter:grayscale(0) opacity(1)}
 
 /* ─── FRANCE SECTION ─── */
-#france{background:var(--charcoal);padding:var(--sp-v) var(--sp-h)}
-.france-inner{display:grid;grid-template-columns:1fr;gap:48px}
-@media(min-width:768px){.france-inner{grid-template-columns:1fr 1fr;align-items:start;gap:80px}}
+#france{background:var(--charcoal);padding:calc(var(--sp-v)*.55) var(--sp-h)}
+.france-inner{display:grid;grid-template-columns:1fr;gap:28px}
+@media(min-width:768px){.france-inner{grid-template-columns:3fr 2fr;align-items:center;gap:40px}}
 .france-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:16px}
 .france-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:var(--white);margin-bottom:40px}
 .france-locs{border-top:1px solid rgba(255,255,255,.1)}
@@ -656,10 +676,10 @@ img{max-width:100%;display:block}
 
 /* ─── ABOUT ─── */
 #about{background:var(--white);padding:var(--sp-v) var(--sp-h);border-top:1px solid var(--gray-300)}
-.about-inner{display:grid;grid-template-columns:1fr;gap:48px}
-@media(min-width:768px){.about-inner{grid-template-columns:260px 1fr;gap:64px;align-items:start}}
+.about-inner{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:768px){.about-inner{grid-template-columns:180px 1fr 280px;gap:48px;align-items:start}}
 .about-photo{border-radius:var(--r-media);overflow:hidden}
-.about-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top}
 .about-cap{padding:12px 0 0;border-top:1px solid var(--gray-300);display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
 .about-name{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--black)}
 .about-role{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--y-dark)}
@@ -743,7 +763,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
     <a href="#welcome" class="nav-link">Expertise</a>
     <a href="#offres" class="nav-link">Offres</a>
     <a href="#about" class="nav-link">À propos</a>
-    <a href="#contact" class="nav-cta">Me contacter</a>
+    <a href="#about" class="nav-cta">Me contacter</a>
   </div>
 </nav>
 
@@ -763,7 +783,7 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
       <p class="hero-desc">Du conseil stratégique à la mise en production — j'audite, conçois et livre des solutions data qui transforment vos opérations.</p>
       <div class="hero-ctas">
         <a href="#welcome" class="btn-hero-y">Nos expertises</a>
-        <a href="#contact" class="btn-hero-ghost">Prendre contact →</a>
+        <a href="#about" class="btn-hero-ghost">Prendre contact →</a>
       </div>
     </div>
   </div>
@@ -1020,17 +1040,19 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
   <div class="mosaic-grid rv d1">
 
-    <!-- Card A : audit & conseil — avec panel -->
-    <div class="promo22 promo22-a promo22-navy">
+    <!-- Card A : audit & conseil — avec image + panel -->
+    <div class="promo22 promo22-a" style="background:var(--navy)">
+      <div class="promo22-bg"><img src="images/offre-audit.jpg" alt="Audit & Diagnostic data"></div>
+      <div class="promo22-overlay"></div>
       <div class="promo20-vis" style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
         <div class="promo22-eyebrow">Conseil &amp; Audit data</div>
         <div class="promo22-title">Diagnostic de votre maturité data en 2 semaines</div>
       </div>
-      <div class="promo20-hid" style="background:var(--navy)">
+      <div class="promo20-hid" style="background:rgba(30,20,5,.92)">
         <div class="promo20-cat" style="color:rgba(255,255,255,.5)">Conseil &amp; Audit data</div>
         <h3 class="promo20-title" style="color:#fff">Diagnostic de votre maturité data en 2 semaines</h3>
         <p style="color:rgba(255,255,255,.62)">Cartographie des sources, diagnostic des risques, roadmap technique chiffrée — sans engagement préalable.</p>
-        <a href="#contact" class="promo22-cta">En savoir plus →</a>
+        <a href="#about" class="promo22-cta">En savoir plus →</a>
       </div>
     </div>
 
@@ -1050,16 +1072,14 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
       </div>
     </div>
 
-    <!-- Card C : approche — avec panel -->
-    <div class="promo22 promo22-c promo22-beige">
-      <div class="promo20-vis" style="position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2">
-        <div class="promo22-eyebrow" style="color:rgba(0,0,0,.4)">Comment je travaille</div>
-        <div class="promo22-title" style="color:var(--black)">Forfait clair, livraison complète, vous restez propriétaire.</div>
-      </div>
-      <div class="promo20-hid" style="background:var(--beige)">
-        <div class="promo20-cat">Comment je travaille</div>
-        <h3 class="promo20-title">Forfait clair, livraison complète, vous restez propriétaire.</h3>
-        <p>Pas de régie, pas de flou. On cadre le besoin, je livre, vous avez la main — code source et infrastructure inclus.</p>
+    <!-- Card C : approche — statique, pas d'animation -->
+    <div class="promo22 promo22-c promo22-beige promo22-static">
+      <div class="promo20-vis" style="position:static;padding:32px;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%">
+        <div>
+          <div class="promo22-eyebrow" style="color:rgba(0,0,0,.4);margin-bottom:12px">Comment je travaille</div>
+          <div class="promo22-title" style="color:var(--black);margin-bottom:16px">Forfait clair, livraison complète, vous restez propriétaire.</div>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:24px">Pas de régie, pas de flou. On cadre le besoin, je livre, vous avez la main — code source et infrastructure inclus.</p>
+        </div>
         <a href="#offres" class="promo22-cta">Nos offres →</a>
       </div>
     </div>
@@ -1162,57 +1182,41 @@ footer{background:var(--beige);padding:var(--sp-v) var(--sp-h)}
   </div>
 </section>
 
-<!-- ─── ABOUT ─── -->
+<!-- ─── À PROPOS & CONTACT — fusionnés ─── -->
 <section id="about">
   <div class="about-inner">
-    <div class="rv">
+    <!-- Photo + nom -->
+    <div class="rv" style="text-align:center">
       <div class="about-photo">
         <img src="tim.png" alt="Tim LIU — LIU Consulting">
       </div>
-      <div class="about-cap">
+      <div class="about-cap" style="justify-content:center;gap:12px">
         <span class="about-name">Tim LIU</span>
         <span class="about-role">Fondateur</span>
       </div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:8px">SIRET 91929307600023</p>
     </div>
+    <!-- Bio — milieu -->
     <div class="rv d1">
       <div class="about-eyebrow">À propos</div>
       <h2 class="about-title">Conseil, conception, livraison — un seul interlocuteur.</h2>
       <div class="about-body">
         <p>Après 3 ans chez L'Oréal et des missions chez Deezer, Bureau Vallée, TotalEnergies et Servier, j'ai appris à couvrir l'ensemble du spectre data : de l'audit stratégique au pipeline en production.</p>
         <p>J'interviens aussi bien en amont — cadrage, diagnostic, recommandations d'architecture — qu'en exécution directe : pipelines, infrastructure cloud, automatisation, dashboards. Sans sous-traitance, sans couche intermédiaire.</p>
-        <p>Curieux de l'IA appliquée à la donnée, je suis en veille active sur les usages LLM pour l'automatisation et la valorisation des actifs data — et je les intègre progressivement dans mes missions.</p>
-      </div>
-      <div class="about-links">
-        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="about-link"><span class="about-link-label">Email</span><span class="about-link-val">tim.liu.liuconsulting@gmail.com</span></a>
-        <a href="tel:+33603655398" class="about-link"><span class="about-link-label">Téléphone</span><span class="about-link-val">06 03 65 53 98</span></a>
-        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="about-link"><span class="about-link-label">LinkedIn</span><span class="about-link-val">linkedin.com/in/tim-liu-liuconsulting</span></a>
+        <p>Curieux de l'IA appliquée à la donnée, je suis en veille active sur les usages LLM pour l'automatisation et la valorisation des actifs data.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ─── TESTIMONIAL ─── -->
-<section id="testi">
-  <div class="rv">
-    <div class="testi-eyebrow">Témoignage client</div>
-    <p class="testi-quote">Pour la première fois, on peut comparer nos quatre boutiques sur un seul écran et réagir le jour même. Ce qu'on faisait en une journée d'Excel prend maintenant trente secondes.</p>
-    <div class="testi-source"><div class="testi-line"></div><span class="testi-from">Direction commerciale — Grossiste textile, 4 boutiques, 4 M€ de CA</span></div>
-  </div>
-</section>
-
-<!-- ─── CONTACT (= BCG Newsletter dark) ─── -->
-<section id="contact">
-  <div class="contact-inner rv">
-    <div>
-      <div class="contact-eyebrow">Contact</div>
-      <h2 class="contact-title">Prêt à transformer vos données ?</h2>
-      <p class="contact-desc">Un échange de trente minutes pour évaluer si mon approche correspond à votre situation — sans engagement de votre part.</p>
+    <!-- Coordonnées — droite -->
+    <div class="rv d2" style="background:var(--navy);border-radius:var(--r-card);padding:36px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px">Contact</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:12px">Parlons de votre projet.</h3>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:24px">Un échange de 30 minutes pour évaluer si mon approche correspond à votre situation.</p>
+      <div style="border-top:1px solid rgba(255,255,255,.1);margin-bottom:20px">
+        <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">tim.liu.liuconsulting@gmail.com</span></a>
+        <a href="tel:+33603655398" class="contact-item"><span class="contact-item-label">Téléphone</span><span class="contact-item-val">06 03 65 53 98</span></a>
+        <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item"><span class="contact-item-label">LinkedIn</span><span class="contact-item-val">Tim LIU — LIU Consulting</span></a>
+      </div>
       <a href="mailto:tim.liu.liuconsulting@gmail.com" class="btn-primary">Prendre contact →</a>
-    </div>
-    <div class="contact-items rv d1">
-      <a href="mailto:tim.liu.liuconsulting@gmail.com" class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-val">tim.liu.liuconsulting@gmail.com</span></a>
-      <a href="tel:+33603655398" class="contact-item"><span class="contact-item-label">Téléphone</span><span class="contact-item-val">06 03 65 53 98</span></a>
-      <a href="https://linkedin.com/in/tim-liu-liuconsulting" target="_blank" class="contact-item"><span class="contact-item-label">LinkedIn</span><span class="contact-item-val">Tim LIU — LIU Consulting</span></a>
     </div>
   </div>
 </section>
@@ -1297,6 +1301,26 @@ document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () =
   document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
   c.classList.add('on');
 }));
+
+/* Navbar — section active en cours */
+const navLinks = document.querySelectorAll('.nav-link[href]');
+const navMap = {
+  'welcome':  ['welcome','clients','spotlight'],
+  'offres':   ['offres','mosaic','editorial','assist'],
+  'about':    ['about','france','testi'],
+};
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const id = e.target.id;
+    navLinks.forEach(link => {
+      const key = link.getAttribute('href').replace('#','');
+      const targets = navMap[key] || [key];
+      link.classList.toggle('nav-active', targets.includes(id));
+    });
+  });
+}, { rootMargin:'-35% 0px -35% 0px', threshold:0 });
+document.querySelectorAll('section[id]').forEach(el => sectionObs.observe(el));
 </script>
 </body>
 </html>
