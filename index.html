@@ -586,6 +586,12 @@ img{max-width:100%;display:block}
 #mosaic .promo20-hid .promo20-title{
   font-size:clamp(1.3rem,2vw,1.8rem);
 }
+/* Tout le texte du panel encore plus grand au hover */
+@media(hover:hover) and (pointer:fine){
+  #mosaic .promo22:hover .promo20-hid .promo20-title{ font-size:clamp(1.6rem,2.5vw,2.2rem) }
+  #mosaic .promo22:hover .promo20-hid p{ font-size:16px; line-height:1.7 }
+  #mosaic .promo22:hover .promo20-hid .promo20-cat{ font-size:13px }
+}
 
 /* Dark card (no image, solid color) */
 .promo22-dark{background:var(--charcoal)}
