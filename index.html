@@ -357,20 +357,21 @@ img{max-width:100%;display:block}
   transition:font-size .35s ease,margin-bottom .3s ease;
 }
 @media(hover:hover) and (pointer:fine){
+  /* Titre — scale avec la largeur de l'écran, proportionnel à la card */
   .promo20-inner:hover .promo20-hid .promo20-title,
   .promo22:hover .promo20-hid .promo20-title{
-    font-size:clamp(18px,1.8vw,23px);
-    margin-bottom:14px;
+    font-size:clamp(18px,2.8vw,40px);
+    margin-bottom:16px;
   }
 }
 /* Description + CTA : hors layout au repos, apparaissent sur hover */
-.promo20-hid p{ font-size:14px;color:var(--black);opacity:.72;line-height:1.62;display:none }
+.promo20-hid p{ font-size:14px;color:var(--black);opacity:.72;line-height:1.65;display:none }
 .promo20-hid .promo20-cta{ display:none }
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid p,
-  .promo22:hover .promo20-hid p{ display:block;margin-top:4px }
+  .promo22:hover .promo20-hid p{ display:block;margin-top:4px;font-size:clamp(13px,1.2vw,18px) }
   .promo20-inner:hover .promo20-hid .promo20-cta,
-  .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:14px }
+  .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:16px }
 }
 
 /* Offres — texte plus grand, comportement identique */
@@ -588,9 +589,7 @@ img{max-width:100%;display:block}
 }
 /* Tout le texte du panel encore plus grand au hover */
 @media(hover:hover) and (pointer:fine){
-  #mosaic .promo22:hover .promo20-hid .promo20-title{ font-size:clamp(2rem,3vw,2.8rem) }
-  #mosaic .promo22:hover .promo20-hid p{ font-size:18px; line-height:1.75 }
-  #mosaic .promo22:hover .promo20-hid .promo20-cat{ font-size:14px }
+  /* Bouton mosaic descendu */
   #mosaic .promo22:hover .promo22-cta{ margin-top:24px }
 }
 
