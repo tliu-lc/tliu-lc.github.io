@@ -481,7 +481,7 @@ img{max-width:100%;display:block}
 @media(hover:hover) and (pointer:fine){
   .promo20-inner.hex:hover .promo20-hid{
     height:100%; border-radius:0;
-    padding:50px 3% 20px 3%;
+    padding:60px 3% 20px 3%;
   }
   /* Texte plus grand au hover */
   .promo20-inner.hex:hover .promo20-hid .promo20-cat{ font-size:12px }
@@ -581,6 +581,7 @@ img{max-width:100%;display:block}
   font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   transition:background .2s,opacity .3s;
   opacity:0; /* caché par défaut */
+  width:fit-content;align-self:flex-start; /* pas de stretch horizontal */
 }
 .promo22:hover .promo22-cta{opacity:1}
 .promo22-cta:hover{background:var(--y-hover)}
@@ -621,9 +622,9 @@ img{max-width:100%;display:block}
 
 /* ─── EDITORIAL SECTION (= BCG Promo13) ─── */
 #editorial{background:var(--beige)}
-.editorial-inner{display:grid;grid-template-columns:1fr;min-height:500px}
+.editorial-inner{display:grid;grid-template-columns:1fr;min-height:280px}
 @media(min-width:768px){.editorial-inner{grid-template-columns:1fr 1fr}}
-.editorial-media{overflow:hidden;min-height:400px}
+.editorial-media{overflow:hidden;min-height:240px}
 .editorial-media img{width:100%;height:100%;object-fit:cover;display:block}
 .editorial-content{
   padding:var(--sp-v) var(--sp-h);
