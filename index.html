@@ -324,17 +324,18 @@ img{max-width:100%;display:block}
   transition:height .42s cubic-bezier(.25,.46,.45,.94),border-radius .42s ease;
 }
 
-/* Panel dans promo20-inner — flex, sous l'image */
+/* Panel dans promo20-inner — absolu en bas, grandit au hover */
 .promo20-inner .promo20-hid{
-  position:relative;
-  bottom:auto;left:auto;right:auto;
-  flex:1;
-  height:auto;
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:38%;
   opacity:1;
-  border-radius:0;
-  justify-content:flex-start;
-  transition:none;
-  z-index:1;
+  border-radius:0 0 var(--r-media) var(--r-media);
+  justify-content:flex-end;
+  transition:height .42s cubic-bezier(.25,.46,.45,.94),
+             border-radius .42s ease,
+             justify-content 0s linear .2s;
+  z-index:3;
 }
 
 /* Hover promo22 (mosaic) */
@@ -344,23 +345,12 @@ img{max-width:100%;display:block}
   }
 }
 
-/* Animation slide-up pour le panel */
-@keyframes panel-slide-up{
-  from{ clip-path:inset(100% 0 0 0 round var(--r-media)) }
-  to  { clip-path:inset(0 0 0 0 round var(--r-media)) }
-}
-
-/* Hover promo20-inner : panel absolu couvre l'image avec animation */
+/* Hover promo20-inner : le même panel grandit de bas en haut */
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid{
-    position:absolute !important;
-    inset:0 !important;
     height:100% !important;
-    flex:none;
-    border-radius:var(--r-media);
-    z-index:5;
-    justify-content:flex-start;
-    animation:panel-slide-up .42s cubic-bezier(.25,.46,.45,.94) forwards;
+    border-radius:var(--r-media) !important;
+    justify-content:flex-start !important;
   }
 }
 
