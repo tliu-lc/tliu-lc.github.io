@@ -374,9 +374,21 @@ img{max-width:100%;display:block}
   .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:16px }
 }
 
-/* Offres — texte plus grand, comportement identique */
+/* Offres — texte repos */
 #offres .promo20-hid .promo20-title{ font-size:clamp(20px,2vw,26px) }
 #offres .promo20-hid p{ font-size:16px; line-height:1.72 }
+
+/* Welcome carousel — réduit au hover (cards plus petites) */
+@media(hover:hover) and (pointer:fine){
+  #welcome .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(15px,1.5vw,20px) }
+  #welcome .promo20-inner:hover .promo20-hid p{ font-size:clamp(12px,.9vw,14px) }
+}
+
+/* Offres — hover explicite (cards moyennes) */
+@media(hover:hover) and (pointer:fine){
+  #offres .promo20-inner:hover .promo20-hid .promo20-title{ font-size:clamp(18px,2vw,26px) }
+  #offres .promo20-inner:hover .promo20-hid p{ font-size:clamp(14px,1vw,17px) }
+}
 
 /* CTA arrow button */
 .promo20-cta{
