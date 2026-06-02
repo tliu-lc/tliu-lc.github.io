@@ -364,11 +364,19 @@ img{max-width:100%;display:block}
 }
 .promo20-cta:hover{background:var(--y-hover)}
 
-/* Catégorie — cachée au repos, visible au hover */
+/* Au repos : uniquement le titre visible */
 .promo20-hid .promo20-cat{ display:none }
+.promo20-hid p{ display:none }
+.promo20-hid .promo20-cta{ display:none }
+
+/* Au hover : tout apparaît */
 @media(hover:hover) and (pointer:fine){
   .promo20-inner:hover .promo20-hid .promo20-cat,
   .promo22:hover .promo20-hid .promo20-cat{ display:block;color:var(--black);opacity:.45;font-size:11px;margin-bottom:8px }
+  .promo20-inner:hover .promo20-hid p,
+  .promo22:hover .promo20-hid p{ display:block;margin-top:4px }
+  .promo20-inner:hover .promo20-hid .promo20-cta,
+  .promo22:hover .promo20-hid .promo20-cta{ display:inline-flex;margin-top:14px }
 }
 
 /* ─── SPOTLIGHT STRIP (= BCG List14) ─── */
